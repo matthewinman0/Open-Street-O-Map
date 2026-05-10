@@ -1,0 +1,43 @@
+{
+  "layers": [
+    {
+        "id": "buildings-2d",
+        "type": "fill",
+        "source": "osm",
+        "source-layer": "building",
+        "layout": {
+            "visibility": "visible"
+        },
+        "paint": {
+            "fill-color": "#231f20",
+            "fill-opacity": 1
+        }
+        
+    },
+    {
+        "id": "buildings-3d",
+        "type": "fill-extrusion",
+        "source": "osm",
+        "source-layer": "building",
+        "layout": {
+            "visibility": "none"
+        },
+        "minzoom": 14,
+        "paint": {
+            "fill-extrusion-color": "#231f20",
+            "fill-extrusion-height": [
+            "coalesce",
+            ["get", "render_height"],
+            ["get", "height"],
+            10
+            ],
+            "fill-extrusion-base": [
+            "coalesce",
+            ["get", "min_height"],
+            0
+            ],
+            "fill-extrusion-opacity": 1
+        }
+    }
+  ]
+}

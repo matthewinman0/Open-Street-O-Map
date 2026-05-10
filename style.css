@@ -1,0 +1,83 @@
+body { margin: 0; }
+
+#map { width: 100vw; height: 100vh; }
+
+#toggle3d {
+    position: absolute;
+    z-index: 1;
+    top: 148px;
+    right: 10px;
+    padding: 6px;
+    font-weight: 600;
+    background: white;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    cursor: pointer;
+}
+
+#hud {
+    position: absolute;
+    z-index: 1;
+    bottom: 10px;
+    left: 140px;
+    background: white;
+    padding: 6px 10px;
+    font-family: sans-serif;
+    font-size: 13px;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+}
+
+#ui-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    display: flex;
+    z-index: 10;
+}
+
+/* BUTTON */
+#settings-toggle {
+    width: 35px;
+    height: 80px;
+    margin-top: 10px;
+    background: white;
+    border: none;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    cursor: pointer;
+
+    transition: transform 0.3s ease;
+}
+
+/* PANEL */
+#settings-panel {
+    width: 400px;
+    height: 100vh;
+    background: white;
+    padding: 0px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+
+    transform: translateX(-435px);
+    transition: transform 0.3s ease;
+}
+
+/* OPEN STATE */
+#ui-wrapper.open #settings-panel {
+    transform: translateX(-35px);
+}
+
+/* button follows panel state */
+#ui-wrapper.open #settings-toggle {
+    transform: translateX(400px);
+}
+
+#svg-settings {
+    transition: transform 0.3s ease;
+}
+#ui-wrapper.open #svg-settings {
+    transform: rotate(180deg);
+}

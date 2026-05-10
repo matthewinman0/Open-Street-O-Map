@@ -8,86 +8,40 @@
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 
-<style>
-  body { margin: 0; }
-  #map { width: 100vw; height: 100vh; }
-
-  #toggle3d {
-    position: absolute;
-    z-index: 1;
-    top: 148px;
-    right: 10px;
-    padding: 6px;
-    font-weight: 600;
-    background: white;
-    border: none;
-    border-radius: 4px;
-    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
-    cursor: pointer;
-  }
-</style>
+<link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
 
 <div id="map"></div>
+
+<div id="ui-wrapper">
+  <button id="settings-toggle">
+    <svg id="svg-settings" width="20px" height="60px" viewBox="-19.04 0 75.804 75.804" xmlns="http://www.w3.org/2000/svg">
+  <g id="Group_65" data-name="Group 65" transform="translate(-831.568 -384.448)">
+    <path
+      id="Path_57"
+      d="M833.068,460.252a1.5,1.5,0,0,1-1.061-2.561l33.557-33.56a2.53,2.53,0,0,0,0-3.564l-33.557-33.558a1.5,1.5,0,0,1,2.122-2.121l33.556,33.558a5.53,5.53,0,0,1,0,7.807l-33.557,33.56A1.5,1.5,0,0,1,833.068,460.252Z"
+      fill="none"
+      stroke="#000000"
+      stroke-width="6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </g>
+</svg>
+  </button>
+
+  <div id="settings-panel">
+    <h3>Settings</h3>
+    <p>Work In Progress</p>
+  </div>
+</div>
+
 <button id="toggle3d">3D</button>
 
-<script>
-let is3D = false;
+<div id="hud">Zoom: -- | Contour: -- m</div>
 
-const map = new maplibregl.Map({
-  container: "map",
-  style: "./style.json",
-  center: [-3.9642, 56.1884],
-  zoom: 14
-});
-
-const geolocate = new maplibregl.GeolocateControl({
-  positionOptions: {
-    enableHighAccuracy: true
-  },
-  trackUserLocation: true,
-  showUserHeading: true
-});
-
-map.addControl(geolocate);
-
-// ✅ toggle logic
-function updateButton() {
-  document.getElementById("toggle3d").innerText = is3D ? "2D" : "3D";
-}
-
-function toggleBuildings() {
-  is3D = !is3D;
-
-  map.setLayoutProperty(
-    "buildings-3d",
-    "visibility",
-    is3D ? "visible" : "none"
-  );
-
-  map.setLayoutProperty(
-    "buildings-2d",
-    "visibility",
-    is3D ? "none" : "visible"
-  );
-
-  updateButton();
-}
-
-// attach click
-document.getElementById("toggle3d").onclick = toggleBuildings;
-
-// initial label
-updateButton();
-
-map.on("load", () => {
-
-  map.addControl(new maplibregl.NavigationControl());
-
-});
-</script>
+<script src="./main.js"></script>
 
 </body>
 </html>

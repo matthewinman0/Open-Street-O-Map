@@ -1,0 +1,68 @@
+{
+  "layers": [
+    {
+      "id": "residential-areas",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landuse",
+      "filter": ["==", "class", "residential"],
+      "paint": {
+        "fill-color": "#aba537",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "landcover-grass",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landcover",
+      "filter": ["in", "class", "grass", "meadow", "farmland"],
+      "paint": {
+        "fill-color": "#febe50",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "landcover-wood",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landcover",
+      "filter": ["in", "subclass", "forest", "wood"],
+      "paint": {
+        "fill-color": "#ffffff",
+        "fill-opacity": 1
+      }
+    },
+    {
+        "id": "contours",
+        "type": "line",
+        "source": "contours",
+        "source-layer": "contour",
+        "minzoom": 0,
+        "maxzoom": 22,
+        "paint": {
+            "line-color": "#444444",
+            "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            8, 0.3,
+            12, 0.6,
+            16, 1.2
+            ],
+            "line-opacity": 0.5
+        }
+    },
+    {
+      "id": "pitches",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landuse",
+      "filter": ["==", "class", "pitch"],
+      "paint": {
+        "fill-color": "#c07635",
+        "fill-opacity": 1
+      }
+    }
+  ]
+}
