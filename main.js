@@ -83,8 +83,8 @@ loadStyle().then(style => {
   map = new maplibregl.Map({
     container: "map",
     style,
-    center: [-3.9642, 56.1884],
-    zoom: 14
+    center: [-2.5420°, 54.0022],
+    zoom: 5
   });
 
   map.on("style.load", () => {
