@@ -16,30 +16,30 @@
       "id": "background",
       "type": "background",
       "paint": {
-        "background-color": "#ffffff"
+        "background-color": "#ffdda3"
       }
     },
     {
-      "id": "landuse-forest",
+      "id": "landcover-grass",
       "type": "fill",
       "source": "osm",
-      "source-layer": "landuse",
-      "filter": ["==", "class", "forest"],
+      "source-layer": "landcover",
+      "filter": ["in", "class", "grass", "meadow"],
       "paint": {
-        "fill-color": "#2f6b2f",
-        "fill-opacity": 0.85
-      }
-    },
-    {
-      "id": "landuse-grass",
-      "type": "fill",
-      "source": "osm",
-      "source-layer": "landuse",
-      "filter": ["in", "class", "grass", "meadow", "farmland"],
-      "paint": {
-        "fill-color": "#eaf6e2",
+        "fill-color": "#febe50",
         "fill-opacity": 1
       }
+    },
+        {
+        "id": "landcover-wood",
+        "type": "fill",
+        "source": "osm",
+        "source-layer": "landcover",
+        "filter": ["in", "subclass", "forest", "wood"],
+        "paint": {
+            "fill-color": "#ffffff",
+            "fill-opacity": 1
+        }
     },
     {
       "id": "residential-areas",
@@ -59,7 +59,50 @@
       "source-layer": "water",
       "paint": {
         "fill-color": "#009ddc",
-        "fill-opacity": 0.9
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "streams",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "waterway",
+      "filter": ["in", "class", "stream", "canal", "drain"],
+      "paint": {
+        "line-color": "#009ddc",
+        "line-opacity": 1,
+        "line-width": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              10, 1.2,
+              14, 1,
+              18, 8,
+              19, 30
+              ]
+      }
+    },
+    {
+      "id": "walls",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": ["==", "class", "wall"],
+      "paint": {
+        "line-color": "#3a3a3a",
+        "line-width": 1.2
+      }
+    },
+    {
+      "id": "fences",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": ["==", "class", "fence"],
+      "paint": {
+        "line-color": "#6b5b3e",
+        "line-width": 0.8,
+        "line-dasharray": [2, 2]
       }
     },
     {
@@ -70,7 +113,15 @@
         "filter": ["==", "class", "motorway"],
         "paint": {
             "line-color": "#e4af7b",
-            "line-width": 2.5
+            "line-width": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              10, 1.2,
+              14, 4,
+              18, 20,
+              19, 30
+              ]
         }
     },
     {
@@ -91,6 +142,24 @@
             19, 30
             ]
         }
+    },
+    {
+      "id": "roads-tertiary",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": ["in", "class", "tertiary", "minor"],
+      "paint": {
+        "line-color": "#000000",
+        "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 1.2,
+            14, 1.5,
+            18, 10
+            ]
+      }
     },
     {
       "id": "roads-primary",
@@ -117,9 +186,16 @@
       "source-layer": "transportation",
       "filter": ["==", "class", "secondary"],
       "paint": {
-        "line-color": "#d8c9ad",
-        "line-width": 1
-      }
+        "line-color": "#e4af7b",
+        "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 1.2,
+            14, 2.5,
+            18, 15
+            ]
+        }
     },
     {
       "id": "paths",
@@ -128,9 +204,9 @@
       "source-layer": "transportation",
       "filter": ["in", "class", "path", "footway", "track"],
       "paint": {
-        "line-color": "#6b5b3e",
-        "line-width": 0.8,
-        "line-dasharray": [2, 2]
+        "line-color": "#000000",
+        "line-width": 1,
+        "line-dasharray": [3, 3]
       }
     },
     {
@@ -139,7 +215,7 @@
         "source": "osm",
         "source-layer": "building",
         "layout": {
-            "visibility": "none"
+            "visibility": "visible"
         },
         "paint": {
             "fill-color": "#231f20",
@@ -153,7 +229,7 @@
         "source": "osm",
         "source-layer": "building",
         "layout": {
-            "visibility": "visible"
+            "visibility": "none"
         },
         "minzoom": 14,
         "paint": {

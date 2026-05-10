@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Custom MapLibre Style</title>
+<meta name="google" content="notranslate">
+<title>Open Street O-Map</title>
 
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
@@ -10,24 +11,52 @@
 <style>
   body { margin: 0; }
   #map { width: 100vw; height: 100vh; }
+
+  #toggle3d {
+    position: absolute;
+    z-index: 1;
+    top: 148px;
+    right: 10px;
+    padding: 6px;
+    font-weight: 600;
+    background: white;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    cursor: pointer;
+  }
 </style>
 </head>
 
 <body>
 
 <div id="map"></div>
-<button id="toggle3d" onclick="toggleBuildings()" style="
-  position:absolute;
-  z-index:1;
-  top:10px;
-  left:10px;
-  padding:8px;
-">
-Toggle 3D
-</button>
+<button id="toggle3d">3D</button>
 
 <script>
-let is3D = true;
+let is3D = false;
+
+const map = new maplibregl.Map({
+  container: "map",
+  style: "./style.json",
+  center: [-3.9642, 56.1884],
+  zoom: 14
+});
+
+const geolocate = new maplibregl.GeolocateControl({
+  positionOptions: {
+    enableHighAccuracy: true
+  },
+  trackUserLocation: true,
+  showUserHeading: true
+});
+
+map.addControl(geolocate);
+
+// ✅ toggle logic
+function updateButton() {
+  document.getElementById("toggle3d").innerText = is3D ? "2D" : "3D";
+}
 
 function toggleBuildings() {
   is3D = !is3D;
@@ -43,30 +72,21 @@ function toggleBuildings() {
     "visibility",
     is3D ? "none" : "visible"
   );
+
+  updateButton();
 }
 
-const map = new maplibregl.Map({
-  container: "map",
-  style: "./style.json",
-  center: [-3.9642, 56.1884],
-  zoom: 14
-});
+// attach click
+document.getElementById("toggle3d").onclick = toggleBuildings;
+
+// initial label
+updateButton();
 
 map.on("load", () => {
-
-  // 🔥 FORCE VECTOR SOURCE (fixes most issues)
-  map.addSource("buildings", {
-    type: "vector",
-    tiles: [
-      "https://api.maptiler.com/tiles/v3/{z}/{x}/{y}.pbf?key=SOSAfSwTZ8G9yYdNtF8Z"
-    ]
-  });
-
 
   map.addControl(new maplibregl.NavigationControl());
 
 });
-
 </script>
 
 </body>
