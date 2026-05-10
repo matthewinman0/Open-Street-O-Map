@@ -83,7 +83,7 @@ loadStyle().then(style => {
   map = new maplibregl.Map({
     container: "map",
     style,
-    center: [-2.5420°, 54.0022],
+    center: [-2.5420, 54.0022],
     zoom: 5
   });
 
