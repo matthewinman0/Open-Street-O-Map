@@ -84,7 +84,7 @@ loadStyle().then(style => {
     container: "map",
     style,
     center: [-2.5420, 54.0022],
-    zoom: 5
+    zoom: 14
   });
 
   map.on("style.load", () => {
