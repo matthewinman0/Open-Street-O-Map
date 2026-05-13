@@ -16,7 +16,7 @@
       "tiles": [
         "https://api.maptiler.com/tiles/contours-v2/{z}/{x}/{y}.pbf?key=SOSAfSwTZ8G9yYdNtF8Z"
       ],
-      "minzoom": 5,
+      "minzoom": 9,
       "maxzoom": 14
     },
     "terrain": {

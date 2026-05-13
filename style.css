@@ -3,6 +3,10 @@ html, body {
 }
 body { margin: 0; }
 
+* {
+  font-family: "JetBrains Mono", monospace;
+}
+
 #map {
     width: 100vw;
     height: 100dvh;
@@ -36,13 +40,13 @@ body { margin: 0; }
 }
 
 /*settings buttons */
-#export-settings-btn, #tools-settings-btn, #map-settings-btn {
-    width: 27%;
+#export-settings-btn, #tools-settings-btn, #map-settings-btn{
+    width: 26%;
     height: 30px;
     margin: 10px;
     background: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     box-shadow: 0 0 0 2px rgba(0,0,0,.1);
     cursor: pointer;
     pointer-events: auto;
@@ -104,6 +108,44 @@ body { margin: 0; }
 #ui-wrapper.open #svg-settings {
     transform: rotate(180deg);
 }
+
+
+/* Export page */
+#export-select-btn {
+    width: 95%;
+    left: 10%;
+    height: 30px;
+    margin: 10px;
+    background: white;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background 0.3s ease;
+}
+#export-select-btn:hover {
+    background: #cccccc;
+}
+
+#export-btn {
+    width: 20%;
+    height: 30px;
+    margin-top: 10%;
+    background: white;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background 0.3s ease;
+}
+#export-btn:hover {
+    background: #cccccc;
+}
+
+
+
 
 @media (max-width: 768px) {
     #settings-panel {

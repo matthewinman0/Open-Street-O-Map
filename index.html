@@ -7,6 +7,10 @@
 <title>Open Street O-Map</title>
 <meta name="description" content="Orienteering map version of Open Street Map, OSOM">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 
@@ -45,13 +49,35 @@
       <p>Terrain Exaggeration: <input type="number" id="terrain-exaggeration" name="terrain-exaggeration" step="0.1" value="1" max="5" min="0"></p>
       <p>Example color setting: <input type="color" id="example-color" name="example-color" value="#ff0000"></p>
     </div>
+
     <div id="tools-settings" style="display: none;">
       <h3>Tools IN PROGRESS</h3>
       <p>Example tool setting: <input type="text" id="example-tool-setting" name="example-tool-setting"></p>
     </div>
+
     <div id="export-settings" style="display: none;">
-      <h3>Export IN PROGRESS</h3>
-      <p>Example export setting: <input type="text" id="example-export-setting" name="example-export-setting"></p>
+      <h2 style="justify-content: center; display: flex;">Export</h2>
+      <p><button id="export-select-btn">Select Area</button></p>
+
+      <p><label for="scale-select">Scale:</label>
+      <select id="scale-select">
+        <option value="10000">1:10,000</option>
+        <option value="5000">1:5,000</option>
+        <option value="15000">1:15,000</option>
+      </select></p>
+
+      <p><label for="page-size">Page Size:</label>
+      <select id="page-size">
+        <option value="A4">A4</option>
+        <option value="A3">A3</option>
+        <option value="A2">A2</option>
+      </select></p>
+
+      <p><label for="dpi">Zoom "DPI":</label>
+
+      <input type="number" id="dpi" name="export-dpi" step="1" value="600" min="1"></p>
+
+      <button id="export-btn">Export</button>
     </div>
   </div>
 </div>
@@ -59,6 +85,7 @@
 <div id="hud">Zoom: -- | Contour: -- m</div>
 
 <script src="./main.js"></script>
+<script src="./export.js"></script>
 
 </body>
 </html>

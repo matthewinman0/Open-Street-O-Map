@@ -77,7 +77,8 @@ loadStyle().then(style => {
     center: [-2.5420, 54.0022],
     zoom: 5
   });
-  
+
+  window.map = map;
 
   map.on("style.load", () => {
     map.addControl(new maplibregl.NavigationControl());
@@ -105,10 +106,11 @@ loadStyle().then(style => {
   map.on("terrain", toggleBuildings);
 });
 
+
 // UI
 
 //UI opener
-document.getElementById("settings-toggle", "close-settings-btn").onclick = () => {
+document.getElementById("settings-toggle").onclick = () => {
   document.getElementById("ui-wrapper").classList.toggle("open");
 };
 
