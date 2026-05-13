@@ -6,7 +6,7 @@
     "osm": {
       "type": "vector",
       "tiles": [
-        "https://api.maptiler.com/tiles/v3/{z}/{x}/{y}.pbf?key=qXof2MAd3X61BuoqMG9b"
+        "https://api.maptiler.com/tiles/v3/{z}/{x}/{y}.pbf?key=SOSAfSwTZ8G9yYdNtF8Z"
       ],
       "minzoom": 0,
       "maxzoom": 14
@@ -14,7 +14,7 @@
     "contours": {
       "type": "vector",
       "tiles": [
-        "https://api.maptiler.com/tiles/contours-v2/{z}/{x}/{y}.pbf?key=qXof2MAd3X61BuoqMG9b"
+        "https://api.maptiler.com/tiles/contours-v2/{z}/{x}/{y}.pbf?key=SOSAfSwTZ8G9yYdNtF8Z"
       ],
       "minzoom": 5,
       "maxzoom": 14
@@ -22,7 +22,7 @@
     "terrain": {
       "type": "raster-dem",
       "tiles": [
-        "https://api.maptiler.com/tiles/terrain-rgb-v2/{z}/{x}/{y}.webp?key=qXof2MAd3X61BuoqMG9b"
+        "https://api.maptiler.com/tiles/terrain-rgb-v2/{z}/{x}/{y}.webp?key=SOSAfSwTZ8G9yYdNtF8Z"
       ],
       "minzoom": 0,
       "maxzoom": 18
