@@ -6,6 +6,7 @@ async function loadStyle() {
   const base = await (await fetch("./style/base.json")).json();
   const land = await (await fetch("./style/land.json")).json();
   const water = await (await fetch("./style/water.json")).json();
+  const paths = await (await fetch("./style/paths.json")).json();
   const roads = await (await fetch("./style/roads.json")).json();
   const buildings = await (await fetch("./style/buildings.json")).json();
 
@@ -13,6 +14,7 @@ async function loadStyle() {
     ...base.layers,
     ...land.layers,
     ...water.layers,
+    ...paths.layers,
     ...roads.layers,
     ...buildings.layers,
   ];

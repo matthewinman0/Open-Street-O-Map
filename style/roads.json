@@ -1,24 +1,6 @@
 {
   "layers": [
     {
-      "id": "paths",
-      "type": "line",
-      "source": "osm",
-      "source-layer": "transportation",
-      "filter": ["in", "class", "path", "footway", "track"],
-      "paint": {
-        "line-color": "#000000",
-        "line-width": [
-            "interpolate",
-            ["linear"],
-            ["zoom"],
-            14, 1.5,
-            18, 5
-            ],
-        "line-dasharray": [3, 2]
-      }
-    },
-    {
       "id": "roads-tertiary",
       "type": "line",
       "source": "osm",
@@ -176,8 +158,8 @@
         ["==", "bridge", true]
       ],
       "paint": {
-        "line-color": "#fff",
-        "line-width": 2
+        "line-color": "#ffffff",
+        "line-width": 200
       }
     }
   ]

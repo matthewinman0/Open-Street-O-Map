@@ -12,7 +12,7 @@
       }
     },
     {
-      "id": "commercial-areas",
+      "id": "paved-areas",
       "type": "fill",
       "source": "osm",
       "source-layer": "landuse",
@@ -34,13 +34,35 @@
       }
     },
     {
-      "id": "landcover-wood",
+      "id": "rough-open",
+      "type":"fill",
+      "source": "osm",
+      "source-layer": "landcover",
+      "filter": ["in", "subclass", "heath"],
+      "paint": {
+        "fill-color": "#ffdfa4",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "forrest",
       "type": "fill",
       "source": "osm",
       "source-layer": "landcover",
       "filter": ["in", "subclass", "forest", "wood"],
       "paint": {
         "fill-color": "#ffffff",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "Vegetation",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landcover",
+      "filter": ["in", "subclass", "scrub", "shrubbery"],
+      "paint": {
+        "fill-color": "#bef4b6",
         "fill-opacity": 1
       }
     },
