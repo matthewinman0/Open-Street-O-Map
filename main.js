@@ -1,7 +1,7 @@
 let map;
 let is3D = false;
 
-// ---------- STYLE LOADER ----------
+//  Style Loader - fetches and merges style layers
 async function loadStyle() {
   const base = await (await fetch("./style/base.json")).json();
   const land = await (await fetch("./style/land.json")).json();
@@ -20,18 +20,14 @@ async function loadStyle() {
   return base;
 }
 
-// ---------- CONTROLS ----------
+//  Location 
 const geolocate = new maplibregl.GeolocateControl({
   positionOptions: { enableHighAccuracy: true },
   trackUserLocation: true,
   showUserHeading: true
 });
 
-function updateButton() {
-  document.getElementById("toggle3d").innerText = is3D ? "2D" : "3D";
-}
-
-// simple contour interval estimate based on zoom
+// Contour detail definitions
 function getContourInterval(zoom) {
   if (zoom < 10) return 200;
   if (zoom < 11) return 100;
@@ -50,33 +46,28 @@ function updateHUD() {
     `Zoom: ${z.toFixed(2)} | Contour: ${contour} m`;
 }
 
-// ---------- 2D/3D TOGGLE ----------
+//  2D/3D Buildings
 function toggleBuildings() {
-  is3D = !is3D;
+  const terrainEnabled = map.getTerrain() !== null;
 
-  if (!map) return;
+  map.setLayoutProperty(
+    "buildings-2d",
+    "visibility",
+    terrainEnabled ? "none" : "visible"
+  );
 
-  if (map.getLayer("buildings-3d")) {
-    map.setLayoutProperty(
-      "buildings-3d",
-      "visibility",
-      is3D ? "visible" : "none"
-    );
-  }
+  map.setLayoutProperty(
+    "buildings-3d",
+    "visibility",
+    terrainEnabled ? "visible" : "none"
+  );
 
-  if (map.getLayer("buildings-2d")) {
-    map.setLayoutProperty(
-      "buildings-2d",
-      "visibility",
-      is3D ? "none" : "visible"
-    );
-  }
-
-  updateButton();
+  map.setLayoutProperty(
+    "hills",
+    "visibility",
+    terrainEnabled ? "visible" : "none"
+  );
 }
-
-document.getElementById("toggle3d").onclick = toggleBuildings;
-updateButton();
 
 // ---------- INIT ----------
 loadStyle().then(style => {
@@ -86,6 +77,7 @@ loadStyle().then(style => {
     center: [-2.5420, 54.0022],
     zoom: 5
   });
+  
 
   map.on("style.load", () => {
     map.addControl(new maplibregl.NavigationControl());
@@ -94,6 +86,16 @@ loadStyle().then(style => {
       new maplibregl.ScaleControl({ maxWidth: 120, unit: "metric" }),
       "bottom-left"
     );
+    map.addControl(
+        new maplibregl.TerrainControl({
+            source: 'terrain',
+            exaggeration: 1
+        })
+    );
+    map.setTerrain(null);
+    toggleBuildings();
+
+    let markerHeight = 50, markerRadius = 10, linearOffset = 25;
 
     // HUD updates
     updateHUD();
@@ -102,6 +104,7 @@ loadStyle().then(style => {
 
     geolocate.trigger();
   });
+  map.on("terrain", toggleBuildings);
 });
 
 

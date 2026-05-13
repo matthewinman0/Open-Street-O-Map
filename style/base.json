@@ -6,7 +6,7 @@
     "osm": {
       "type": "vector",
       "tiles": [
-        "https://api.maptiler.com/tiles/v3/{z}/{x}/{y}.pbf?key=SOSAfSwTZ8G9yYdNtF8Z"
+        "https://api.maptiler.com/tiles/v3/{z}/{x}/{y}.pbf?key=qXof2MAd3X61BuoqMG9b"
       ],
       "minzoom": 0,
       "maxzoom": 14
@@ -14,7 +14,7 @@
     "contours": {
       "type": "vector",
       "tiles": [
-        "https://api.maptiler.com/tiles/contours-v2/{z}/{x}/{y}.pbf?key=SOSAfSwTZ8G9yYdNtF8Z"
+        "https://api.maptiler.com/tiles/contours-v2/{z}/{x}/{y}.pbf?key=qXof2MAd3X61BuoqMG9b"
       ],
       "minzoom": 5,
       "maxzoom": 14
@@ -22,10 +22,10 @@
     "terrain": {
       "type": "raster-dem",
       "tiles": [
-        "https://api.maptiler.com/tiles/terrain-quantized-mesh-v2/{z}/{x}/{y}.quantized-mesh-1.0?key=SOSAfSwTZ8G9yYdNtF8Z"
+        "https://api.maptiler.com/tiles/terrain-rgb-v2/{z}/{x}/{y}.webp?key=qXof2MAd3X61BuoqMG9b"
       ],
       "minzoom": 0,
-      "maxzoom": 14
+      "maxzoom": 18
     }
   },
   "layers": [
@@ -34,6 +34,17 @@
       "type": "background",
       "paint": {
         "background-color": "#ffdda3"
+      }
+    },
+    {
+      "id": "hills",
+      "type": "hillshade",
+      "source": "terrain",
+      "layout": {
+          "visibility": "visible"
+      },
+      "paint": {
+          "hillshade-shadow-color": "#473B24"
       }
     },
     {
@@ -86,5 +97,9 @@
         "text-halo-width": 1
       }
     }
-  ]
+  ],
+  "terrain": {
+    "source": "terrain",
+    "exaggeration": 1
+  }
 }

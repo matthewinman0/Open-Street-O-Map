@@ -2,20 +2,6 @@ body { margin: 0; }
 
 #map { width: 100vw; height: 100vh; }
 
-#toggle3d {
-    position: absolute;
-    z-index: 1;
-    top: 148px;
-    right: 10px;
-    padding: 6px;
-    font-weight: 600;
-    background: white;
-    border: none;
-    border-radius: 4px;
-    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
-    cursor: pointer;
-}
-
 #hud {
     position: absolute;
     z-index: 1;
@@ -36,6 +22,7 @@ body { margin: 0; }
     height: 100vh;
     display: flex;
     z-index: 10;
+    pointer-events: none;
 }
 
 /* BUTTON */
@@ -49,6 +36,7 @@ body { margin: 0; }
     border-bottom-right-radius: 6px;
     box-shadow: 0 0 0 2px rgba(0,0,0,.1);
     cursor: pointer;
+    pointer-events: auto;
 
     transition: transform 0.3s ease;
 }
@@ -58,11 +46,14 @@ body { margin: 0; }
     width: 400px;
     height: 100vh;
     background: white;
-    padding: 0px;
+    padding: 10px;
+    padding-bottom: 0;
+    padding-top: 0;
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
 
-    transform: translateX(-435px);
+    transform: translateX(-455px);
     transition: transform 0.3s ease;
+    pointer-events: auto;
 }
 
 /* OPEN STATE */
@@ -72,7 +63,7 @@ body { margin: 0; }
 
 /* button follows panel state */
 #ui-wrapper.open #settings-toggle {
-    transform: translateX(400px);
+    transform: translateX(420px);
 }
 
 #svg-settings {
