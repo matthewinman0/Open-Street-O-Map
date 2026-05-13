@@ -34,6 +34,17 @@
       }
     },
     {
+      "id": "pitches",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landuse",
+      "filter": ["==", "class", "pitch"],
+      "paint": {
+        "fill-color": "#c07635",
+        "fill-opacity": 1
+      }
+    },
+    {
         "id": "contours",
         "type": "line",
         "source": "contours",
@@ -54,14 +65,14 @@
         }
     },
     {
-      "id": "pitches",
-      "type": "fill",
-      "source": "osm",
-      "source-layer": "landuse",
-      "filter": ["==", "class", "pitch"],
+      "id": "hills",
+      "type": "hillshade",
+      "source": "terrain",
+      "layout": {
+          "visibility": "visible"
+      },
       "paint": {
-        "fill-color": "#c07635",
-        "fill-opacity": 1
+          "hillshade-shadow-color": "#473B24"
       }
     }
   ]

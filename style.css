@@ -1,12 +1,22 @@
+html, body {
+    touch-action: none;
+}
 body { margin: 0; }
 
-#map { width: 100vw; height: 100vh; }
+#map {
+    width: 100vw;
+    height: 100dvh;
+}
+
+.maplibregl-ctrl-bottom-right {
+    display: none;
+}
 
 #hud {
     position: absolute;
     z-index: 1;
     bottom: 10px;
-    left: 140px;
+    right: 10px;
     background: white;
     padding: 6px 10px;
     font-family: sans-serif;
@@ -23,6 +33,28 @@ body { margin: 0; }
     display: flex;
     z-index: 10;
     pointer-events: none;
+}
+
+/*settings buttons */
+#export-settings-btn, #tools-settings-btn, #map-settings-btn {
+    width: 27%;
+    height: 30px;
+    margin: 10px;
+    background: white;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background 0.3s ease;
+}
+
+#export-settings-btn:hover, #tools-settings-btn:hover, #map-settings-btn:hover {
+    background: #cccccc;
+}
+
+#close-settings-btn{
+    display: none;
 }
 
 /* BUTTON */
@@ -71,4 +103,35 @@ body { margin: 0; }
 }
 #ui-wrapper.open #svg-settings {
     transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+    #settings-panel {
+        width: 100vw;
+        transform: translateX(-125vw);
+    }
+    #ui-wrapper.open #settings-panel {
+        transform: translateX(-10vw);
+    }
+    #ui-wrapper.open #settings-toggle {
+        transform: translateX(-20vw);
+    }
+    #export-settings-btn, #tools-settings-btn, #map-settings-btn {
+        width: 20%;
+        height: 30px;
+        margin: 10px;
+    }
+    #close-settings-btn {
+        display:inline;
+        width: 8%;
+        height: 30px;
+        margin-left: 10vw;
+        background: white;
+        border: none;
+        border-radius: 6px;
+        box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+        cursor: pointer;
+        pointer-events: auto;
+        transition: background 0.3s ease;
+    }
 }

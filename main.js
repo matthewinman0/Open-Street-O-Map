@@ -14,7 +14,7 @@ async function loadStyle() {
     ...land.layers,
     ...water.layers,
     ...roads.layers,
-    ...buildings.layers
+    ...buildings.layers,
   ];
 
   return base;
@@ -101,18 +101,44 @@ loadStyle().then(style => {
     updateHUD();
     map.on("move", updateHUD);
     map.on("zoom", updateHUD);
-
-    geolocate.trigger();
   });
   map.on("terrain", toggleBuildings);
 });
 
-
 // UI
 
-const wrapper = document.getElementById("ui-wrapper");
-const btn = document.getElementById("settings-toggle");
-
-btn.onclick = () => {
-  wrapper.classList.toggle("open");
+//UI opener
+document.getElementById("settings-toggle", "close-settings-btn").onclick = () => {
+  document.getElementById("ui-wrapper").classList.toggle("open");
 };
+
+document.getElementById("close-settings-btn").onclick = () => {
+  document.getElementById("ui-wrapper").classList.remove("open");
+};
+
+//buttons to switch between settings sections
+document.getElementById("map-settings-btn").onclick = () => {
+  document.getElementById("map-settings").style.display = "block";
+  document.getElementById("tools-settings").style.display = "none";
+  document.getElementById("export-settings").style.display = "none";
+};
+
+document.getElementById("tools-settings-btn").onclick = () => {
+  document.getElementById("map-settings").style.display = "none";
+  document.getElementById("tools-settings").style.display = "block";
+  document.getElementById("export-settings").style.display = "none";
+};
+
+document.getElementById("export-settings-btn").onclick = () => {
+  document.getElementById("map-settings").style.display = "none";
+  document.getElementById("tools-settings").style.display = "none";
+  document.getElementById("export-settings").style.display = "block";
+};
+
+// CONTROLS FOR MAP
+
+// Terrain exaggeration control
+document.getElementById("terrain-exaggeration").onchange = (e) => {
+  const value = parseFloat(e.target.value);
+  map.setTerrain({ source: "terrain", exaggeration: value });
+}

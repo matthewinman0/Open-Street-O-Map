@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Open Street O-Map</title>
 
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
@@ -32,15 +33,24 @@
   </button>
 
   <div id="settings-panel">
-    <button id="map-settings-button">Map</button>
-    <button id="tools-settings-button">Tools</button>
-    <button id="export-settings-button">Export</button>
+    <button id="map-settings-btn">Map</button>
+    <button id="tools-settings-btn">Tools</button>
+    <button id="export-settings-btn">Export</button>
+    <button id="close-settings-btn">x</button>
     <div id="map-settings">
       <h3>Settings IN PROGRESS</h3>
       <p>Example settings: <input type="text" id="example-setting" name="example-setting"></p>
       <p>Another example setting: <input type="checkbox" id="example-checkbox" name="example-checkbox"></p>
-      <p>Example range setting: <input type="range" id="example-range" name="example-range" min="0" max="100"></p>
+      <p>Terrain Exaggeration: <input type="number" id="terrain-exaggeration" name="terrain-exaggeration" step="0.1" value="1" max="5" min="0"></p>
       <p>Example color setting: <input type="color" id="example-color" name="example-color" value="#ff0000"></p>
+    </div>
+    <div id="tools-settings" style="display: none;">
+      <h3>Tools IN PROGRESS</h3>
+      <p>Example tool setting: <input type="text" id="example-tool-setting" name="example-tool-setting"></p>
+    </div>
+    <div id="export-settings" style="display: none;">
+      <h3>Export IN PROGRESS</h3>
+      <p>Example export setting: <input type="text" id="example-export-setting" name="example-export-setting"></p>
     </div>
   </div>
 </div>

@@ -37,17 +37,6 @@
       }
     },
     {
-      "id": "hills",
-      "type": "hillshade",
-      "source": "terrain",
-      "layout": {
-          "visibility": "visible"
-      },
-      "paint": {
-          "hillshade-shadow-color": "#473B24"
-      }
-    },
-    {
       "id": "country-borders",
       "type": "line",
       "source": "osm",
