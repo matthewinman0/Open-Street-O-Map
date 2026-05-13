@@ -144,6 +144,16 @@ body { margin: 0; }
     background: #cccccc;
 }
 
+details {
+    padding: 10px;
+    border-bottom: rgba(0,0,0,.1) 2px solid;
+    transition: border-color 0.3s ease, border-width 0.3s ease;
+}
+
+details:hover {
+    border-color: rgba(0,0,0,.3);
+    border-width: 3px;
+}
 
 
 

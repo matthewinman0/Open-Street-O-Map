@@ -13,6 +13,7 @@
 
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/proj4@2.9.2/dist/proj4.js"></script>
 
 <link rel="stylesheet" href="./style.css">
 </head>
@@ -43,17 +44,27 @@
     <button id="export-settings-btn">Export</button>
     <button id="close-settings-btn">x</button>
     <div id="map-settings">
-      <h3>Settings IN PROGRESS</h3>
+      <h2 style="justify-content: center; display: flex;">Map Settings</h2>
       <p>Example settings: <input type="text" id="example-setting" name="example-setting"></p>
       <p>Another example setting: <input type="checkbox" id="example-checkbox" name="example-checkbox"></p>
       <p>Terrain Exaggeration: <input type="number" id="terrain-exaggeration" name="terrain-exaggeration" step="0.1" value="1" max="5" min="0"></p>
       <p>Example color setting: <input type="color" id="example-color" name="example-color" value="#ff0000"></p>
     </div>
 
+
     <div id="tools-settings" style="display: none;">
-      <h3>Tools IN PROGRESS</h3>
-      <p>Example tool setting: <input type="text" id="example-tool-setting" name="example-tool-setting"></p>
+      <h2 style="justify-content: center; display: flex;">Tools</h2>
+      <details>
+      <summary><h3 style="display: inline-block;">Map Overlay</h3></summary>
+
+        <p>Upload Map: <input type="file" id="uploaded-map"></p>
+        <p>Upload GeoRef: <input type="file" id="uploaded-pgw"></p>
+
+        <button id="display-uploaded-map">Display</button>
+        <button id="clear-uploaded-map" style="margin-bottom: 20px;">Clear</button>
+      </details>
     </div>
+
 
     <div id="export-settings" style="display: none;">
       <h2 style="justify-content: center; display: flex;">Export</h2>
@@ -86,6 +97,7 @@
 
 <script src="./main.js"></script>
 <script src="./export.js"></script>
+<script src="./Tools/overlay.js"></script>
 
 </body>
 </html>
