@@ -72,7 +72,7 @@ function toggleBuildings() {
 }
 
 // ---------- INIT ----------
-loadStyle().then(style => {
+window.mapReady = loadStyle().then(style => {
   map = new maplibregl.Map({
     container: "map",
     style,
@@ -92,7 +92,7 @@ loadStyle().then(style => {
     map.addControl(
         new maplibregl.TerrainControl({
             source: 'terrain',
-            exaggeration: 1
+            exaggeration: parseFloat(document.getElementById("terrain-exaggeration").value)
         })
     );
     map.setTerrain(null);
@@ -144,5 +144,10 @@ document.getElementById("export-settings-btn").onclick = () => {
 // Terrain exaggeration control
 document.getElementById("terrain-exaggeration").onchange = (e) => {
   const value = parseFloat(e.target.value);
-  map.setTerrain({ source: "terrain", exaggeration: value });
-}
+  const terrain = map.getTerrain();
+
+  map.setTerrain({
+    source: "terrain",
+    exaggeration: value
+  });
+};
