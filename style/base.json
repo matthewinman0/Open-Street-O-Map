@@ -6,7 +6,7 @@
     "osm": {
       "type": "vector",
       "tiles": [
-        "https://api.maptiler.com/tiles/v3/{z}/{x}/{y}.pbf?key=SOSAfSwTZ8G9yYdNtF8Z"
+        "https://tiles.openstreetmap.us/vector/openmaptiles/{z}/{x}/{y}.pbf"
       ],
       "minzoom": 0,
       "maxzoom": 14
