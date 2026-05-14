@@ -148,14 +148,14 @@ details:hover {
     }
     #export-settings-btn, #tools-settings-btn, #map-settings-btn {
         width: 20%;
-        height: 30px;
         margin: 10px;
+        height: 35px;
     }
     #close-settings-btn {
         display:inline;
         width: 8%;
-        height: 30px;
-        margin-left: 10vw;
+        height: 30px;;
+        margin-left: 4vw;
         background: white;
         border: none;
         border-radius: 6px;
