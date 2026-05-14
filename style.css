@@ -11,11 +11,11 @@ body { margin: 0; }
     width: 100vw;
     height: 100dvh;
 }
-
 .maplibregl-ctrl-bottom-right {
     display: none;
 }
 
+/* contours and scale */
 #hud {
     position: absolute;
     z-index: 1;
@@ -27,6 +27,21 @@ body { margin: 0; }
     font-size: 13px;
     border-radius: 4px;
     box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+}
+
+.button {
+    margin: 0px 0px 10px 0px;
+    padding: 10px;
+    background: white;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background 0.3s ease;
+}
+.button:hover {
+    background: #cccccc;
 }
 
 #ui-wrapper {
@@ -42,26 +57,14 @@ body { margin: 0; }
 /*settings buttons */
 #export-settings-btn, #tools-settings-btn, #map-settings-btn{
     width: 26%;
-    height: 30px;
+    height: 5vh;
     margin: 10px;
-    background: white;
-    border: none;
-    border-radius: 4px;
-    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
-    cursor: pointer;
-    pointer-events: auto;
-    transition: background 0.3s ease;
-}
-
-#export-settings-btn:hover, #tools-settings-btn:hover, #map-settings-btn:hover {
-    background: #cccccc;
 }
 
 #close-settings-btn{
     display: none;
 }
 
-/* BUTTON */
 #settings-toggle {
     width: 35px;
     height: 80px;
@@ -73,11 +76,9 @@ body { margin: 0; }
     box-shadow: 0 0 0 2px rgba(0,0,0,.1);
     cursor: pointer;
     pointer-events: auto;
-
     transition: transform 0.3s ease;
 }
 
-/* PANEL */
 #settings-panel {
     width: 400px;
     height: 100vh;
@@ -86,7 +87,6 @@ body { margin: 0; }
     padding-bottom: 0;
     padding-top: 0;
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-
     transform: translateX(-455px);
     transition: transform 0.3s ease;
     pointer-events: auto;
@@ -96,12 +96,11 @@ body { margin: 0; }
 #ui-wrapper.open #settings-panel {
     transform: translateX(-35px);
 }
-
-/* button follows panel state */
 #ui-wrapper.open #settings-toggle {
     transform: translateX(420px);
 }
 
+/* cool little arrow flip */
 #svg-settings {
     transition: transform 0.3s ease;
 }
@@ -114,42 +113,21 @@ body { margin: 0; }
 #export-select-btn {
     width: 95%;
     left: 10%;
-    height: 30px;
     margin: 10px;
-    background: white;
-    border: none;
-    border-radius: 4px;
-    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
-    cursor: pointer;
-    pointer-events: auto;
-    transition: background 0.3s ease;
 }
-#export-select-btn:hover {
-    background: #cccccc;
-}
-
 #export-btn {
     width: 20%;
-    height: 30px;
     margin-top: 10%;
-    background: white;
-    border: none;
-    border-radius: 4px;
-    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
-    cursor: pointer;
-    pointer-events: auto;
-    transition: background 0.3s ease;
-}
-#export-btn:hover {
-    background: #cccccc;
 }
 
+/* Tool cards */
 details {
     padding: 10px;
     border-bottom: rgba(0,0,0,.1) 2px solid;
     transition: border-color 0.3s ease, border-width 0.3s ease;
+    user-select: none;
+    cursor: pointer;
 }
-
 details:hover {
     border-color: rgba(0,0,0,.3);
     border-width: 3px;

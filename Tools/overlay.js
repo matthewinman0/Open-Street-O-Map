@@ -1,3 +1,5 @@
+// 100% chatgpt and not checked over, it sorta works
+
 let uploadedOverlaySourceId = "uploaded-overlay-source";
 let uploadedOverlayLayerId = "uploaded-overlay-layer";
 

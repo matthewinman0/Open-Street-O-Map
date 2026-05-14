@@ -71,7 +71,7 @@ function toggleBuildings() {
   );
 }
 
-// ---------- INIT ----------
+// Map Initialization
 window.mapReady = loadStyle().then(style => {
   map = new maplibregl.Map({
     container: "map",
@@ -109,9 +109,7 @@ window.mapReady = loadStyle().then(style => {
 });
 
 
-// UI
-
-//UI opener
+//UI button handlers
 document.getElementById("settings-toggle").onclick = () => {
   document.getElementById("ui-wrapper").classList.toggle("open");
 };
@@ -139,9 +137,8 @@ document.getElementById("export-settings-btn").onclick = () => {
   document.getElementById("export-settings").style.display = "block";
 };
 
-// CONTROLS FOR MAP
 
-// Terrain exaggeration control
+// Terrain exaggeration control (broken)
 document.getElementById("terrain-exaggeration").onchange = (e) => {
   const value = parseFloat(e.target.value);
   const terrain = map.getTerrain();

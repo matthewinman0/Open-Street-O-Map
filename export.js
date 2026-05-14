@@ -1,36 +1,26 @@
 let exportCenter = null;
 
-// ============================
-// SETTINGS
-// ============================
 const PAGE_SIZES = {
   A4: { w: 11.69, h: 8.27 },
   A3: { w: 16.54, h: 11.69 },
   A2: { w: 23.4, h: 16.5 }
 };
 
-// ============================
-// HELPERS
-// ============================
+// Helpers
 function getScale() {
   return parseInt(document.getElementById("scale-select").value);
 }
-
 function getPageSize() {
   return document.getElementById("page-size").value;
 }
-
 function getDPI() {
   return parseInt(document.getElementById("dpi").value) || 600;
 }
-
 function getMap() {
   return window.map;
 }
 
-// ============================
-// PREVIEW LAYER
-// ============================
+// Preview box
 let previewBoxId = "export-preview-box";
 
 function updatePreview() {
@@ -102,9 +92,7 @@ function updatePreview() {
   });
 }
 
-// ============================
-// SELECT CENTER
-// ============================
+// Select center
 document.getElementById("export-select-btn").onclick = () => {
   const map = getMap();
   if (!map) return;
@@ -126,9 +114,7 @@ document.getElementById("export-select-btn").onclick = () => {
 document.getElementById("scale-select").onchange = updatePreview;
 document.getElementById("page-size").onchange = updatePreview;
 
-// ============================
 // EXPORT
-// ============================
 document.getElementById("export-btn").onclick = async () => {
   const map = getMap();
 
@@ -198,9 +184,7 @@ document.getElementById("export-btn").onclick = async () => {
   a.click();
 };
 
-// ============================
-// CENTER MARKER
-// ============================
+// Dot maker
 function drawCenter() {
   const map = getMap();
   if (!map || !exportCenter) return;

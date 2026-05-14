@@ -39,9 +39,9 @@
   </button>
 
   <div id="settings-panel">
-    <button id="map-settings-btn">Map</button>
-    <button id="tools-settings-btn">Tools</button>
-    <button id="export-settings-btn">Export</button>
+    <button id="map-settings-btn" class="button">Map</button>
+    <button id="tools-settings-btn" class="button">Tools</button>
+    <button id="export-settings-btn" class="button">Export</button>
     <button id="close-settings-btn">x</button>
     <div id="map-settings">
       <h2 style="justify-content: center; display: flex;">Map Settings</h2>
@@ -57,15 +57,15 @@
       <p>Upload Map: <input type="file" id="uploaded-map"></p>
       <p>Upload GeoRef: <input type="file" id="uploaded-pgw"></p>
 
-      <button id="display-uploaded-map">Display</button>
-      <button id="clear-uploaded-map" style="margin-bottom: 20px;">Clear</button>
+      <button id="display-uploaded-map" class="button">Display</button>
+      <button id="clear-uploaded-map" class="button">Clear</button>
       </details>
     </div>
 
 
     <div id="export-settings" style="display: none;">
       <h2 style="justify-content: center; display: flex;">Export</h2>
-      <p><button id="export-select-btn">Select Area</button></p>
+      <p><button id="export-select-btn" class="button">Select Area</button></p>
 
       <p><label for="scale-select">Scale:</label>
       <select id="scale-select">
@@ -85,7 +85,7 @@
 
       <input type="number" id="dpi" name="export-dpi" step="1" value="600" min="1"></p>
 
-      <button id="export-btn">Export</button>
+      <button id="export-btn" class="button">Export</button>
     </div>
   </div>
 </div>
