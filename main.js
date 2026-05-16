@@ -112,13 +112,13 @@ window.mapReady = loadStyle().then(style => {
       tiles: [
         demSource.contourProtocolUrl({
           // convert meters to feet, default=1 for meters
-          multiplier: 3.28084,
+          multiplier: 1,
           thresholds: {
             // zoom: [minor, major]
-            11: [200, 1000],
-            12: [100, 500],
-            14: [50, 200],
-            15: [20, 100],
+            11: [5, 1000],
+            12: [5, 500],
+            14: [5, 200],
+            15: [5, 100],
           },
           // optional, override vector tile parameters:
           contourLayer: "contours",
