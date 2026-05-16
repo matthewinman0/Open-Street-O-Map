@@ -115,10 +115,10 @@ window.mapReady = loadStyle().then(style => {
           multiplier: 1,
           thresholds: {
             // zoom: [minor, major]
-            11: [5, 1000],
-            12: [5, 500],
-            14: [5, 200],
-            15: [5, 100],
+            11: [5, 25],
+            12: [5, 25],
+            14: [5, 25],
+            15: [5, 25],
           },
           // optional, override vector tile parameters:
           contourLayer: "contours",
@@ -140,23 +140,6 @@ window.mapReady = loadStyle().then(style => {
         "line-color": "rgba(0,0,0, 50%)",
         // level = highest index in thresholds array the elevation is a multiple of
         "line-width": ["match", ["get", "level"], 1, 1, 0.5],
-      },
-    });
-    map.addLayer({
-      id: "contour-labels",
-      type: "symbol",
-      source: "contour-source",
-      "source-layer": "contours",
-      filter: [">", ["get", "level"], 0],
-      layout: {
-        "symbol-placement": "line",
-        "text-size": 10,
-        "text-field": ["concat", ["number-format", ["get", "ele"], {}], "'"],
-        "text-font": ["Noto Sans Bold"],
-      },
-      paint: {
-        "text-halo-color": "white",
-        "text-halo-width": 1,
       },
     });
 
