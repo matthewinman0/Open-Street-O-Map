@@ -46,9 +46,8 @@
     <div id="map-settings">
       <h2 style="justify-content: center; display: flex;">Map Settings</h2>
       <p>Terrain Exaggeration: <input type="number" id="terrain-exaggeration" name="terrain-exaggeration" step="0.1" value="1" max="5" min="0"></p>
-
-      Tiles from https://openmaptiles.org
-      Currently hosted on https://tiles.openstreetmap.us untill selfhosted
+      <br>
+      Tiles from https://openfreemap.org/, (open-source free api run off donations)
     </div>
 
 
@@ -95,6 +94,7 @@
 
 <div id="hud">Zoom: -- | Contour: -- m</div>
 
+<script src="https://unpkg.com/maplibre-contour@0.1.0/dist/index.min.js"></script>
 <script src="./main.js"></script>
 <script src="./export.js"></script>
 <script src="./Tools/overlay.js"></script>

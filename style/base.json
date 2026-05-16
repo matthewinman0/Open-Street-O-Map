@@ -6,28 +6,33 @@
     "osm": {
       "type": "vector",
       "tiles": [
-        "https://tiles.openstreetmap.us/vector/openmaptiles/{z}/{x}/{y}.pbf"
+        "https://tiles.openfreemap.org/planet/20260506_001001_pt/{z}/{x}/{y}.pbf"
       ],
       "minzoom": 0,
       "maxzoom": 14
     },
-    "contours": {
-      "type": "vector",
-      "tiles": [
-        "https://api.maptiler.com/tiles/contours-v2/{z}/{x}/{y}.pbf?key=SOSAfSwTZ8G9yYdNtF8Z"
-      ],
-      "minzoom": 9,
-      "maxzoom": 14
-    },
-    "terrain": {
+    "hillshade": {
       "type": "raster-dem",
       "tiles": [
-        "https://api.maptiler.com/tiles/terrain-rgb-v2/{z}/{x}/{y}.webp?key=SOSAfSwTZ8G9yYdNtF8Z"
+        "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
       ],
       "minzoom": 0,
-      "maxzoom": 18
+      "maxzoom": 18,
+      "tileSize": 256,
+      "encoding": "terrarium"
+    },
+    "3d terrain": {
+      "type": "raster-dem",
+      "tiles": [
+        "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
+      ],
+      "minzoom": 0,
+      "maxzoom": 18,
+      "tileSize": 256,
+      "encoding": "terrarium"
     }
   },
+  
   "layers": [
     {
       "id": "background",
@@ -88,6 +93,6 @@
     }
   ],
   "terrain": {
-    "source": "terrain"
+    "source": "3d terrain"
   }
 }
