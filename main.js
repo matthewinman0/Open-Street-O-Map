@@ -92,7 +92,6 @@ window.mapReady = loadStyle().then(style => {
 });
 
   window.map = map;
-
   map.on("style.load", () => {
     map.addControl(new maplibregl.NavigationControl());
     map.addControl(geolocate);
