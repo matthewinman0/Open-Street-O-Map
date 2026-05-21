@@ -4,7 +4,7 @@ let is3D = false;
 
 //contour definitions
 var demSource = new mlcontour.DemSource({
-  url: "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
+  url: "https://tiles.mapterhorn.com/{z}/{x}/{y}.webp",
   encoding: "terrarium", // "mapbox" or "terrarium" default="terrarium"
   maxzoom: 13,
   worker: true, // offload isoline computation to a web worker to reduce jank
@@ -196,23 +196,78 @@ document.getElementById("terrain-exaggeration").onchange = (e) => {
   });
 };
 
-document.getElementById("contoursToggle").onchange = (e) => {
-  const value = parseFloat(e.target.value);
-  const terrain = map.getTerrain();
-    if (e.target.checked) {
-    map.addLayer({
-      id: "contour-lines",
-      type: "line",
-      source: "contour-source",
-      "source-layer": "contours",
-      paint: {
-        "line-color": "rgba(0,0,0, 50%)",
-        // level = highest index in thresholds array the elevation is a multiple of
-        "line-width": ["match", ["get", "level"], 1, 1, 0.5],
-      },
-    });
-  } 
-  else {
+document.getElementById("contour-type").onchange = (e) => {
+  const value = e.target.value;
+
+  // remove existing contour layer
+  if (map.getLayer("contour-lines")) {
     map.removeLayer("contour-lines");
   }
+  // remove existing source
+  if (map.getSource("contour-source")) {
+    map.removeSource("contour-source");
+  }
+  // none selected
+  if (value === "none") {
+    return;
+  }
+
+  // choose DEM source URL
+  let demUrl;
+  if (value === "mapterhorn") {
+    demUrl = "https://tiles.mapterhorn.com/{z}/{x}/{y}.webp";
+  }
+  else if (value === "amazon") {
+    demUrl = "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png";
+  }
+
+  // create NEW contour source
+  const demSource = new mlcontour.DemSource({
+    url: demUrl,
+    encoding: "terrarium",
+    maxzoom: 13,
+    worker: true,
+    cacheSize: 100,
+    timeoutMs: 10000
+  });
+
+  demSource.setupMaplibre(maplibregl);
+
+  map.addSource("contour-source", {
+    type: "vector",
+    tiles: [
+      demSource.contourProtocolUrl({
+        multiplier: 1,
+        thresholds: {
+          11: [5, 25],
+          12: [5, 25],
+          14: [5, 25],
+          15: [5, 25],
+        },
+        contourLayer: "contours",
+        elevationKey: "ele",
+        levelKey: "level",
+        extent: 4096,
+        buffer: 1,
+      }),
+    ],
+    maxzoom: 15,
+  });
+
+  // recreate contour layer
+  map.addLayer({
+    id: "contour-lines",
+    type: "line",
+    source: "contour-source",
+    "source-layer": "contours",
+    paint: {
+      "line-color": "rgba(0,0,0,0.5)",
+      "line-width": [
+        "match",
+        ["get", "level"],
+        1, 1,
+        0.5
+      ]
+    }
+  });
 };
