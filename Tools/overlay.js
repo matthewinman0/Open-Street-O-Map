@@ -1,21 +1,24 @@
-// 100% chatgpt and not checked over, it sorta works
+// ============================
+// OVERLAY SYSTEM (CLEAN VERSION)
+// ============================
 
 let uploadedOverlaySourceId = "uploaded-overlay-source";
 let uploadedOverlayLayerId = "uploaded-overlay-layer";
 
 // ============================
-// DEFINE CRS
+// PROJ4 SETUP (OSGB36)
 // ============================
 
 proj4.defs(
   "EPSG:27700",
   "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 " +
   "+x_0=400000 +y_0=-100000 +ellps=airy " +
+  "+towgs84=446.448,-125.157,542.060,-0.1502,-0.2470,-0.8421,20.4894 " +
   "+units=m +no_defs"
 );
 
 // ============================
-// ELEMENTS
+// DOM ELEMENTS
 // ============================
 
 const mapInput = document.getElementById("uploaded-map");
@@ -30,111 +33,73 @@ const clearButton = document.getElementById("clear-uploaded-map");
 
 const DB_NAME = "OverlayDB";
 const STORE_NAME = "overlayStore";
-const DB_VERSION = 1;
 
 function openDatabase() {
-
   return new Promise((resolve, reject) => {
-
-    const request = indexedDB.open(DB_NAME, DB_VERSION);
+    const request = indexedDB.open(DB_NAME, 1);
 
     request.onupgradeneeded = (event) => {
-
       const db = event.target.result;
-
       if (!db.objectStoreNames.contains(STORE_NAME)) {
         db.createObjectStore(STORE_NAME);
       }
-
     };
 
     request.onsuccess = () => resolve(request.result);
-
     request.onerror = () => reject(request.error);
-
   });
-
 }
 
-// ============================
-// SAVE OVERLAY
-// ============================
-
 async function saveOverlayToDB(imageFile, pgwText) {
-
   const db = await openDatabase();
-
   const tx = db.transaction(STORE_NAME, "readwrite");
-
   const store = tx.objectStore(STORE_NAME);
 
   store.put(imageFile, "image");
   store.put(pgwText, "pgw");
 
-  return new Promise((resolve, reject) => {
-
-    tx.oncomplete = () => resolve();
-
-    tx.onerror = () => reject(tx.error);
-
+  return new Promise((res, rej) => {
+    tx.oncomplete = res;
+    tx.onerror = () => rej(tx.error);
   });
-
 }
 
-// ============================
-// LOAD OVERLAY
-// ============================
-
 async function loadOverlayFromDB() {
-
   const db = await openDatabase();
-
   const tx = db.transaction(STORE_NAME, "readonly");
-
   const store = tx.objectStore(STORE_NAME);
 
   return new Promise((resolve, reject) => {
-
-    const imageReq = store.get("image");
+    const imgReq = store.get("image");
     const pgwReq = store.get("pgw");
 
     tx.oncomplete = () => {
-
       resolve({
-        image: imageReq.result,
+        image: imgReq.result,
         pgw: pgwReq.result
       });
-
     };
 
     tx.onerror = () => reject(tx.error);
-
   });
-
 }
 
-// ============================
-// CLEAR DATABASE
-// ============================
-
 async function clearOverlayDB() {
-
   const db = await openDatabase();
-
   const tx = db.transaction(STORE_NAME, "readwrite");
-
   const store = tx.objectStore(STORE_NAME);
 
   store.delete("image");
   store.delete("pgw");
-
 }
 
 // ============================
-// CLEAR OVERLAY
+// OVERLAY CLEANUP
 // ============================
 
 function clearOverlay() {
+  const map = window.map;
+  if (!map) return;
 
   if (map.getLayer(uploadedOverlayLayerId)) {
     map.removeLayer(uploadedOverlayLayerId);
@@ -143,209 +108,151 @@ function clearOverlay() {
   if (map.getSource(uploadedOverlaySourceId)) {
     map.removeSource(uploadedOverlaySourceId);
   }
-
 }
 
 // ============================
-// DISPLAY OVERLAY
+// IMAGE LOADER
+// ============================
+
+function loadImage(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
+// ============================
+// CORE RENDER
 // ============================
 
 async function displayOverlay(imageFile, pgwText) {
-
   try {
-
-    const lines = pgwText
-      .trim()
-      .split(/\r?\n/)
-      .map(Number);
+    const lines = pgwText.trim().split(/\r?\n/).map(Number);
 
     if (lines.length < 6) {
-      alert("Invalid PGW file.");
+      alert("Invalid PGW file");
       return;
     }
 
-    const pixelSizeX = lines[0];
-    const pixelSizeY = lines[3];
+    const [A, B, D, E, C, F] = lines;
 
-    const topLeftX = lines[4];
-    const topLeftY = lines[5];
+    const map = window.map;
+    if (!map || !map.isStyleLoaded()) return;
 
     const imageURL = URL.createObjectURL(imageFile);
+    const img = await loadImage(imageURL);
 
-    const img = new Image();
+    const w = img.naturalWidth;
+    const h = img.naturalHeight;
 
-    img.onload = () => {
+    const worldFromPixel = (x, y) => ([
+      A * (x + 0.5) + B * (y + 0.5) + C,
+      D * (x + 0.5) + E * (y + 0.5) + F
+    ]);
 
-      const width = img.width;
-      const height = img.height;
+    const tl = worldFromPixel(0, 0);
+    const tr = worldFromPixel(w, 0);
+    const bl = worldFromPixel(0, h);
+    const br = worldFromPixel(w, h);
 
-      const minX = topLeftX - (pixelSizeX / 2);
-      const maxY = topLeftY + (pixelSizeY / 2);
+    const coords = [
+      proj4("EPSG:27700", "EPSG:4326", tl),
+      proj4("EPSG:27700", "EPSG:4326", tr),
+      proj4("EPSG:27700", "EPSG:4326", br),
+      proj4("EPSG:27700", "EPSG:4326", bl)
+    ];
 
-      const maxX = minX + (width * pixelSizeX);
-      const minY = maxY + (height * pixelSizeY);
+    const lngs = coords.map(c => c[0]);
+    const lats = coords.map(c => c[1]);
 
-      function convert27700(x, y) {
+    const bounds = [
+      [Math.min(...lngs), Math.min(...lats)],
+      [Math.max(...lngs), Math.max(...lats)]
+    ];
 
-        const p = proj4(
-          "EPSG:27700",
-          "EPSG:4326",
-          [x, y]
-        );
+    map.fitBounds(bounds, { padding: 40 });
 
-        p[1] += 0.00008;
-        p[0] -= 0.00042;
+    console.log("COORDS:");
+    coords.forEach((c, i) => {
+      console.log(i, "=>", c[0], c[1]);
+    });
+    console.log(
+      proj4("EPSG:27700", "EPSG:4326", [300000, 200000])
+    );
 
-        return p;
 
+    clearOverlay();
+
+    map.addSource(uploadedOverlaySourceId, {
+      type: "image",
+      url: imageURL,
+      coordinates: coords
+    });
+
+    map.addLayer({
+      id: uploadedOverlayLayerId,
+      type: "raster",
+      source: uploadedOverlaySourceId,
+      paint: {
+        "raster-opacity": 0.5
       }
+    });
 
-      const topLeft = convert27700(minX, maxY);
-      const topRight = convert27700(maxX, maxY);
-      const bottomRight = convert27700(maxX, minY);
-      const bottomLeft = convert27700(minX, minY);
+    map.fitBounds([bl, tr], { padding: 40 });
 
-      const coordinates = [
-        topLeft,
-        topRight,
-        bottomRight,
-        bottomLeft
-      ];
-
-      clearOverlay();
-
-      if (!map.isStyleLoaded()) {
-        console.warn("Map style not loaded yet.");
-        return;
-      }
-
-      map.addSource(uploadedOverlaySourceId, {
-        type: "image",
-        url: imageURL,
-        coordinates: coordinates
-      });
-
-      if (!map.getLayer(uploadedOverlayLayerId)) {
-        map.addLayer({
-          id: uploadedOverlayLayerId,
-          type: "raster",
-          source: uploadedOverlaySourceId,
-          paint: {
-            "raster-opacity": 1
-          }
-        });
-      }
-
-      map.fitBounds([
-        bottomLeft,
-        topRight
-      ], {
-        padding: 40
-      });
-
-      console.log("Overlay added.");
-
-    };
-
-    img.src = imageURL;
-
-  } catch (err) {
-
-    console.error(err);
-    alert("Failed to load overlay.");
-
+    console.log("Overlay loaded");
+  } catch (e) {
+    console.error(e);
   }
-
 }
 
 // ============================
-// DISPLAY BUTTON
+// BUTTONS
 // ============================
 
-displayButton.addEventListener("click", async () => {
+displayButton.onclick = async () => {
+  const imageFile = mapInput.files[0];
+  const pgwFile = pgwInput.files[0];
 
-  try {
-
-    const imageFile = mapInput.files[0];
-    const pgwFile = pgwInput.files[0];
-
-    if (!imageFile || !pgwFile) {
-      alert("Upload both image and PGW.");
-      return;
-    }
-
-    const pgwText = await pgwFile.text();
-
-    await saveOverlayToDB(imageFile, pgwText);
-
-    await displayOverlay(imageFile, pgwText);
-
-  } catch (err) {
-
-    console.error(err);
-    alert("Failed to load overlay.");
-
+  if (!imageFile || !pgwFile) {
+    alert("Upload both files");
+    return;
   }
 
-});
+  const pgwText = await pgwFile.text();
 
-// ============================
-// CLEAR BUTTON
-// ============================
+  await saveOverlayToDB(imageFile, pgwText);
+  await displayOverlay(imageFile, pgwText);
+};
 
-clearButton.addEventListener("click", async () => {
-
+clearButton.onclick = async () => {
   clearOverlay();
-
   mapInput.value = "";
   pgwInput.value = "";
-
   await clearOverlayDB();
-
-});
-
-// ============================
-// AUTO LOAD SAVED OVERLAY
-// ============================
-
-async function loadSavedOverlay() {
-
-  try {
-
-    const saved = await loadOverlayFromDB();
-
-    if (!saved.image || !saved.pgw) {
-      return;
-    }
-
-    await displayOverlay(saved.image, saved.pgw);
-
-    console.log("Saved overlay restored.");
-
-  } catch (err) {
-
-    console.error("Failed loading saved overlay:", err);
-
-  }
-
-}
+};
 
 // ============================
 // AUTO LOAD
 // ============================
 
-window.mapReady.then(() => {
+async function loadSavedOverlay() {
+  const saved = await loadOverlayFromDB();
+  if (!saved?.image || !saved?.pgw) return;
+  await displayOverlay(saved.image, saved.pgw);
+}
 
-  const map = window.map;
+// wait for map
+function waitForMap() {
+  return new Promise((resolve) => {
+    const check = () => {
+      if (window.map?.isStyleLoaded) resolve(window.map);
+      else setTimeout(check, 50);
+    };
+    check();
+  });
+}
 
-  const tryLoad = () => {
-    if (map && map.isStyleLoaded()) {
-      loadSavedOverlay();
-    } else {
-      map.once("load", loadSavedOverlay);
-    }
-  };
-
-  tryLoad();
-
-});
+waitForMap().then(() => loadSavedOverlay());
