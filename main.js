@@ -1,6 +1,8 @@
 let map;
 let is3D = false;
 
+
+//contour definitions
 var demSource = new mlcontour.DemSource({
   url: "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
   encoding: "terrarium", // "mapbox" or "terrarium" default="terrarium"
@@ -105,15 +107,13 @@ window.mapReady = loadStyle().then(style => {
             exaggeration: parseFloat(document.getElementById("terrain-exaggeration").value)
         })
     );
-    
     map.addSource("contour-source", {
       type: "vector",
       tiles: [
         demSource.contourProtocolUrl({
-          // convert meters to feet, default=1 for meters
-          multiplier: 1,
+          multiplier: 1, // 1 = meters
           thresholds: {
-            // zoom: [minor, major]
+            // zoom: [minor contour, major contour]
             11: [5, 25],
             12: [5, 25],
             14: [5, 25],
