@@ -129,20 +129,17 @@ window.mapReady = loadStyle().then(style => {
       ],
       maxzoom: 15,
     });
-
-    if (document.getElementById("contoursToggle").checked) {
-      map.addLayer({
-        id: "contour-lines",
-        type: "line",
-        source: "contour-source",
-        "source-layer": "contours",
-        paint: {
-          "line-color": "rgba(0,0,0, 50%)",
-          // level = highest index in thresholds array the elevation is a multiple of
-          "line-width": ["match", ["get", "level"], 1, 1, 0.5],
-        },
-      });
-    }
+    map.addLayer({
+      id: "contour-lines",
+      type: "line",
+      source: "contour-source",
+      "source-layer": "contours",
+      paint: {
+        "line-color": "rgba(0,0,0, 50%)",
+        // level = highest index in thresholds array the elevation is a multiple of
+        "line-width": ["match", ["get", "level"], 1, 1, 0.5],
+      },
+    });
 
     map.setTerrain(null);
     toggleBuildings();
