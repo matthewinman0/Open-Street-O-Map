@@ -130,17 +130,19 @@ window.mapReady = loadStyle().then(style => {
       maxzoom: 15,
     });
 
-    map.addLayer({
-      id: "contour-lines",
-      type: "line",
-      source: "contour-source",
-      "source-layer": "contours",
-      paint: {
-        "line-color": "rgba(0,0,0, 50%)",
-        // level = highest index in thresholds array the elevation is a multiple of
-        "line-width": ["match", ["get", "level"], 1, 1, 0.5],
-      },
-    });
+    if (document.getElementById("contoursToggle").checked) {
+      map.addLayer({
+        id: "contour-lines",
+        type: "line",
+        source: "contour-source",
+        "source-layer": "contours",
+        paint: {
+          "line-color": "rgba(0,0,0, 50%)",
+          // level = highest index in thresholds array the elevation is a multiple of
+          "line-width": ["match", ["get", "level"], 1, 1, 0.5],
+        },
+      });
+    }
 
     map.setTerrain(null);
     toggleBuildings();
@@ -184,13 +186,33 @@ document.getElementById("export-settings-btn").onclick = () => {
   document.getElementById("export-settings").style.display = "block";
 };
 
-// Terrain exaggeration control (broken)
+// Terrain exaggeration control
 document.getElementById("terrain-exaggeration").onchange = (e) => {
   const value = parseFloat(e.target.value);
   const terrain = map.getTerrain();
-
   map.setTerrain({
     source: "3d terrain",
     exaggeration: value
   });
+};
+
+document.getElementById("contoursToggle").onchange = (e) => {
+  const value = parseFloat(e.target.value);
+  const terrain = map.getTerrain();
+    if (e.target.checked) {
+    map.addLayer({
+      id: "contour-lines",
+      type: "line",
+      source: "contour-source",
+      "source-layer": "contours",
+      paint: {
+        "line-color": "rgba(0,0,0, 50%)",
+        // level = highest index in thresholds array the elevation is a multiple of
+        "line-width": ["match", ["get", "level"], 1, 1, 0.5],
+      },
+    });
+  } 
+  else {
+    map.removeLayer("contour-lines");
+  }
 };
