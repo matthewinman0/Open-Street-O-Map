@@ -19,43 +19,6 @@
       }
     },
     {
-      "id": "railway-background",
-      "type": "line",
-      "source": "osm",
-      "source-layer": "transportation",
-      "filter": ["==", "subclass", "rail"],
-      "paint": {
-        "line-color": "#000000",
-        "line-width": [
-            "interpolate",
-            ["linear"],
-            ["zoom"],
-            10, 1.2,
-            14, 1.5,
-            18, 10
-            ]
-      }
-    },
-    {
-      "id": "railway",
-      "type": "line",
-      "source": "osm",
-      "source-layer": "transportation",
-      "filter": ["==", "subclass", "rail"],
-      "paint": {
-        "line-color": "#ffffff",
-        "line-width": [
-            "interpolate",
-            ["linear"],
-            ["zoom"],
-            10, 1.3,
-            14, 1.4,
-            18, 8
-            ],
-        "line-dasharray": [4, 4]
-      }
-    },
-    {
         "id": "roads-large-outline",
         "type": "line",
         "source": "osm",
@@ -147,19 +110,175 @@
           ]
       }
     },
+
+
+
+
     {
-      "id": "roads-bridge",
+      "id": "railway-background",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": ["==", "subclass", "rail"],
+      "paint": {
+        "line-color": "#000000",
+        "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 1.2,
+            14, 1.5,
+            18, 10
+            ]
+      }
+    },
+    {
+      "id": "railway",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": ["==", "subclass", "rail"],
+      "paint": {
+        "line-color": "#ffffff",
+        "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 1.3,
+            14, 1.4,
+            18, 8
+            ],
+        "line-dasharray": [4, 4]
+      }
+    },
+
+
+
+
+
+      {
+      "id": "bridge-tertiary",
       "type": "line",
       "source": "osm",
       "source-layer": "transportation",
       "filter": [
         "all",
-        ["in", "class", "motorway", "primary", "secondary"],
-        ["==", "bridge", true]
+        ["in", "class", "tertiary", "minor", "service"],
+        ["==", "brunnel", "bridge"]
       ],
       "paint": {
-        "line-color": "#ffffff",
-        "line-width": 200
+        "line-color": "#000000",
+        "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 1.2,
+            14, 1.5,
+            18, 10
+            ]
+      }
+    },
+    {
+      "id": "large-bridge-outline",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": [
+        "all",
+        ["in", "class", "motorway", "trunk"],
+        ["==", "brunnel", "bridge"]
+      ],
+      "paint": {
+          "line-color": "#000000",
+          "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 1.3,
+            14, 6,
+            18, 27,
+            19, 40
+          ]
+      }
+    },
+    {
+      "id": "small-bridge-outline",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": [
+        "all", 
+        ["in", "class", "primary", "secondary"],
+        ["==", "brunnel", "bridge"]],
+      "paint": {
+        "line-color": "#000000",
+        "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 1.4,
+            14, 4.5,
+            18, 30
+            ]
+      }
+    },
+    {
+      "id": "large-bridge",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": [
+        "all",
+        ["in", "class", "motorway", "trunk"],
+        ["==", "brunnel", "bridge"]
+      ],
+      "paint": {
+          "line-color": "#e4af7b",
+          "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 1.2,
+            14, 4,
+            18, 20,
+            19, 30
+            ]
+      }
+    },
+    {
+      "id": "bridge-primary",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": ["all", ["==", "class", "primary"], ["==", "brunnel", "bridge"]],
+      "paint": {
+        "line-color": "#e4af7b",
+        "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 1.2,
+            14, 2.5,
+            18, 20
+            ]
+      }
+    },
+    {
+      "id": "bridge-secondary",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": ["all", ["==", "class", "secondary"], ["==", "brunnel", "bridge"]],
+      "paint": {
+        "line-color": "#e4af7b",
+        "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 1.2,
+            14, 2.5,
+            18, 15
+          ]
       }
     }
   ]
