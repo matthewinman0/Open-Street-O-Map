@@ -42,23 +42,13 @@ const geolocate = new maplibregl.GeolocateControl({
   showUserHeading: true
 });
 
-// Contour detail definitions
-function getContourInterval(zoom) {
-  if (zoom < 10) return 200;
-  if (zoom < 11) return 100;
-  if (zoom < 12) return 50;
-  if (zoom < 13) return 25;
-  if (zoom < 14) return 10;
-  return "5/10";
-}
-
 // HUD updater
 function updateHUD() {
   const z = map.getZoom();
-  const contour = getContourInterval(z);
+  const { lng, lat } = map.getCenter();
 
   document.getElementById("hud").innerText =
-    `Zoom: ${z.toFixed(2)} | Contour: ${contour} m`;
+    `Zoom: ${z.toFixed(2)} | Longitude: ${lng.toFixed(4)} | Latitude: ${lat.toFixed(4)}`;
 }
 
 //  2D/3D Buildings
@@ -211,8 +201,13 @@ document.getElementById("contour-type").onchange = (e) => {
 
   // choose DEM source URL
   let demUrl;
+  let encoding;
   if (value === "mapterhorn") {
     demUrl = "https://tiles.mapterhorn.com/{z}/{x}/{y}.webp";
+  }
+  else if (value === "mapbox") {
+    demUrl = "https://api.mapbox.com/v4/mapbox.terrain-rgb/{z}/{x}/{y}.webp?access_token=pk.eyJ1IjoibWF0dGhld2lubWFuMCIsImEiOiJjbXA2eWtudHUwNmptMnJzZXozM202cmJsIn0.ovrLr5VISDjJta4Lxr5NOw";
+    encoding = "mapbox";
   }
   else if (value === "amazon") {
     demUrl = "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png";
@@ -221,7 +216,7 @@ document.getElementById("contour-type").onchange = (e) => {
   // create NEW contour source
   const demSource = new mlcontour.DemSource({
     url: demUrl,
-    encoding: "terrarium",
+    encoding: encoding||"terrarium",
     maxzoom: 13,
     worker: true,
     cacheSize: 100,
