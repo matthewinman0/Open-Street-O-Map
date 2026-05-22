@@ -205,10 +205,6 @@ document.getElementById("contour-type").onchange = (e) => {
   if (value === "mapterhorn") {
     demUrl = "https://tiles.mapterhorn.com/{z}/{x}/{y}.webp";
   }
-  else if (value === "mapbox") {
-    demUrl = "https://api.mapbox.com/v4/mapbox.terrain-rgb/{z}/{x}/{y}.webp?access_token=pk.eyJ1IjoibWF0dGhld2lubWFuMCIsImEiOiJjbXA2eWtudHUwNmptMnJzZXozM202cmJsIn0.ovrLr5VISDjJta4Lxr5NOw";
-    encoding = "mapbox";
-  }
   else if (value === "amazon") {
     demUrl = "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png";
   }
