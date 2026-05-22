@@ -164,4 +164,7 @@ details:hover {
         pointer-events: auto;
         transition: background 0.3s ease;
     }
+    #hud {
+        font-size: 11px;
+    }
 }
