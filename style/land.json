@@ -16,7 +16,7 @@
       "type": "fill",
       "source": "osm",
       "source-layer": "landuse",
-      "filter": ["==", "class", "commercial"],
+      "filter": ["in", "class", "commercial", "retail"],
       "paint": {
         "fill-color": "#e4af7b",
         "fill-opacity": 1
