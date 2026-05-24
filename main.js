@@ -1,6 +1,7 @@
 let map;
 let is3D = false;
-let mapStyle = "Sprint"; // default map style
+let mapStyle = "Forest"; // default map style
+let mapInitialized = false;
 
 //contour definitions
 var demSource = new mlcontour.DemSource({
@@ -87,6 +88,7 @@ function toggleBuildings() {
 
 // Map Initialization
 window.mapReady = loadStyle().then(style => {
+
   map = new maplibregl.Map({
     container: "map",
     style,
@@ -95,64 +97,67 @@ window.mapReady = loadStyle().then(style => {
   });
 
   window.map = map;
-  map.on("style.load", () => {
-    map.addControl(new maplibregl.NavigationControl());
-    map.addControl(geolocate);
-    map.addControl(
-      new maplibregl.ScaleControl({ maxWidth: 120, unit: "metric" }),
-      "bottom-left"
-    );
-    map.addControl(
-        new maplibregl.TerrainControl({
-            source: '3d terrain',
-            exaggeration: parseFloat(document.getElementById("terrain-exaggeration").value)
-        })
-    );
-    map.addSource("contour-source", {
-      type: "vector",
-      tiles: [
-        demSource.contourProtocolUrl({
-          multiplier: 1, // 1 = meters
-          thresholds: {
-            // zoom: [minor contour, major contour]
-            11: [5, 25],
-            12: [5, 25],
-            14: [5, 25],
-            15: [5, 25],
-          },
-          // optional, override vector tile parameters:
-          contourLayer: "contours",
-          elevationKey: "ele",
-          levelKey: "level",
-          extent: 4096,
-          buffer: 1,
-        }),
-      ],
-      maxzoom: 15,
-    });
-    map.addLayer({
-      id: "contour-lines",
-      type: "line",
-      source: "contour-source",
-      "source-layer": "contours",
-      paint: {
-        "line-color": "rgba(0,0,0, 50%)",
-        // level = highest index in thresholds array the elevation is a multiple of
-        "line-width": ["match", ["get", "level"], 1, 1, 0.5],
-      },
-    });
 
+  map.on("style.load", () => {
+    if (!map.__initialized) {
+      map.addControl(new maplibregl.NavigationControl());
+      map.addControl(geolocate);
+      map.addControl(
+        new maplibregl.ScaleControl({maxWidth: 120, unit: "metric"}),"bottom-left"
+      );
+      map.addControl(
+        new maplibregl.TerrainControl({
+          source: "3d terrain",
+          exaggeration: parseFloat(document.getElementById("terrain-exaggeration").value
+          )
+        })
+      );
+      map.__initialized = true;
+    }
+
+    if (!map.getSource("contour-source")) {
+      map.addSource("contour-source", {
+        type: "vector",
+        tiles: [
+          demSource.contourProtocolUrl({
+            multiplier: 1,
+            thresholds: {
+              11: [5, 25],
+              12: [5, 25],
+              14: [5, 25],
+              15: [5, 25],
+            },
+            contourLayer: "contours",
+            elevationKey: "ele",
+            levelKey: "level",
+            extent: 4096,
+            buffer: 1,
+          }),
+        ],
+        maxzoom: 15,
+      });
+    }
+    if (!map.getLayer("contour-lines")) {
+      map.addLayer({
+        id: "contour-lines",
+        type: "line",
+        source: "contour-source",
+        "source-layer": "contours",
+        paint: {
+          "line-color": "rgba(0,0,0, 50%)",
+          "line-width": ["match", ["get", "level"], 1, 1, 0.5],
+        },
+      });
+    }
     map.setTerrain(null);
     toggleBuildings();
 
-    let markerHeight = 50, markerRadius = 10, linearOffset = 25;
-
-    // HUD updates
+    // HUD
     updateHUD();
     map.on("move", updateHUD);
     map.on("zoom", updateHUD);
+
   });
-  map.on("terrain", toggleBuildings);
 });
 
 
