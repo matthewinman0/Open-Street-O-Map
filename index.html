@@ -5,6 +5,7 @@
 <meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Open Street O-Map</title>
+<link rel="icon" type="image/x-icon" href="assets/OSOM.ico">
 <meta name="description" content="Orienteering map version of Open Street Map, OSOM">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,13 +46,19 @@
     <button id="close-settings-btn">x</button>
     <div id="map-settings">
       <h2 style="justify-content: center; display: flex;">Map Settings</h2>
-      <p>Terrain Exaggeration: <input type="number" id="terrain-exaggeration" name="terrain-exaggeration" step="0.1" value="1" max="5" min="0"></p>
+
+      <p>O-style: <select id="style-select">
+        <option value="Forest">Forest</option>
+        <option value="Sprint">Sprint</option>
+      </select></p>
 
       <p>Contour Type: <select id="contour-type">
         <option value="mapterhorn">Mapterhorn</option>
         <option value="amazon">AWS Terrarium</option>
         <option value="none">None</option>
       </select></p>
+
+      <p>Terrain Exaggeration: <input type="number" id="terrain-exaggeration" name="terrain-exaggeration" step="0.1" value="1" max="5" min="0"></p>
 
       <br>
       Tiles from https://openfreemap.org/, (open-source free api run off donations)

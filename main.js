@@ -1,6 +1,6 @@
 let map;
 let is3D = false;
-
+let mapStyle = "Sprint"; // default map style
 
 //contour definitions
 var demSource = new mlcontour.DemSource({
@@ -16,13 +16,18 @@ demSource.setupMaplibre(maplibregl);
 
 //  Style Loader - fetches and merges style layers
 async function loadStyle() {
-  const base = await (await fetch("./style/base.json")).json();
-  const land = await (await fetch("./style/land.json")).json();
-  const water = await (await fetch("./style/water.json")).json();
-  const paths = await (await fetch("./style/paths.json")).json();
-  const roads = await (await fetch("./style/roads.json")).json();
-  const buildings = await (await fetch("./style/buildings.json")).json();
-
+  let base, land, water, paths, roads, buildings;
+  base = await (await fetch("./style/base.json")).json();
+  land = await (await fetch("./style/land.json")).json();
+  water = await (await fetch("./style/water.json")).json();
+  if (mapStyle === "Forest") {
+    paths = await (await fetch("./style/forest/paths.json")).json();
+    roads = await (await fetch("./style/forest/roads.json")).json();
+  } else if (mapStyle === "Sprint") {
+    paths = await (await fetch("./style/sprint/paths.json")).json();
+    roads = await (await fetch("./style/sprint/roads.json")).json();
+  }
+  buildings = await (await fetch("./style/buildings.json")).json();
   base.layers = [
     ...base.layers,
     ...land.layers,
@@ -34,6 +39,12 @@ async function loadStyle() {
 
   return base;
 }
+
+document.getElementById("style-select").onchange = async (e) => {
+  mapStyle = e.target.value;
+  const newStyle = await loadStyle();
+  map.setStyle(newStyle);
+};
 
 //  Location 
 const geolocate = new maplibregl.GeolocateControl({
@@ -81,7 +92,7 @@ window.mapReady = loadStyle().then(style => {
     style,
     center: [-2.5420, 54.0022],
     zoom: 5
-});
+  });
 
   window.map = map;
   map.on("style.load", () => {

@@ -1,6 +1,6 @@
-# Open-Street-O-Map (OSOM)
+# <img src="./assets/OSOM.ico" width="32">Open-Street-O-Map (OSOM)
 
-![London](./examples/London-10000-A2-600dpi.png)
+![London](./assets/London-10000-A2-600dpi.png)
 Example of OSOM in London
 
 ## What Is OSOM?
