@@ -160,6 +160,8 @@ document.getElementById("export-btn").onclick = async () => {
   container.style.top = "-99999px";
   document.body.appendChild(container);
 
+  map.setLayoutProperty("export-center", "visibility", "none");
+
   const exportMap = new maplibregl.Map({
     container,
     style: map.getStyle(),
@@ -182,6 +184,7 @@ document.getElementById("export-btn").onclick = async () => {
   a.href = image;
   a.download = `map-${scale}-${getPageSize()}-${dpi}dpi.png`;
   a.click();
+  map.setLayoutProperty("export-center", "visibility", "visible");
 };
 
 // Dot maker
