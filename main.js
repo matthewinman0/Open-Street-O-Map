@@ -65,27 +65,32 @@ function updateHUD() {
 }
 
 //  2D/3D Buildings & hillshade
-function toggleBuildings() {
-  const terrainEnabled = map.getTerrain() !== null;
+document.getElementById("3d-buildings-toggle").addEventListener("change", (e) => {
+  const buildingsEnabled = e.target.checked;
 
   map.setLayoutProperty(
     "buildings-2d",
     "visibility",
-    terrainEnabled ? "none" : "visible"
+    buildingsEnabled ? "none" : "visible"
   );
 
   map.setLayoutProperty(
     "buildings-3d",
     "visibility",
-    terrainEnabled ? "visible" : "none"
+    buildingsEnabled ? "visible" : "none"
   );
+});
 
+function toggleBuildings() {
+  const terrainEnabled = map.getTerrain() !== null;
   map.setLayoutProperty(
     "hillshade",
     "visibility",
     terrainEnabled ? "visible" : "none"
   );
 }
+
+
 
 // Map Initialization
 window.mapReady = loadStyle().then(style => {
