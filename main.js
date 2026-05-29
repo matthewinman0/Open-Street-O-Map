@@ -157,6 +157,8 @@ window.mapReady = loadStyle().then(style => {
     updateHUD();
     map.on("move", updateHUD);
     map.on("zoom", updateHUD);
+    map.on("terrain", toggleBuildings);
+
 
   });
 });
