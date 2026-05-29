@@ -1,0 +1,85 @@
+{
+  "layers": [
+    {
+        "id": "buildings-2d",
+        "type": "fill",
+        "source": "osm",
+        "source-layer": "building",
+        "layout": {
+            "visibility": "visible"
+        },
+        "paint": {
+            "fill-color": "#9A9A9A",
+            "fill-opacity": 1
+        }
+        
+    },
+    {
+        "id": "buildings-2d-outline",
+        "type": "line",
+        "source": "osm",
+        "source-layer": "building",
+        "layout": {
+            "visibility": "visible"
+        },
+        "paint": {
+            "line-color": "#000000",
+            "line-width": 2
+        }
+        
+    },
+    {
+        "id": "buildings-3d",
+        "type": "fill-extrusion",
+        "source": "osm",
+        "source-layer": "building",
+        "layout": {
+            "visibility": "none"
+        },
+        "minzoom": 14,
+        "paint": {
+            "fill-extrusion-color": "#9A9A9A",
+            "fill-extrusion-height": [
+            "coalesce",
+            ["get", "render_height"],
+            ["get", "height"],
+            10
+            ],
+            "fill-extrusion-base": [
+            "coalesce",
+            ["get", "min_height"],
+            0
+            ],
+            "fill-extrusion-opacity": 1
+        }
+    },
+
+    {
+      "id": "city-names",
+      "type": "symbol",
+      "source": "osm",
+      "source-layer": "place",
+      "filter": [
+        "==",
+        "class",
+        "country"
+      ],
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-font": ["Noto Sans Regular"],
+        "text-size": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          6, 10,
+          12, 16
+        ]
+      },
+      "paint": {
+        "text-color": "#222222",
+        "text-halo-color": "#ffffff",
+        "text-halo-width": 1
+      }
+    }
+  ]
+}

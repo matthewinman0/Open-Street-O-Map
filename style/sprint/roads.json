@@ -20,11 +20,11 @@
         }
     },
     {
-      "id": "roads-small-outline",
+      "id": "roads-primary-outline",
       "type": "line",
       "source": "osm",
       "source-layer": "transportation",
-      "filter": ["in", "class", "primary", "secondary", "tertiary", "minor", "service"],
+      "filter": ["in", "class", "primary"],
       "paint": {
         "line-color": "#000000",
         "line-width": [
@@ -37,6 +37,44 @@
             ]
       }
     },
+    {
+      "id": "roads-secondary-outline",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": ["in", "class", "secondary"],
+      "paint": {
+        "line-color": "#000000",
+        "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 1.4,
+            14, 4.5,
+            18, 30
+            ]
+      }
+    },
+    {
+      "id": "roads-tertiary-outline",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": ["in", "class", "tertiary", "minor", "service"],
+      "paint": {
+        "line-color": "#000000",
+        "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 1.4,
+            14, 2.5,
+            16, 8,
+            18, 30
+            ]
+      }
+    },
+    
     {
         "id": "roads-large",
         "type": "line",
@@ -106,6 +144,7 @@
             ["zoom"],
             10, 1.2,
             14, 2,
+            16, 4.5,
             18, 15
           ]
       }

@@ -78,7 +78,7 @@
       }
     },
     {
-      "id": "hills",
+      "id": "hillshade",
       "type": "hillshade",
       "source": "hillshade",
       "layout": {

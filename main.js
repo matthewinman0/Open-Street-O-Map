@@ -24,11 +24,12 @@ async function loadStyle() {
   if (mapStyle === "Forest") {
     paths = await (await fetch("./style/forest/paths.json")).json();
     roads = await (await fetch("./style/forest/roads.json")).json();
+    buildings = await (await fetch("./style/forest/buildings.json")).json();
   } else if (mapStyle === "Sprint") {
     paths = await (await fetch("./style/sprint/paths.json")).json();
     roads = await (await fetch("./style/sprint/roads.json")).json();
+    buildings = await (await fetch("./style/sprint/buildings.json")).json();
   }
-  buildings = await (await fetch("./style/buildings.json")).json();
   base.layers = [
     ...base.layers,
     ...land.layers,
@@ -44,7 +45,7 @@ async function loadStyle() {
 document.getElementById("style-select").onchange = async (e) => {
   mapStyle = e.target.value;
   const newStyle = await loadStyle();
-  map.setStyle(newStyle);
+  map.setStyle(newStyle, { diff: false });
 };
 
 //  Location 
@@ -63,7 +64,7 @@ function updateHUD() {
     `Zoom: ${z.toFixed(2)} | Longitude: ${lng.toFixed(4)} | Latitude: ${lat.toFixed(4)}`;
 }
 
-//  2D/3D Buildings
+//  2D/3D Buildings & hillshade
 function toggleBuildings() {
   const terrainEnabled = map.getTerrain() !== null;
 
@@ -80,7 +81,7 @@ function toggleBuildings() {
   );
 
   map.setLayoutProperty(
-    "hills",
+    "hillshade",
     "visibility",
     terrainEnabled ? "visible" : "none"
   );
@@ -159,7 +160,6 @@ window.mapReady = loadStyle().then(style => {
 
   });
 });
-
 
 //UI button handlers
 document.getElementById("settings-toggle").onclick = () => {
