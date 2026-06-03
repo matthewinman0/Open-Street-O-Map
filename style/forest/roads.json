@@ -112,14 +112,14 @@
     },
 
 
-
-
     {
       "id": "railway-background",
       "type": "line",
       "source": "osm",
       "source-layer": "transportation",
-      "filter": ["==", "subclass", "rail"],
+      "filter": ["all",[
+        "match",["get","brunnel"],["tunnel"],false,true],
+        ["==", ["get", "class"], "rail"]],
       "paint": {
         "line-color": "#000000",
         "line-width": [
@@ -137,7 +137,9 @@
       "type": "line",
       "source": "osm",
       "source-layer": "transportation",
-      "filter": ["==", "subclass", "rail"],
+      "filter": ["all",[
+        "match",["get","brunnel"],["tunnel"],false,true],
+        ["==", ["get", "class"], "rail"]],
       "paint": {
         "line-color": "#ffffff",
         "line-width": [
