@@ -1,9 +1,16 @@
 // ============================
-// OVERLAY SYSTEM (CLEAN VERSION)
+// OVERLAY SYSTEM
 // ============================
 
 let uploadedOverlaySourceId = "uploaded-overlay-source";
 let uploadedOverlayLayerId = "uploaded-overlay-layer";
+
+
+const mapInput = document.getElementById("uploaded-map");
+const pgwInput = document.getElementById("uploaded-pgw");
+
+const displayButton = document.getElementById("display-uploaded-map");
+const clearButton = document.getElementById("clear-uploaded-map");
 
 // ============================
 // PROJ4 SETUP (OSGB36)
@@ -16,16 +23,6 @@ proj4.defs(
   "+towgs84=446.448,-125.157,542.060,-0.1502,-0.2470,-0.8421,20.4894 " +
   "+units=m +no_defs"
 );
-
-// ============================
-// DOM ELEMENTS
-// ============================
-
-const mapInput = document.getElementById("uploaded-map");
-const pgwInput = document.getElementById("uploaded-pgw");
-
-const displayButton = document.getElementById("display-uploaded-map");
-const clearButton = document.getElementById("clear-uploaded-map");
 
 // ============================
 // INDEXEDDB
@@ -129,7 +126,10 @@ function loadImage(url) {
 
 async function displayOverlay(imageFile, pgwText) {
   try {
-    const lines = pgwText.trim().split(/\r?\n/).map(Number);
+    const lines = pgwText
+      .trim()
+      .split(/\r?\n/)
+      .map(l => parseFloat(l.trim()));
 
     if (lines.length < 6) {
       alert("Invalid PGW file");
@@ -148,8 +148,8 @@ async function displayOverlay(imageFile, pgwText) {
     const h = img.naturalHeight;
 
     const worldFromPixel = (x, y) => ([
-      A * (x + 0.5) + B * (y + 0.5) + C,
-      D * (x + 0.5) + E * (y + 0.5) + F
+      A * x + B * y + C,
+      D * x + E * y + F
     ]);
 
     const tl = worldFromPixel(0, 0);
@@ -167,12 +167,10 @@ async function displayOverlay(imageFile, pgwText) {
     const lngs = coords.map(c => c[0]);
     const lats = coords.map(c => c[1]);
 
-    const bounds = [
+    map.fitBounds([
       [Math.min(...lngs), Math.min(...lats)],
       [Math.max(...lngs), Math.max(...lats)]
-    ];
-
-    map.fitBounds(bounds, { padding: 40 });
+    ], { padding: 40 });
 
     console.log("COORDS:");
     coords.forEach((c, i) => {
@@ -196,11 +194,14 @@ async function displayOverlay(imageFile, pgwText) {
       type: "raster",
       source: uploadedOverlaySourceId,
       paint: {
-        "raster-opacity": 0.5
+        "raster-opacity": 0.7
       }
     });
 
-    map.fitBounds([bl, tr], { padding: 40 });
+    map.fitBounds([
+      [Math.min(...lngs), Math.min(...lats)],
+      [Math.max(...lngs), Math.max(...lats)]
+    ], { padding: 40 });
 
     console.log("Overlay loaded");
   } catch (e) {
