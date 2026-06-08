@@ -1,0 +1,72 @@
+Course planner
+Fix Map overlay georef
+add option for GCF forrest ordered over OSM
+More detailed global veg density
+Town/City names (togleable)
+Sort out layers and bridges
+Contour interval settings
+Add styling for all layers:
+    allotments
+    bare_rock
+    beach
+    bog
+    dune
+    scrub
+    shrubbery
+    farm
+    farmland
+    fell
+    forest
+    garden
+    glacier
+    grass
+    grassland
+    golf_course
+    heath
+    mangrove
+    marsh
+    meadow
+    orchard
+    park
+    plant_nursery
+    recreation_ground
+    reedbed
+    saltern
+    saltmarsh
+    sand
+    scree
+    swamp
+    tidalflat
+    tundra
+    village_green
+    vineyard
+    wet_meadow
+    wetland
+    wood
+
+    railway
+    cemetery
+    military
+    residential
+    commercial
+    industrial
+    garages
+    retail
+    bus_station
+    school
+    university
+    kindergarten
+    college
+    library
+    hospital
+    stadium
+    pitch
+    playground
+    track
+    theme_park
+    zoo
+    suburb
+    quarter
+    neighbourhood
+    dam
+    quarry

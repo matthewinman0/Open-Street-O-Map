@@ -19,6 +19,24 @@
       }
     },
     {
+      "id": "aeroways",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "aeroway",
+      "filter": ["all"],
+      "paint": {
+        "line-color": "#000000",
+        "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10, 0.3,
+            14, 0.8,
+            18, 6
+            ]
+      }
+    },
+    {
         "id": "roads-large-outline",
         "type": "line",
         "source": "osm",

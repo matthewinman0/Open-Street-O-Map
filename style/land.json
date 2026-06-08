@@ -8,7 +8,8 @@
         "raster-brightness-min": 1,
         "raster-brightness-max": 1,
         "raster-contrast": 0,
-        "raster-saturation": -1}
+        "raster-saturation": -1,
+        "raster-resampling": "linear"}
     },
     {
       "id": "residential-areas",
@@ -27,6 +28,17 @@
       "source": "osm",
       "source-layer": "landuse",
       "filter": ["in", "class", "commercial", "retail"],
+      "paint": {
+        "fill-color": "#e4af7b",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "paved-aeroways",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "aeroway",
+      "filter": ["all"],
       "paint": {
         "fill-color": "#e4af7b",
         "fill-opacity": 1
@@ -62,6 +74,17 @@
       "filter": ["in", "subclass", "forest", "wood"],
       "paint": {
         "fill-color": "#ffffff",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "rocks",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landcover",
+      "filter": ["in", "subclass", "rock"],
+      "paint": {
+        "fill-color": "#BCBCBC",
         "fill-opacity": 1
       }
     },
