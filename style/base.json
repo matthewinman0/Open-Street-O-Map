@@ -50,29 +50,6 @@
       "paint": {
         "background-color": "#ffdda3"
       }
-    },
-    {
-      "id": "country-borders",
-      "type": "line",
-      "source": "osm",
-      "source-layer": "boundary",
-      "minzoom": 0,
-      "maxzoom": 8,
-      "filter": [
-        "all",
-        ["==", "admin_level", 2],
-        ["==", "maritime", 0]
-      ],
-      "paint": {
-        "line-color": "#666666",
-        "line-width": [
-          "interpolate",
-          ["linear"],
-          ["zoom"],
-          1, 0.5,
-          5, 2
-        ]
-      }
     }
   ],
   "terrain": {
