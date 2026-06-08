@@ -1,6 +1,16 @@
 {
   "layers": [
     {
+      "id": "GFC",
+      "type": "raster",
+      "source": "GFC2020 Terrain",
+      "paint": {
+        "raster-brightness-min": 1,
+        "raster-brightness-max": 1,
+        "raster-contrast": 0,
+        "raster-saturation": -1}
+    },
+    {
       "id": "residential-areas",
       "type": "fill",
       "source": "osm",
