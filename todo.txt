@@ -1,11 +1,13 @@
 Course planner
+Save xyz for reload to same place
 Fix Map overlay georef
+Add branding to map export
 add option for GCF forrest ordered over OSM
 More detailed global veg density
 Town/City names (togleable)
 Sort out layers and bridges
 Contour interval settings
-Add styling for all layers:
+Add styling for all layers (Patterns, ISOM Svgs):
     allotments
     bare_rock
     beach
