@@ -31,10 +31,20 @@
       "tileSize": 256,
       "encoding": "terrarium"
     },
-    "GFC2020 Terrain":{
+    "GFC2020-veg":{
       "type":"raster",
       "tiles": [
         "https://ies-ows.jrc.ec.europa.eu/iforce/gfc2020/wms.py?service=WMS&request=GetMap&version=1.1.1&layers=gfc2020_v3&format=image/png&transparent=true&srs=EPSG:3857&bbox={bbox-epsg-3857}&width=256&height=256"
+      ],
+      "paint": {
+        "fill-color": "#ffffff",
+        "fill-opacity": 1
+      }
+    },
+    "GFC2020-veg-type":{
+      "type":"raster",
+      "tiles": [
+        "https://ies-ows.jrc.ec.europa.eu/iforce/gft2020/wms.py?service=WMS&request=GetMap&version=1.1.1&layers=gft2020_v0&format=image/png&transparent=true&srs=EPSG:3857&bbox={bbox-epsg-3857}&width=256&height=256"
       ],
       "paint": {
         "fill-color": "#ffffff",

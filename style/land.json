@@ -3,13 +3,18 @@
     {
       "id": "GFC",
       "type": "raster",
-      "source": "GFC2020 Terrain",
+      "source": "GFC2020-veg",
       "paint": {
         "raster-brightness-min": 1,
         "raster-brightness-max": 1,
         "raster-contrast": 0,
         "raster-saturation": -1,
         "raster-resampling": "linear"}
+    },
+    {
+      "id": "GFT-type",
+      "type": "raster",
+      "source": "GFC2020-veg-type"
     },
     {
       "id": "residential-areas",

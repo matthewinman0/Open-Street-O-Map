@@ -11,6 +11,14 @@ Contours and hillshade data come from [Mapterhorn](https://mapterhorn.com/) and 
 
 The project has tools that let users upload their own maps to layer them ontop. This then means that the project can display maps in **3 dimentions** as it has terrain maps built in.
 
+## Contributing
+
+### Map
+Contributing to the map is relatively easy. Styling is based off combined json files which are kept in the style folder. The map uses OSM ____ scheme on Maplibre 
+
+### Tools
+
+
 ## Running Yourself
 
 Just download and host the repository, Maplibre doesn't like running from files unfortunatly so a web server is still needed
