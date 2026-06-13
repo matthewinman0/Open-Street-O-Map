@@ -12,9 +12,23 @@
         "raster-resampling": "linear"}
     },
     {
+      "id": "forrest",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landcover",
+      "filter": ["in", "subclass", "forest", "wood"],
+      "paint": {
+        "fill-color": "#ffffff",
+        "fill-opacity": 1
+      }
+    },
+    {
       "id": "GFT-type",
       "type": "raster",
-      "source": "GFC2020-veg-type"
+      "source": "GFC2020-veg-type",
+      "paint":{
+        "raster-resampling": "linear"
+      }
     },
     {
       "id": "residential-areas",
@@ -68,17 +82,6 @@
       "filter": ["in", "subclass", "heath"],
       "paint": {
         "fill-color": "#ffdfa4",
-        "fill-opacity": 1
-      }
-    },
-    {
-      "id": "forrest",
-      "type": "fill",
-      "source": "osm",
-      "source-layer": "landcover",
-      "filter": ["in", "subclass", "forest", "wood"],
-      "paint": {
-        "fill-color": "#ffffff",
         "fill-opacity": 1
       }
     },
