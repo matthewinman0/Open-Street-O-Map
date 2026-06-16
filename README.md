@@ -14,10 +14,58 @@ The project has tools that let users upload their own maps to layer them ontop. 
 ## Contributing
 
 ### Map
-Contributing to the map is relatively easy. Styling is based off combined json files which are kept in the style folder. The map uses OSM ____ scheme on Maplibre 
+
+Contributing to the map is relatively easy. Styling is based off combined json files which are kept in the style folder. The map uses [Open Map Tiles Scheme](https://docs.maptiler.com/schema/omt-planet/) on [Maplibre](https://maplibre.org/maplibre-gl-js/docs/) with a variety of other datasets.
+
+Some useful links:
+
+* [Style Spec](https://maplibre.org/maplibre-style-spec/)
+* [Examples](https://maplibre.org/maplibre-gl-js/docs/examples/)
+
+#### Snippets:
+
+Defining a source
+
+```
+ "sources": {
+    "osm": {
+      "type": "vector",
+      "tiles": [
+        "https://tiles.openfreemap.org/planet/20260506_001001_pt/{z}/{x}/{y}.pbf"
+      ],
+      "minzoom": 0,
+      "maxzoom": 14
+    }
+```
+
+Styling and adding a layer
+
+```
+"layers": [
+  {
+    "id": "buildings-2d",
+    "type": "fill",
+    "source": "osm",
+    "source-layer": "building",
+    "layout": {
+        "visibility": "visible"
+    },
+    "paint": {
+        "fill-color": "#231f20",
+        "fill-opacity": 1
+    }
+  }
+]
+```
 
 ### Tools
 
+Tools and other parts of the map are programed in Javascript
+
+Useful Links:
+
+* [API Docs](https://maplibre.org/maplibre-gl-js/docs/API/)
+* [Plugins](https://maplibre.org/maplibre-gl-js/docs/plugins/)
 
 ## Running Yourself
 
