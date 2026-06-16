@@ -133,8 +133,8 @@ window.mapReady = loadStyle().then(style => {
           ["linear"],
           ["zoom"],
           10, 0.1,
-          12, 0.3,
-          14, 1
+          13, 0.3,
+          14, 0.8
         ]
         }
       });
