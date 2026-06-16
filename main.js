@@ -104,7 +104,9 @@ window.mapReady = loadStyle().then(style => {
 
   window.map = map;
 
-  map.on("style.load", () => {
+  map.on("style.load", async () => {
+  const patternImg = await map.loadImage("./patterns/dot.png");
+  map.addImage("dot", patternImg.data);
     if (!map.__initialized) {
       map.addControl(new maplibregl.NavigationControl());
       map.addControl(geolocate);
@@ -118,6 +120,24 @@ window.mapReady = loadStyle().then(style => {
           )
         })
       );
+      map.addLayer({
+        id: "sand",
+        type: "fill",
+        source: "osm", // <-- must exist already
+        "source-layer": "landcover",     // if vector tiles
+        filter: ["in", "subclass", "sand", "farmland"],
+        paint: {
+          "fill-pattern": "dot",
+          "fill-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          10, 0.1,
+          12, 0.3,
+          14, 1
+        ]
+        }
+      });
       map.__initialized = true;
     }
 

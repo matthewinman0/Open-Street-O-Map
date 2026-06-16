@@ -171,6 +171,17 @@ document.getElementById("export-btn").onclick = async () => {
     preserveDrawingBuffer: true
   });
 
+
+  exportMap.on("style.load", async () => {
+
+    // re-add pattern images
+    if (!exportMap.hasImage("dot")) {
+      const img = await exportMap.loadImage("./patterns/dot.png");
+      exportMap.addImage("dot", img.data);
+    }
+
+  });
+
   await new Promise(r => exportMap.once("idle", r));
   await new Promise(r => requestAnimationFrame(r));
 
