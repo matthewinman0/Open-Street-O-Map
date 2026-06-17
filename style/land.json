@@ -27,6 +27,11 @@
       "type": "raster",
       "source": "GFC2020-veg-type",
       "paint":{
+        "raster-hue-rotate": 50,
+        "raster-brightness-min": 0.3,
+        "raster-brightness-max": 1,
+        "raster-contrast": 0,
+        "raster-saturation": 0.1,
         "raster-resampling": "linear"
       }
     },
