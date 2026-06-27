@@ -107,6 +107,8 @@ window.mapReady = loadStyle().then(style => {
   map.on("style.load", async () => {
   const patternImg = await map.loadImage("./patterns/dot.png");
   map.addImage("dot", patternImg.data);
+  const marshImg = await map.loadImage("./patterns/marsh.png");
+  map.addImage("marsh", marshImg.data);
     if (!map.__initialized) {
       map.addControl(new maplibregl.NavigationControl());
       map.addControl(geolocate);
@@ -128,6 +130,24 @@ window.mapReady = loadStyle().then(style => {
         filter: ["in", "subclass", "sand", "farmland"],
         paint: {
           "fill-pattern": "dot",
+          "fill-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          10, 0.1,
+          13, 0.3,
+          14, 0.8
+        ]
+        }
+      });
+      map.addLayer({
+        id: "marsh",
+        type: "fill",
+        source: "osm", // <-- must exist already
+        "source-layer": "landcover",     // if vector tiles
+        filter: ["in", "subclass", "swamp", "marsh", "mangrove", "bog", "wetland"],
+        paint: {
+          "fill-pattern": "marsh",
           "fill-opacity": [
           "interpolate",
           ["linear"],
