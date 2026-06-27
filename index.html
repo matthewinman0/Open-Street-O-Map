@@ -23,7 +23,7 @@
 <div id="map"></div>
 
 <div id="ui-wrapper">
-  <button id="settings-toggle">
+  <button name="Settings panel open" id="settings-toggle">
     <svg id="svg-settings" width="20px" height="60px" viewBox="-19.04 0 75.804 75.804" xmlns="http://www.w3.org/2000/svg">
   <g id="Group_65" data-name="Group 65" transform="translate(-831.568 -384.448)">
     <path
@@ -40,37 +40,32 @@
   </button>
 
   <div id="settings-panel">
-    <button id="map-settings-btn" class="button">Map</button>
-    <button id="tools-settings-btn" class="button">Tools</button>
-    <button id="export-settings-btn" class="button">Export</button>
-    <button id="close-settings-btn">x</button>
+    <button name="Map Settings" id="map-settings-btn" class="button">Map</button>
+    <button name="Tools" id="tools-settings-btn" class="button">Tools</button>
+    <button name="Export" id="export-settings-btn" class="button">Export</button>
+    <button name="Close Settings" id="close-settings-btn">x</button>
+
+
+
     <div id="map-settings">
       <h2 style="justify-content: center; display: flex;">Map Settings</h2>
 
-      <p>O-style: <select id="style-select">
+      <p>O-style: <select name="O-style" id="style-select">
         <option value="Forest">Forest</option>
         <option value="Sprint">Sprint</option>
       </select></p>
 
-      <p>Contour Type: <select id="contour-type">
+      <p>Contour Type: <select name="Contour Type" id="contour-type">
         <option value="mapterhorn">Mapterhorn</option>
         <option value="amazon">AWS Terrarium</option>
         <option value="none">None</option>
       </select></p>
 
-      <p>Terrain Exaggeration: <input type="number" id="terrain-exaggeration" name="terrain-exaggeration" step="0.1" value="1" max="5" min="0"></p>
+      <p>Terrain Exaggeration: <input name="Terrain Exaggeration" type="number" id="terrain-exaggeration" name="terrain-exaggeration" step="0.1" value="1" max="5" min="0"></p>
 
-      <p>3d Buildings:<input type="checkbox" id="3d-buildings-toggle"></p>
-
-
-      <footer style="font-size: 0.8em; text-align: left; bottom: 10px; position: absolute; padding: 0px">
-        <a href="https://github.com/matthewinman0/Open-Street-O-Map">Github</a>
-        <br>
-        <a href="https://openfreemap.org/">OSM Tiles</a>
-        <a href="https://mapterhorn.com/">Mapterhorn Terrain</a>
-        <a href="https://registry.opendata.aws/terrain-tiles/">AWS Terrarium</a>
-      </footer>
+      <p>3d Buildings:<input name="3d Buildings toggle" type="checkbox" id="3d-buildings-toggle"></p>
     </div>
+
 
 
     <div id="tools-settings" style="display: none;">
@@ -78,18 +73,18 @@
       <details>
       <summary><h3 style="display: inline-block;">Map Overlay</h3></summary>
 
-      <p>Upload Map: <input type="file" id="uploaded-map"></p>
-      <p>Upload GeoRef: <input type="file" id="uploaded-pgw"></p>
+      <p>Upload Map: <input type="file" id="uploaded-map" class="upload-button"></p>
+      <p>Upload GeoRef: <input type="file" id="uploaded-pgw" class="upload-button"></p>
 
-      <button id="display-uploaded-map" class="button">Display</button>
-      <button id="clear-uploaded-map" class="button">Clear</button>
+      <button name="Display Map" id="display-uploaded-map" class="button">Display</button>
+      <button name="Clear Maps" id="clear-uploaded-map" class="button">Clear</button>
       </details>
     </div>
 
 
     <div id="export-settings" style="display: none;">
       <h2 style="justify-content: center; display: flex;">Export</h2>
-      <p><button id="export-select-btn" class="button">Select Area</button></p>
+      <p><button name="Select export area" id="export-select-btn" class="button">Select Area</button></p>
 
       <p><label for="scale-select">Scale:</label>
       <select id="scale-select">
@@ -110,8 +105,18 @@
 
       <input type="number" id="dpi" name="export-dpi" step="1" value="300" min="1"></p>
 
-      <button id="export-btn" class="button">Export</button>
+      <button name="export" id="export-btn" class="button">Export</button>
     </div>
+
+    <footer style="font-size: 0.8em; text-align: left; bottom: 10px; position: absolute; padding: 0px;">
+      <a href="https://github.com/matthewinman0/Open-Street-O-Map">Github</a>
+      <a href="./about/" style="padding-left: 10px;">About</a>
+      <br>
+      <a href="https://openfreemap.org/">OSM Tiles</a>
+      <a href="https://mapterhorn.com/">Mapterhorn Terrain</a>
+      <a href="https://registry.opendata.aws/terrain-tiles/">AWS Terrarium</a>
+    </footer>
+      
   </div>
 </div>
 
