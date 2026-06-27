@@ -111,6 +111,29 @@
       }
     },
     {
+      "id": "ditches",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "waterway",
+      "filter": ["==", "class", "ditch"],
+
+      "paint": {
+        "line-color": "#D07500",
+        "line-opacity": 1,
+        "line-dasharray": [1, 1],
+        "line-width": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              10, 0.4,
+              14, 1,
+              18, 10,
+              19, 20
+              ]
+
+      }
+    },
+    {
       "id": "hillshade",
       "type": "hillshade",
       "source": "hillshade",

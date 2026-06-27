@@ -145,7 +145,7 @@ window.mapReady = loadStyle().then(style => {
         type: "fill",
         source: "osm", // <-- must exist already
         "source-layer": "landcover",     // if vector tiles
-        filter: ["in", "subclass", "swamp", "marsh", "mangrove", "bog", "wetland"],
+        filter: ["in", "subclass", "swamp", "marsh", "mangrove", "bog", "wetland", "reedbed"],
         paint: {
           "fill-pattern": "marsh",
           "fill-opacity": [

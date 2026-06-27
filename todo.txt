@@ -1,24 +1,21 @@
 Course planner
+Hide Country names when exporting / add all names
 Save xyz for reload to same place
 Fix Map overlay georef
 Add branding to map export
 add option for GCF forrest ordered over OSM
 More detailed global veg density
-Town/City names (togleable)
 Sort out layers and bridges
 Contour interval settings
 Add styling for all layers (Patterns, ISOM Svgs):
     allotments
     bare_rock
-    beach
-    bog
     dune
     scrub
     shrubbery
     farm
     farmland
     fell
-    forest
     garden
     glacier
     grass
@@ -32,24 +29,20 @@ Add styling for all layers (Patterns, ISOM Svgs):
     park
     plant_nursery
     recreation_ground
-    reedbed
     saltern
     saltmarsh
     sand
     scree
-    swamp
     tidalflat
     tundra
     village_green
     vineyard
     wet_meadow
-    wetland
     wood
 
     railway
     cemetery
     military
-    residential
     commercial
     industrial
     garages
@@ -62,7 +55,6 @@ Add styling for all layers (Patterns, ISOM Svgs):
     library
     hospital
     stadium
-    pitch
     playground
     track
     theme_park
