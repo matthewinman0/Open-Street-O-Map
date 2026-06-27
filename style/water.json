@@ -88,6 +88,35 @@
               19, 50
               ]
       }
+    },
+    {
+      "id": "piers- outline",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": ["==", "class", "pier"],
+      "paint": {
+        "line-color": "#000000",
+        "line-opacity": 1,
+        "line-width": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            14, 1.5,
+            18, 5
+            ]
+      }
+    },
+    {
+      "id": "piers",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "transportation",
+      "filter": ["==", "class", "pier"],
+      "paint": {
+        "fill-color": "#000000",
+        "fill-opacity": 1
+      }
     }
   ]
 }
