@@ -79,7 +79,7 @@
       "type": "fill",
       "source": "osm",
       "source-layer": "landcover",
-      "filter": ["in", "class", "grass", "meadow", "farmland"],
+      "filter": ["in", "class", "grass", "meadow", "farmland", "orchard"],
       "paint": {
         "fill-color": "#febe50",
         "fill-opacity": 1

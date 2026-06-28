@@ -78,103 +78,122 @@ window.mapReady = loadStyle().then(style => {
 
   map.on("style.load", async () => {
   const patternImg = await map.loadImage("./patterns/dot.png");
-  map.addImage("dot", patternImg.data);
   const marshImg = await map.loadImage("./patterns/marsh.png");
+  const greenDotImg = await map.loadImage("./patterns/greenDot.png") 
+  map.addImage("dot", patternImg.data);
   map.addImage("marsh", marshImg.data);
-    if (!map.__initialized) {
-      map.addControl(new maplibregl.NavigationControl());
-      map.addControl(geolocate);
-      map.addControl(
-        new maplibregl.ScaleControl({maxWidth: 120, unit: "metric"}),"bottom-left"
-      );
-      map.addControl(
-        new maplibregl.TerrainControl({
-          source: "3d terrain",
-          exaggeration: parseFloat(document.getElementById("terrain-exaggeration").value
-          )
-        })
-      );
-      map.addLayer({
-        id: "sand",
-        type: "fill",
-        source: "osm", // <-- must exist already
-        "source-layer": "landcover",     // if vector tiles
-        filter: ["in", "subclass", "sand", "farmland"],
-        paint: {
-          "fill-pattern": "dot",
-          "fill-opacity": [
-          "interpolate",
-          ["linear"],
-          ["zoom"],
-          10, 0.1,
-          13, 0.3,
-          14, 0.8
-        ]
-        }
-      });
-      map.addLayer({
-        id: "marsh",
-        type: "fill",
-        source: "osm", // <-- must exist already
-        "source-layer": "landcover",     // if vector tiles
-        filter: ["in", "subclass", "swamp", "marsh", "mangrove", "bog", "wetland", "reedbed"],
-        paint: {
-          "fill-pattern": "marsh",
-          "fill-opacity": [
-          "interpolate",
-          ["linear"],
-          ["zoom"],
-          10, 0.1,
-          13, 0.3,
-          14, 0.8
-        ]
-        }
-      });
-      map.__initialized = true;
-    }
+  map.addImage("greenDot", greenDotImg.data);
 
-    if (!map.getSource("contour-source")) {
-      map.addSource("contour-source", {
-        type: "vector",
-        tiles: [
-          demSource.contourProtocolUrl({
-            multiplier: 1,
-            thresholds: {
-              11: [5, 25],
-              12: [5, 25],
-              14: [5, 25],
-              15: [5, 25],
-            },
-            contourLayer: "contours",
-            elevationKey: "ele",
-            levelKey: "level",
-            extent: 4096,
-            buffer: 1,
-          }),
-        ],
-        maxzoom: 15,
-      });
-    }
-    if (!map.getLayer("contour-lines")) {
-      map.addLayer({
-        id: "contour-lines",
-        type: "line",
-        source: "contour-source",
-        "source-layer": "contours",
-        paint: {
-          "line-color": "rgba(0,0,0, 50%)",
-          "line-width": ["match", ["get", "level"], 1, 1, 0.5],
-        },
-      });
-    }
-    map.setTerrain(null);
-    toggleBuildings();
+  if (!map.__initialized) {
+    map.addControl(new maplibregl.NavigationControl());
+    map.addControl(geolocate);
+    map.addControl(
+      new maplibregl.ScaleControl({maxWidth: 120, unit: "metric"}),"bottom-left"
+    );
+    map.addControl(
+      new maplibregl.TerrainControl({
+        source: "3d terrain",
+        exaggeration: parseFloat(document.getElementById("terrain-exaggeration").value)
+      })
+    );
+    map.addLayer({
+      id: "sand",
+      type: "fill",
+      source: "osm",
+      "source-layer": "landcover",
+      filter: ["in", "subclass", "sand", "farmland"],
+      paint: {
+        "fill-pattern": "dot",
+        "fill-opacity": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        10, 0.1,
+        13, 0.3,
+        14, 0.8
+        ]
+      }
+    });
+    map.addLayer({
+      id: "marsh",
+      type: "fill",
+      source: "osm",
+      "source-layer": "landcover",
+      filter: ["in", "subclass", "swamp", "marsh", "mangrove", "bog", "wetland", "reedbed"],
+      paint: {
+        "fill-pattern": "marsh",
+        "fill-opacity": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        10, 0.1,
+        13, 0.3,
+        14, 0.8
+        ]
+      }
+    });
+    map.addLayer({
+      id: "orchard",
+      type: "fill",
+      source: "osm", 
+      "source-layer": "landcover",
+      filter: ["in", "class", "orchard"],
+      paint: {
+        "fill-pattern": "marsh",
+        "fill-opacity": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        10, 0.1,
+        13, 0.3,
+        14, 0.8
+        ]
+      }
+    });
+    map.__initialized = true;
+  }
+  if (!map.getSource("contour-source")) {
+    map.addSource("contour-source", {
+      type: "vector",
+      tiles: [
+        demSource.contourProtocolUrl({
+          multiplier: 1,
+          thresholds: {
+            11: [5, 25],
+            12: [5, 25],
+            14: [5, 25],
+            15: [5, 25],
+          },
+          contourLayer: "contours",
+          elevationKey: "ele",
+          levelKey: "level",
+          extent: 4096,
+          buffer: 1,
+        }),
+      ],
+      maxzoom: 15,
+    });
+  }
+  if (!map.getLayer("contour-lines")) {
+    map.addLayer({
+      id: "contour-lines",
+      type: "line",
+      source: "contour-source",
+      "source-layer": "contours",
+      paint: {
+        "line-color": "rgba(0,0,0, 50%)",
+        "line-width": ["match", ["get", "level"], 1, 1, 0.5],
+      },
+    });
+  }
+  map.setTerrain(null);
+  toggleBuildings();
 
-    // HUD
-    updateHUD();
-    map.on("move", updateHUD);
-    map.on("zoom", updateHUD);
-    map.on("terrain", toggleBuildings);
+  // HUD
+  updateHUD();
+  map.on("move", updateHUD);
+  map.on("zoom", updateHUD);
+  map.on("terrain", toggleBuildings);
 
 
   });
