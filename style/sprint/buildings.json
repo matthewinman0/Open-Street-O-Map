@@ -9,7 +9,7 @@
             "visibility": "visible"
         },
         "paint": {
-            "fill-color": "#9A9A9A",
+            "fill-color": "#9d9d9c",
             "fill-opacity": 1
         }
         
@@ -38,7 +38,7 @@
         },
         "minzoom": 14,
         "paint": {
-            "fill-extrusion-color": "#9A9A9A",
+            "fill-extrusion-color": "#9d9d9c",
             "fill-extrusion-height": [
             "coalesce",
             ["get", "render_height"],
