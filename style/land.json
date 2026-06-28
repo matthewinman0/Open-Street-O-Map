@@ -23,17 +23,6 @@
       }
     },
     {
-      "id": "paved-areas",
-      "type": "fill",
-      "source": "osm",
-      "source-layer": "landuse",
-      "filter": ["in", "class", "commercial", "retail"],
-      "paint": {
-        "fill-color": "#e4af7b",
-        "fill-opacity": 1
-      }
-    },
-    {
       "id": "paved-areas-outline",
       "type": "line",
       "source": "osm",
@@ -42,14 +31,25 @@
       "paint": {
         "line-color": "#000000",
         "line-width": [
-            "interpolate",
-            ["linear"],
-            ["zoom"],
-            10, 0.1,
-            14, 1,
-            16, 3,
-            18, 5
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          10, 0.5,
+          14, 2.5,
+          18, 8,
+          19, 20
           ]
+      }
+    },
+    {
+      "id": "paved-areas",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landuse",
+      "filter": ["in", "class", "commercial", "retail"],
+      "paint": {
+        "fill-color": "#e4af7b",
+        "fill-opacity": 1
       }
     },
     {
