@@ -2,6 +2,7 @@ let map;
 let is3D = false;
 let mapStyle = "Forest"; // default map style
 let mapInitialized = false;
+let contourint = 5;
 
 //contour definitions
 var demSource = new mlcontour.DemSource({
@@ -128,10 +129,10 @@ window.mapReady = loadStyle().then(style => {
           demSource.contourProtocolUrl({
             multiplier: 1,
             thresholds: {
-              11: [5, 25],
-              12: [5, 25],
-              14: [5, 25],
-              15: [5, 25],
+              11: [contourint, contourint * 5],
+              12: [contourint, contourint * 5], 
+              14: [contourint, contourint * 5],
+              15: [contourint, contourint * 5],
             },
             contourLayer: "contours",
             elevationKey: "ele",
@@ -196,6 +197,7 @@ document.getElementById("export-settings-btn").onclick = () => {
   document.getElementById("export-settings").style.display = "block";
 };
 
+
 // Terrain exaggeration control
 document.getElementById("terrain-exaggeration").onchange = (e) => {
   const value = parseFloat(e.target.value);
@@ -206,8 +208,19 @@ document.getElementById("terrain-exaggeration").onchange = (e) => {
   });
 };
 
-document.getElementById("contour-type").onchange = (e) => {
-  const value = e.target.value;
+
+let contourType = document.getElementById("contour-type");
+let contourInt = document.getElementById("contour-int");
+contourInt.onchange = (e) => {
+  updateContours();
+}
+contourType.onchange = (e) => {
+  updateContours();
+}
+
+function updateContours() {
+  let value = contourType.value;
+  contourint = parseFloat(contourInt.value);
 
   // remove existing contour layer
   if (map.getLayer("contour-lines")) {
@@ -250,10 +263,10 @@ document.getElementById("contour-type").onchange = (e) => {
       demSource.contourProtocolUrl({
         multiplier: 1,
         thresholds: {
-          11: [5, 25],
-          12: [5, 25],
-          14: [5, 25],
-          15: [5, 25],
+          11: [contourint, contourint * 5],
+          12: [contourint, contourint * 5],
+          14: [contourint, contourint * 5],
+          15: [contourint, contourint * 5],
         },
         contourLayer: "contours",
         elevationKey: "ele",
