@@ -40,7 +40,7 @@
         }
     },
     {
-      "id": "city-names",
+      "id": "Placenames",
       "type": "symbol",
       "source": "osm",
       "source-layer": "place",

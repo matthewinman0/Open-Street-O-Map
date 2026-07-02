@@ -199,16 +199,25 @@ document.getElementById("export-settings-btn").onclick = () => {
 
 
 // Terrain exaggeration control
-document.getElementById("terrain-exaggeration").onchange = (e) => {
+document.getElementById("terrain-exaggeration").addEventListener("change", (e) => {
   const value = parseFloat(e.target.value);
   const terrain = map.getTerrain();
   map.setTerrain({
     source: "3d terrain",
     exaggeration: value
   });
+});
+
+document.getElementById("placenames").onchange = (e) => {
+  const namesEnabled = e.target.checked;
+  map.setLayoutProperty(
+    "Placenames",
+    "visibility",
+    namesEnabled ? "visible" : "none"
+  );
 };
 
-
+//instances in which contours need updates
 let contourType = document.getElementById("contour-type");
 let contourInt = document.getElementById("contour-int");
 contourInt.onchange = (e) => {
