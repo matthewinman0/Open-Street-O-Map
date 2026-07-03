@@ -41,15 +41,10 @@
     },
 
     {
-      "id": "city-names",
+      "id": "Placenames",
       "type": "symbol",
       "source": "osm",
       "source-layer": "place",
-      "filter": [
-        "==",
-        "class",
-        "country"
-      ],
       "layout": {
         "text-field": ["get", "name"],
         "text-font": ["Noto Sans Regular"],

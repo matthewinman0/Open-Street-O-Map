@@ -2,6 +2,7 @@ let map;
 let is3D = false;
 let mapStyle = "Forest"; // default map style
 let mapInitialized = false;
+let contourint = 5;
 
 //contour definitions
 var demSource = new mlcontour.DemSource({
@@ -64,6 +65,34 @@ function updateHUD() {
     `Zoom: ${z.toFixed(2)} | Longitude: ${lng.toFixed(4)} | Latitude: ${lat.toFixed(4)}`;
 }
 
+//  2D/3D Buildings & hillshade
+document.getElementById("3d-buildings-toggle").addEventListener("change", (e) => {
+  const buildingsEnabled = e.target.checked;
+
+  map.setLayoutProperty(
+    "buildings-2d",
+    "visibility",
+    buildingsEnabled ? "none" : "visible"
+  );
+
+  map.setLayoutProperty(
+    "buildings-3d",
+    "visibility",
+    buildingsEnabled ? "visible" : "none"
+  );
+});
+
+function toggleBuildings() {
+  const terrainEnabled = map.getTerrain() !== null;
+  map.setLayoutProperty(
+    "hillshade",
+    "visibility",
+    terrainEnabled ? "visible" : "none"
+  );
+}
+
+
+
 // Map Initialization
 window.mapReady = loadStyle().then(style => {
 
@@ -84,18 +113,18 @@ window.mapReady = loadStyle().then(style => {
   map.addImage("marsh", marshImg.data);
   map.addImage("greenDot", greenDotImg.data);
 
-  if (!map.__initialized) {
-    map.addControl(new maplibregl.NavigationControl());
-    map.addControl(geolocate);
-    map.addControl(
-      new maplibregl.ScaleControl({maxWidth: 120, unit: "metric"}),"bottom-left"
-    );
-    map.addControl(
-      new maplibregl.TerrainControl({
-        source: "3d terrain",
+    if (!map.__initialized) {
+      map.addControl(new maplibregl.NavigationControl());
+      map.addControl(geolocate);
+      map.addControl(
+        new maplibregl.ScaleControl({maxWidth: 120, unit: "metric"}),"bottom-left"
+      );
+      map.addControl(
+        new maplibregl.TerrainControl({
+          source: "3d terrain",
         exaggeration: parseFloat(document.getElementById("terrain-exaggeration").value)
-      })
-    );
+        })
+      );
     map.addLayer({
       id: "sand",
       type: "fill",
@@ -150,50 +179,51 @@ window.mapReady = loadStyle().then(style => {
         ]
       }
     });
-    map.__initialized = true;
-  }
-  if (!map.getSource("contour-source")) {
-    map.addSource("contour-source", {
-      type: "vector",
-      tiles: [
-        demSource.contourProtocolUrl({
-          multiplier: 1,
-          thresholds: {
-            11: [5, 25],
-            12: [5, 25],
-            14: [5, 25],
-            15: [5, 25],
-          },
-          contourLayer: "contours",
-          elevationKey: "ele",
-          levelKey: "level",
-          extent: 4096,
-          buffer: 1,
-        }),
-      ],
-      maxzoom: 15,
-    });
-  }
-  if (!map.getLayer("contour-lines")) {
-    map.addLayer({
-      id: "contour-lines",
-      type: "line",
-      source: "contour-source",
-      "source-layer": "contours",
-      paint: {
-        "line-color": "rgba(0,0,0, 50%)",
-        "line-width": ["match", ["get", "level"], 1, 1, 0.5],
-      },
-    });
-  }
-  map.setTerrain(null);
-  toggleBuildings();
+      map.__initialized = true;
+    }
 
-  // HUD
-  updateHUD();
-  map.on("move", updateHUD);
-  map.on("zoom", updateHUD);
-  map.on("terrain", toggleBuildings);
+    if (!map.getSource("contour-source")) {
+      map.addSource("contour-source", {
+        type: "vector",
+        tiles: [
+          demSource.contourProtocolUrl({
+            multiplier: 1,
+            thresholds: {
+              11: [contourint, contourint * 5],
+              12: [contourint, contourint * 5], 
+              14: [contourint, contourint * 5],
+              15: [contourint, contourint * 5],
+            },
+            contourLayer: "contours",
+            elevationKey: "ele",
+            levelKey: "level",
+            extent: 4096,
+            buffer: 1,
+          }),
+        ],
+        maxzoom: 15,
+      });
+    }
+    if (!map.getLayer("contour-lines")) {
+      map.addLayer({
+        id: "contour-lines",
+        type: "line",
+        source: "contour-source",
+        "source-layer": "contours",
+        paint: {
+          "line-color": "rgba(0,0,0, 50%)",
+          "line-width": ["match", ["get", "level"], 1, 1, 0.5],
+        },
+      });
+    }
+    map.setTerrain(null);
+    toggleBuildings();
+
+    // HUD
+    updateHUD();
+    map.on("move", updateHUD);
+    map.on("zoom", updateHUD);
+    map.on("terrain", toggleBuildings);
 
 
   });
@@ -227,8 +257,39 @@ document.getElementById("export-settings-btn").onclick = () => {
   document.getElementById("export-settings").style.display = "block";
 };
 
-document.getElementById("contour-type").onchange = (e) => {
-  const value = e.target.value;
+
+// Terrain exaggeration control
+document.getElementById("terrain-exaggeration").addEventListener("change", (e) => {
+  const value = parseFloat(e.target.value);
+  const terrain = map.getTerrain();
+  map.setTerrain({
+    source: "3d terrain",
+    exaggeration: value
+  });
+});
+
+document.getElementById("placenames").onchange = (e) => {
+  const namesEnabled = e.target.checked;
+  map.setLayoutProperty(
+    "Placenames",
+    "visibility",
+    namesEnabled ? "visible" : "none"
+  );
+};
+
+//instances in which contours need updates
+let contourType = document.getElementById("contour-type");
+let contourInt = document.getElementById("contour-int");
+contourInt.onchange = (e) => {
+  updateContours();
+}
+contourType.onchange = (e) => {
+  updateContours();
+}
+
+function updateContours() {
+  let value = contourType.value;
+  contourint = parseFloat(contourInt.value);
 
   // remove existing contour layer
   if (map.getLayer("contour-lines")) {
@@ -271,10 +332,10 @@ document.getElementById("contour-type").onchange = (e) => {
       demSource.contourProtocolUrl({
         multiplier: 1,
         thresholds: {
-          11: [5, 25],
-          12: [5, 25],
-          14: [5, 25],
-          15: [5, 25],
+          11: [contourint, contourint * 5],
+          12: [contourint, contourint * 5],
+          14: [contourint, contourint * 5],
+          15: [contourint, contourint * 5],
         },
         contourLayer: "contours",
         elevationKey: "ele",
