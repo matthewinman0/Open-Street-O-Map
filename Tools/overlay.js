@@ -12,16 +12,9 @@ const pgwInput = document.getElementById("uploaded-pgw");
 const displayButton = document.getElementById("display-uploaded-map");
 const clearButton = document.getElementById("clear-uploaded-map");
 
-// ============================
-// PROJ4 SETUP (OSGB36)
-// ============================
-
 proj4.defs(
-  "EPSG:27700",
-  "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 " +
-  "+x_0=400000 +y_0=-100000 +ellps=airy " +
-  "+towgs84=446.448,-125.157,542.060,-0.1502,-0.2470,-0.8421,20.4894 " +
-  "+units=m +no_defs"
+    "EPSG:27700",
+    "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,-0.1502,-0.247,-0.8421,20.4894 +units=m +no_defs"
 );
 
 // ============================

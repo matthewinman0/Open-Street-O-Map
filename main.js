@@ -2,7 +2,7 @@ let map;
 let is3D = false;
 let mapStyle = "Forest"; // default map style
 let mapInitialized = false;
-let contourint = 5;
+let contourint = 2.5;
 
 //contour definitions
 var demSource = new mlcontour.DemSource({
