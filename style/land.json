@@ -64,17 +64,6 @@
       }
     },
     {
-      "id": "paved-aeroways",
-      "type": "fill",
-      "source": "osm",
-      "source-layer": "aeroway",
-      "filter": ["all"],
-      "paint": {
-        "fill-color": "#e4af7b",
-        "fill-opacity": 1
-      }
-    },
-    {
       "id": "landcover-grass",
       "type": "fill",
       "source": "osm",
@@ -126,6 +115,17 @@
       "filter": ["==", "class", "pitch"],
       "paint": {
         "fill-color": "#c07635",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "paved-aeroways",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "aeroway",
+      "filter": ["all"],
+      "paint": {
+        "fill-color": "#e4af7b",
         "fill-opacity": 1
       }
     },

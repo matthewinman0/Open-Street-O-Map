@@ -216,6 +216,30 @@ window.mapReady = loadStyle().then(style => {
         },
       });
     }
+    map.addLayer({
+      id: "Placenames",
+      type: "symbol",
+      source: "osm",
+      "source-layer": "place",
+      layout: {
+        "text-field": ["get", "name"],
+        "text-font": ["Noto Sans Regular"],
+        "text-size": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          6, 10,
+          12, 16
+        ]
+      },
+      paint: {
+        "text-color": "#222222",
+        "text-halo-color": "#ffffff",
+        "text-halo-width": 2 ,
+        "text-halo-blur": 1,
+        "text-opacity": 1
+      }
+    });
     map.setTerrain(null);
     toggleBuildings();
 
