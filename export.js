@@ -174,10 +174,21 @@ document.getElementById("export-btn").onclick = async () => {
 
   exportMap.on("style.load", async () => {
 
-    // re-add pattern images
+    //----------------------
+    // re-add pattern images!!!!!!
+    //----------------------
+
     if (!exportMap.hasImage("dot")) {
       const img = await exportMap.loadImage("./patterns/dot.png");
       exportMap.addImage("dot", img.data);
+    }
+    if (!exportMap.hasImage("marsh")) {
+      const img = await exportMap.loadImage("./patterns/marsh.png");
+      exportMap.addImage("marsh", img.data);
+    }
+    if (!exportMap.hasImage("greenDot")) {
+      const img = await exportMap.loadImage("./patterns/greenDot.png");
+      exportMap.addImage("greenDot", img.data);
     }
 
   });

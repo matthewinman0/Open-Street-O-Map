@@ -1,6 +1,28 @@
 {
   "layers": [
     {
+      "id": "landcover-grass",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landcover",
+      "filter": ["in", "class", "grass", "meadow", "farmland", "orchard"],
+      "paint": {
+        "fill-color": "#febe50",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "rough-open",
+      "type":"fill",
+      "source": "osm",
+      "source-layer": "landcover",
+      "filter": ["in", "subclass", "heath"],
+      "paint": {
+        "fill-color": "#ffdfa4",
+        "fill-opacity": 1
+      }
+    },
+    {
       "id": "GFC",
       "type": "raster",
       "source": "GFC2020 Terrain",
@@ -53,6 +75,17 @@
       }
     },
     {
+      "id": "paved-aeroways",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "aeroway",
+      "filter": ["all"],
+      "paint": {
+        "fill-color": "#e4af7b",
+        "fill-opacity": 1
+      }
+    },
+    {
       "id": "forrest",
       "type": "fill",
       "source": "osm",
@@ -64,24 +97,13 @@
       }
     },
     {
-      "id": "landcover-grass",
+      "id": "farmland",
       "type": "fill",
       "source": "osm",
       "source-layer": "landcover",
-      "filter": ["in", "class", "grass", "meadow", "farmland", "orchard"],
+      "filter": ["in", "class", "farmland"],
       "paint": {
         "fill-color": "#febe50",
-        "fill-opacity": 1
-      }
-    },
-    {
-      "id": "rough-open",
-      "type":"fill",
-      "source": "osm",
-      "source-layer": "landcover",
-      "filter": ["in", "subclass", "heath"],
-      "paint": {
-        "fill-color": "#ffdfa4",
         "fill-opacity": 1
       }
     },
@@ -119,27 +141,16 @@
       }
     },
     {
-      "id": "paved-aeroways",
-      "type": "fill",
-      "source": "osm",
-      "source-layer": "aeroway",
-      "filter": ["all"],
-      "paint": {
-        "fill-color": "#e4af7b",
-        "fill-opacity": 1
-      }
-    },
-    {
       "id": "ditches",
       "type": "line",
       "source": "osm",
       "source-layer": "waterway",
       "filter": ["==", "class", "ditch"],
-
+      "layout": {"line-cap": "round"},
       "paint": {
         "line-color": "#D07500",
         "line-opacity": 1,
-        "line-dasharray": [1, 1],
+        "line-dasharray": [0.5, 3],
         "line-width": [
               "interpolate",
               ["linear"],

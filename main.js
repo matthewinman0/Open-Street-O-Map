@@ -166,9 +166,9 @@ window.mapReady = loadStyle().then(style => {
       type: "fill",
       source: "osm", 
       "source-layer": "landcover",
-      filter: ["in", "class", "orchard"],
+      filter: ["in", "subclass", "orchard"],
       paint: {
-        "fill-pattern": "marsh",
+        "fill-pattern": "greenDot",
         "fill-opacity": [
         "interpolate",
         ["linear"],
