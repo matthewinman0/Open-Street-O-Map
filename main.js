@@ -3,6 +3,7 @@ let is3D = false;
 let mapStyle = "Forest"; // default map style
 let mapInitialized = false;
 let contourint = 2.5;
+const MAP_STATE_KEY = "osomap-map-state";
 
 //contour definitions
 var demSource = new mlcontour.DemSource({
@@ -65,6 +66,54 @@ function updateHUD() {
     `Zoom: ${z.toFixed(2)} | Longitude: ${lng.toFixed(4)} | Latitude: ${lat.toFixed(4)}`;
 }
 
+// Save/restore map position
+function saveMapState() {
+  if (!map) return;
+  const center = map.getCenter(); 
+  localStorage.setItem(
+    MAP_STATE_KEY,
+    JSON.stringify({
+      lng: center.lng,
+      lat: center.lat,
+      zoom: map.getZoom(),
+      bearing: map.getBearing(),
+      pitch: map.getPitch(),
+      terrain: map.getTerrain() !== null
+    })
+  );
+}
+
+function loadMapState() {
+  const state = localStorage.getItem(MAP_STATE_KEY);
+  if (!state) {
+    return {
+      center: [-2.5420, 54.0022],
+      zoom: 5,
+      bearing: 0,
+      pitch: 0,
+      terrain: false
+    };
+  }
+  try {
+    const saved = JSON.parse(state);
+    return {
+      center: [saved.lng, saved.lat],
+      zoom: saved.zoom,
+      bearing: saved.bearing ?? 0,
+      pitch: saved.pitch ?? 0,
+      terrain: saved.terrain ?? false
+    };
+  } catch {
+    return {
+      center: [-2.5420, 54.0022],
+      zoom: 5,
+      bearing: 0,
+      pitch: 0,
+      terrain: false
+    };
+  }
+}
+
 //  2D/3D Buildings & hillshade
 document.getElementById("3d-buildings-toggle").addEventListener("change", (e) => {
   const buildingsEnabled = e.target.checked;
@@ -95,12 +144,16 @@ function toggleBuildings() {
 
 // Map Initialization
 window.mapReady = loadStyle().then(style => {
+  const savedState = loadMapState();
 
   map = new maplibregl.Map({
     container: "map",
     style,
-    center: [-2.5420, 54.0022],
-    zoom: 5
+    center: savedState.center,
+    zoom: savedState.zoom,
+    bearing: savedState.bearing,
+    pitch: savedState.pitch,
+    terrain: savedState.terrain ? { source: "3d terrain" } : null
   });
 
   window.map = map;
@@ -240,15 +293,24 @@ window.mapReady = loadStyle().then(style => {
         "text-opacity": 1
       }
     });
-    map.setTerrain(null);
+    if (savedState.terrain) {
+      map.setTerrain({
+        source: "3d terrain",
+        exaggeration: parseFloat(
+          document.getElementById("terrain-exaggeration").value
+        )
+      });
+    } else {
+      map.setTerrain(null);
+    }
     toggleBuildings();
-
+    
     // HUD
     updateHUD();
     map.on("move", updateHUD);
     map.on("zoom", updateHUD);
     map.on("terrain", toggleBuildings);
-
+    map.on("idle", saveMapState);
 
   });
 });
