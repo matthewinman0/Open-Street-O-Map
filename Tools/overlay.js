@@ -128,9 +128,7 @@ async function displayOverlay(imageFile, pgwText) {
       alert("Invalid PGW file");
       return;
     }
-
-    const [A, B, D, E, C, F] = lines;
-
+    
     const map = window.map;
     if (!map || !map.isStyleLoaded()) return;
 
@@ -140,22 +138,19 @@ async function displayOverlay(imageFile, pgwText) {
     const w = img.naturalWidth;
     const h = img.naturalHeight;
 
+    const [A, B, D, E, C, F] = lines;
+
     const worldFromPixel = (x, y) => ([
-      A * x + B * y + C,
-      D * x + E * y + F
+        A * (x - 0.5) + B * (y - 0.5) + C,
+        D * (x - 0.5) + E * (y - 0.5) + F
     ]);
 
     const tl = worldFromPixel(0, 0);
     const tr = worldFromPixel(w, 0);
-    const bl = worldFromPixel(0, h);
     const br = worldFromPixel(w, h);
+    const bl = worldFromPixel(0, h);
 
-    const coords = [
-      proj4("EPSG:27700", "EPSG:4326", tl),
-      proj4("EPSG:27700", "EPSG:4326", tr),
-      proj4("EPSG:27700", "EPSG:4326", br),
-      proj4("EPSG:27700", "EPSG:4326", bl)
-    ];
+    const coords = [tl, tr, br, bl];
 
     const lngs = coords.map(c => c[0]);
     const lats = coords.map(c => c[1]);

@@ -201,7 +201,7 @@ window.mapReady = loadStyle().then(style => {
       type: "fill",
       source: "osm",
       "source-layer": "landcover",
-      filter: ["in", "subclass", "swamp", "marsh", "mangrove", "bog", "wetland", "reedbed"],
+      filter: ["in", "subclass", "swamp", "marsh", "mangrove", "bog", "wetland", "reedbed", "wet_meadow"],
       paint: {
         "fill-pattern": "marsh",
         "fill-opacity": [
