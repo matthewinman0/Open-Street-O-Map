@@ -23,7 +23,7 @@
       "type": "line",
       "source": "osm",
       "source-layer": "aeroway",
-      "filter": ["all"],
+      "filter": ["in", "class", "helipad", "runway", "taxiway", "apron", "gate"],
       "paint": {
         "line-color": "#000000",
         "line-width": [

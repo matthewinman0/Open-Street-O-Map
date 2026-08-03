@@ -1,6 +1,17 @@
 {
   "layers": [
     {
+      "id": "paved-aeroways",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "aeroway",
+      "filter": ["all"],
+      "paint": {
+        "fill-color": "#e4af7b",
+        "fill-opacity": 1
+      }
+    },
+    {
       "id": "landcover-grass",
       "type": "fill",
       "source": "osm",
@@ -49,7 +60,7 @@
       "type": "line",
       "source": "osm",
       "source-layer": "landuse",
-      "filter": ["in", "class", "commercial", "retail"],
+      "filter": ["in", "class", "commercial", "retail", "runway", "taxiway"],
       "paint": {
         "line-color": "#000000",
         "line-width": [
@@ -69,17 +80,6 @@
       "source": "osm",
       "source-layer": "landuse",
       "filter": ["in", "class", "commercial", "retail"],
-      "paint": {
-        "fill-color": "#e4af7b",
-        "fill-opacity": 1
-      }
-    },
-    {
-      "id": "paved-aeroways",
-      "type": "fill",
-      "source": "osm",
-      "source-layer": "aeroway",
-      "filter": ["all"],
       "paint": {
         "fill-color": "#e4af7b",
         "fill-opacity": 1
