@@ -39,7 +39,7 @@ async function loadStyle() {
     ...paths.layers,
     ...roads.layers,
     ...buildings.layers,
-  ];
+  ];  
 
   return base;
 }
