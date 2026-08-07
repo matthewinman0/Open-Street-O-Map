@@ -84,36 +84,66 @@ function saveMapState() {
 }
 
 function loadMapState() {
-  const state = localStorage.getItem(MAP_STATE_KEY);
-  if (!state) {
-    return {
-      center: [-2.5420, 54.0022],
-      zoom: 5,
-      bearing: 0,
-      pitch: 0,
-      terrain: false
-    };
-  }
-  try {
-    const saved = JSON.parse(state);
-    return {
-      center: [saved.lng, saved.lat],
-      zoom: saved.zoom,
-      bearing: saved.bearing ?? 0,
-      pitch: saved.pitch ?? 0,
-      terrain: saved.terrain ?? false
-    };
-  } catch {
-    return {
-      center: [-2.5420, 54.0022],
-      zoom: 5,
-      bearing: 0,
-      pitch: 0,
-      terrain: false
-    };
-  }
-}
 
+    // 1. Try URL hash first (#zoom/lat/lng)
+    if (location.hash.length > 1) {
+        const parts = location.hash.substring(1).split("/");
+
+        if (parts.length === 3) {
+            const zoom = parseFloat(parts[0]);
+            const lat = parseFloat(parts[1]);
+            const lng = parseFloat(parts[2]);
+
+            if (
+                !isNaN(zoom) &&
+                !isNaN(lat) &&
+                !isNaN(lng)
+            ) {
+                return {
+                    center: [lng, lat],
+                    zoom: zoom,
+                    bearing: 0,
+                    pitch: 0,
+                    terrain: false
+                };
+            }
+        }
+    }
+
+
+    // 2. Try localStorage
+    const state = localStorage.getItem(MAP_STATE_KEY);
+
+    if (state) {
+        try {
+            const saved = JSON.parse(state);
+
+            return {
+                center: [
+                    saved.lng,
+                    saved.lat
+                ],
+                zoom: saved.zoom,
+                bearing: saved.bearing ?? 0,
+                pitch: saved.pitch ?? 0,
+                terrain: saved.terrain ?? false
+            };
+
+        } catch(e) {
+            console.warn("Invalid saved map state");
+        }
+    }
+
+
+    // 3. Default location
+    return {
+        center: [-2.5420, 54.0022],
+        zoom: 5,
+        bearing: 0,
+        pitch: 0,
+        terrain: false
+    };
+}
 //  2D/3D Buildings & hillshade
 document.getElementById("3d-buildings-toggle").addEventListener("change", (e) => {
   const buildingsEnabled = e.target.checked;
@@ -145,6 +175,7 @@ function toggleBuildings() {
 // Map Initialization
 window.mapReady = loadStyle().then(style => {
   const savedState = loadMapState();
+  const parts = location.hash.substring(1).split("/");
 
   map = new maplibregl.Map({
     container: "map",
@@ -312,8 +343,40 @@ window.mapReady = loadStyle().then(style => {
     map.on("terrain", toggleBuildings);
     map.on("idle", saveMapState);
 
+    map.on("moveend", () => {
+        const center = map.getCenter();
+        const zoom = map.getZoom();
+        // Update URL
+        window.history.replaceState(
+            null,
+            "",
+            `#${zoom.toFixed(2)}/${center.lat.toFixed(5)}/${center.lng.toFixed(5)}`
+        );
+        // Also save locally
+        saveMapState();
+    });
+    window.addEventListener("hashchange", () => {
+      const parts = location.hash.substring(1).split("/");
+      if (parts.length !== 3) return;
+      const zoom = parseFloat(parts[0]);
+      const lat = parseFloat(parts[1]);
+      const lng = parseFloat(parts[2]);
+      if (
+          isNaN(zoom) ||
+          isNaN(lat) ||
+          isNaN(lng)
+      ) return;
+      map.flyTo({
+          center: [lng, lat],
+          zoom: zoom,
+          bearing: 0,
+          pitch: map.getPitch(),
+          essential: true
+      });
+    });
   });
 });
+
 
 //UI button handlers
 document.getElementById("settings-toggle").onclick = () => {
