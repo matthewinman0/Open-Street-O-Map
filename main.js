@@ -7,10 +7,17 @@ const MAP_STATE_KEY = "osomap-map-state";
 
 const colormap = {
     "0": "#FF000000",
+    "1": "#FFFFFF",
     "98": "#BEF4B6",
     "99": "#BEF4B6",
     "100": "#31AA47",
 };
+
+// Make values 1–97 white
+for (let i = 1; i <= 97; i++) {
+    colormap[i] = "#FFFFFF";
+}
+
 
 const tileUrl =
     "https://home.matthewinman.uk/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?" +
@@ -18,7 +25,7 @@ const tileUrl =
         url: "/data/UK_TCD.vrt",
         bidx: "1",
         colormap: JSON.stringify(colormap),
-        resampling: "bilinear"
+        resampling: "bilinear",
     }).toString();
 
 console.log(tileUrl);
@@ -50,6 +57,12 @@ async function loadStyle() {
     roads = await (await fetch("./style/sprint/roads.json")).json();
     buildings = await (await fetch("./style/sprint/buildings.json")).json();
   }
+  //add sources for layers that are in json with no sources defined
+  base.sources["tree-cover"] = {
+    type: "raster",
+    tiles: [tileUrl],
+    tileSize: 256
+  };
   base.layers = [
     ...base.layers,
     ...land.layers,
@@ -203,8 +216,6 @@ window.mapReady = loadStyle().then(style => {
     terrain: savedState.terrain ? { source: "3d terrain" } : null
   });
 
-  window.map = map;
-
   map.on("style.load", async () => {
   const patternImg = await map.loadImage("./patterns/dot.png");
   const marshImg = await map.loadImage("./patterns/marsh.png");
@@ -278,17 +289,6 @@ window.mapReady = loadStyle().then(style => {
           14, 0.8
           ]
         }
-      });
-      map.addSource("tree-cover", {
-        type: "raster",
-        tiles: [tileUrl],
-        tileSize: 256
-      });
-
-      map.addLayer({
-          id: "tree-cover",
-          type: "raster",
-          source: "tree-cover"
       });
     map.__initialized = true;
     }

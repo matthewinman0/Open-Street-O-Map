@@ -45,15 +45,9 @@
         "raster-resampling": "linear"}
     },
     {
-      "id": "residential-areas",
-      "type": "fill",
-      "source": "osm",
-      "source-layer": "landuse",
-      "filter": ["==", "class", "residential"],
-      "paint": {
-        "fill-color": "#aba537",
-        "fill-opacity": 1
-      }
+      "id": "tree-cover",
+      "type": "raster",
+      "source": "tree-cover"
     },
     {
       "id": "paved-areas-outline",
@@ -82,6 +76,17 @@
       "filter": ["in", "class", "commercial", "retail"],
       "paint": {
         "fill-color": "#e4af7b",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "residential-areas",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landuse",
+      "filter": ["==", "class", "residential"],
+      "paint": {
+        "fill-color": "#aba537",
         "fill-opacity": 1
       }
     },
