@@ -13,7 +13,7 @@ const colormap = {
 };
 
 const tileUrl =
-    "http://home.matthewinman.uk:8090/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?" +
+    "https://home.matthewinman.uk/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?" +
     new URLSearchParams({
         url: "/data/UK_TCD.vrt",
         bidx: "1",
