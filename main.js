@@ -5,6 +5,23 @@ let mapInitialized = false;
 let contourint = 2.5;
 const MAP_STATE_KEY = "osomap-map-state";
 
+const colormap = {
+    "0": "#FF000000",
+    "98": "#BEF4B6",
+    "99": "#BEF4B6",
+    "100": "#31AA47",
+};
+
+const tileUrl =
+    "http://home.matthewinman.uk:8090/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?" +
+    new URLSearchParams({
+        url: "/data/UK_TCD.vrt",
+        bidx: "1",
+        colormap: JSON.stringify(colormap)
+    }).toString();
+
+console.log(tileUrl);
+
 //contour definitions
 var demSource = new mlcontour.DemSource({
   url: "https://tiles.mapterhorn.com/{z}/{x}/{y}.webp",
@@ -207,61 +224,72 @@ window.mapReady = loadStyle().then(style => {
         exaggeration: parseFloat(document.getElementById("terrain-exaggeration").value)
         })
       );
-    map.addLayer({
-      id: "sand",
-      type: "fill",
-      source: "osm",
-      "source-layer": "landcover",
-      filter: ["in", "subclass", "sand", "farmland"],
-      paint: {
-        "fill-pattern": "dot",
-        "fill-opacity": [
-        "interpolate",
-        ["linear"],
-        ["zoom"],
-        10, 0.1,
-        13, 0.3,
-        14, 0.8
-        ]
-      }
-    });
-    map.addLayer({
-      id: "marsh",
-      type: "fill",
-      source: "osm",
-      "source-layer": "landcover",
-      filter: ["in", "subclass", "swamp", "marsh", "mangrove", "bog", "wetland", "reedbed", "wet_meadow"],
-      paint: {
-        "fill-pattern": "marsh",
-        "fill-opacity": [
-        "interpolate",
-        ["linear"],
-        ["zoom"],
-        10, 0.1,
-        13, 0.3,
-        14, 0.8
-        ]
-      }
-    });
-    map.addLayer({
-      id: "orchard",
-      type: "fill",
-      source: "osm", 
-      "source-layer": "landcover",
-      filter: ["in", "subclass", "orchard"],
-      paint: {
-        "fill-pattern": "greenDot",
-        "fill-opacity": [
-        "interpolate",
-        ["linear"],
-        ["zoom"],
-        10, 0.1,
-        13, 0.3,
-        14, 0.8
-        ]
-      }
-    });
-      map.__initialized = true;
+      map.addLayer({
+        id: "sand",
+        type: "fill",
+        source: "osm",
+        "source-layer": "landcover",
+        filter: ["in", "subclass", "sand", "farmland"],
+        paint: {
+          "fill-pattern": "dot",
+          "fill-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          10, 0.1,
+          13, 0.3,
+          14, 0.8
+          ]
+        }
+      });
+      map.addLayer({
+        id: "marsh",
+        type: "fill",
+        source: "osm",
+        "source-layer": "landcover",
+        filter: ["in", "subclass", "swamp", "marsh", "mangrove", "bog", "wetland", "reedbed", "wet_meadow"],
+        paint: {
+          "fill-pattern": "marsh",
+          "fill-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          10, 0.1,
+          13, 0.3,
+          14, 0.8
+          ]
+        }
+      });
+      map.addLayer({
+        id: "orchard",
+        type: "fill",
+        source: "osm", 
+        "source-layer": "landcover",
+        filter: ["in", "subclass", "orchard"],
+        paint: {
+          "fill-pattern": "greenDot",
+          "fill-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          10, 0.1,
+          13, 0.3,
+          14, 0.8
+          ]
+        }
+      });
+      map.addSource("tree-cover", {
+        type: "raster",
+        tiles: [tileUrl],
+        tileSize: 256
+      });
+
+      map.addLayer({
+          id: "tree-cover",
+          type: "raster",
+          source: "tree-cover"
+      });
+    map.__initialized = true;
     }
 
     if (!map.getSource("contour-source")) {

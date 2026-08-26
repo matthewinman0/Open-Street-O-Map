@@ -86,17 +86,6 @@
       }
     },
     {
-      "id": "forrest",
-      "type": "fill",
-      "source": "osm",
-      "source-layer": "landcover",
-      "filter": ["in", "subclass", "forest", "wood"],
-      "paint": {
-        "fill-color": "#ffffff",
-        "fill-opacity": 1
-      }
-    },
-    {
       "id": "farmland",
       "type": "fill",
       "source": "osm",
