@@ -17,7 +17,8 @@ const tileUrl =
     new URLSearchParams({
         url: "/data/UK_TCD.vrt",
         bidx: "1",
-        colormap: JSON.stringify(colormap)
+        colormap: JSON.stringify(colormap),
+        resampling: "bilinear"
     }).toString();
 
 console.log(tileUrl);
