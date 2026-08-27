@@ -1,4 +1,4 @@
-let map;
+window.map = null;
 let is3D = false;
 let mapStyle = "Forest"; // default map style
 let mapInitialized = false;
