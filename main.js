@@ -215,6 +215,7 @@ window.mapReady = loadStyle().then(style => {
     pitch: savedState.pitch,
     terrain: savedState.terrain ? { source: "3d terrain" } : null
   });
+  window.osomMap = map;
 
   map.on("style.load", async () => {
   const patternImg = await map.loadImage("./patterns/dot.png");
