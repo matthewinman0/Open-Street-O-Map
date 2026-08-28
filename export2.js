@@ -1,4 +1,3 @@
-
 let exportCenter = null;
 let sw = null;
 let ne = null;
@@ -808,6 +807,73 @@ document.getElementById("export-btn").onclick = async () => {
     });
 
   try {
+    /*
+     * Wait for the copied style to load.
+     */
+
+    await new Promise(
+      (resolve) => {
+        exportMap.once(
+          "style.load",
+          resolve
+        );
+      }
+    );
+
+    /*
+     * Load pattern images into the
+     * EXPORT MAP.
+     *
+     * Runtime images added to the
+     * original map are not copied by
+     * map.getStyle().
+     */
+
+    const patternImg =
+      await exportMap.loadImage(
+        "./patterns/dot.png"
+      );
+
+    const marshImg =
+      await exportMap.loadImage(
+        "./patterns/marsh.png"
+      );
+
+    const greenDotImg =
+      await exportMap.loadImage(
+        "./patterns/greenDot.png"
+      );
+
+    /*
+     * Add them to the export map.
+     */
+
+    if (!exportMap.hasImage("dot")) {
+      exportMap.addImage(
+        "dot",
+        patternImg.data
+      );
+    }
+
+    if (!exportMap.hasImage("marsh")) {
+      exportMap.addImage(
+        "marsh",
+        marshImg.data
+      );
+    }
+
+    if (!exportMap.hasImage("greenDot")) {
+      exportMap.addImage(
+        "greenDot",
+        greenDotImg.data
+      );
+    }
+
+    /*
+     * Wait for all map data and
+     * patterns to finish rendering.
+     */
+
     await new Promise(
       (resolve) => {
         exportMap.once(
@@ -910,6 +976,9 @@ document.getElementById("export-btn").onclick = async () => {
         "visible"
       );
     }
+
+    button.textContent =
+      "Export";
   }
   button.textContent = "Export";
 };
