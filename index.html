@@ -80,8 +80,10 @@
         <button name="Display Map" id="display-uploaded-map" class="button">Display</button>
         <button name="Clear Maps" id="clear-uploaded-map" class="button">Clear</button>
       </details>
+
       <details>
         <summary><h3 style="display: inline-block;">Contour Export</h3></summary>
+        <p>Exporting in EPSG:27700</p>
         <button name="Export Contours" id="export-contours" class="button">Export contours to OCAD DXF</button>
         <div id="export-status" style="display:none;"></div>
 
@@ -112,6 +114,7 @@
       <p><label for="dpi">Zoom "DPI":</label>
 
       <input type="number" id="dpi" name="export-dpi" step="1" value="300" min="1"></p>
+      <p>Exporting in EPSG:27700</p>
 
       <button name="export" id="export-btn" class="button">Export</button>
         <br>
@@ -132,11 +135,10 @@
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.11.0/proj4.js"></script>
-<script type="module" src="./exportContours.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.15.0/proj4.js"></script>
 <script src="./libs/maplibre-contour.min.js"></script>
 <script type="module" src="main.js"></script>
-<script src="./export.js"></script>
+<script src="./export2.js"></script>
 <script src="./Tools/overlay.js"></script>
 <script src="./Tools/contourExp.js"></script>
 <script src="./settings.js"></script>

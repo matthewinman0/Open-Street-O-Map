@@ -64,7 +64,7 @@ let previewBoxId = "export-preview-box";
 
 function calculateExportBounds() {
   const scale = getScale();
-  const page = PAGE_SIZES[getPageSize()];
+  const page = PAGE_SIZES[getPageSize()]; 
 
   const widthMeters =
     scale *
