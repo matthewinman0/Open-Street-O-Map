@@ -88,15 +88,6 @@ const geolocate = new maplibregl.GeolocateControl({
   showUserHeading: true
 });
 
-// HUD updater
-function updateHUD() {
-  const z = map.getZoom();
-  const { lng, lat } = map.getCenter();
-
-  document.getElementById("hud").innerText =
-    `Zoom: ${z.toFixed(2)} | Longitude: ${lng.toFixed(4)} | Latitude: ${lat.toFixed(4)}`;
-}
-
 // Save/restore map position
 function saveMapState() {
   if (!map) return;
@@ -228,9 +219,7 @@ window.mapReady = loadStyle().then(style => {
     if (!map.__initialized) {
       map.addControl(new maplibregl.NavigationControl());
       map.addControl(geolocate);
-      map.addControl(
-        new maplibregl.ScaleControl({maxWidth: 120, unit: "metric"}),"bottom-left"
-      );
+      map.addControl(new maplibregl.ScaleControl({maxWidth: 200, unit: "metric"}),"bottom-left");
       map.addControl(
         new maplibregl.TerrainControl({
           source: "3d terrain",
@@ -365,9 +354,6 @@ window.mapReady = loadStyle().then(style => {
     toggleBuildings();
     
     // HUD
-    updateHUD();
-    map.on("move", updateHUD);
-    map.on("zoom", updateHUD);
     map.on("terrain", toggleBuildings);
     map.on("idle", saveMapState);
 
