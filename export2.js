@@ -671,9 +671,10 @@ function reprojectCanvas(
 
 
 
-document.getElementById(
-  "export-btn"
-).onclick = async () => {
+document.getElementById("export-btn").onclick = async () => {
+  const button = document.getElementById("export-btn");
+  button.textContent = "Exporting...";
+
   const map = getMap();
 
   const dpi =
@@ -688,7 +689,7 @@ document.getElementById(
     alert(
       "Please select a center point first."
     );
-
+    button.textContent = "Export";
     return;
   }
 
@@ -717,18 +718,18 @@ document.getElementById(
   const cssWidth =
     Math.round(
       page.w *
-      96
+      128
     );
 
   const cssHeight =
     Math.round(
       page.h *
-      96
+      128
     );
 
   const pixelRatio =
     dpi /
-    96;
+    128;
 
   const container =
     document.createElement(
@@ -910,6 +911,7 @@ document.getElementById(
       );
     }
   }
+  button.textContent = "Export";
 };
 
 
