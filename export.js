@@ -7,33 +7,23 @@ const PAGE_SIZES = {
 };
 
 
-// ============================
 // HELPERS
-// ============================
-
 function getScale() {
   return parseInt(document.getElementById("scale-select").value);
 }
-
 function getPageSize() {
   return document.getElementById("page-size").value;
 }
-
 function getDPI() {
   return parseInt(document.getElementById("dpi").value) || 600;
 }
-
 function getMap() {
   return window.map;
 }
 
 
-// ============================
 // WEB MERCATOR HELPERS
-// ============================
-
 const EARTH_RADIUS = 6378137;
-
 function lngLatToMeters(lng, lat) {
 
   const x = EARTH_RADIUS * lng * Math.PI / 180;
@@ -52,9 +42,7 @@ function lngLatToMeters(lng, lat) {
 
 
 function metersToLngLat(x, y) {
-
   const lng = x / EARTH_RADIUS * 180 / Math.PI;
-
   const lat =
     (2 * Math.atan(Math.exp(y / EARTH_RADIUS))
       - Math.PI / 2)
@@ -75,7 +63,6 @@ let previewBoxId = "export-preview-box";
 
 
 function calculateExportBounds() {
-
   const scale = getScale();
   const page = PAGE_SIZES[getPageSize()];
 
@@ -88,7 +75,6 @@ function calculateExportBounds() {
     scale *
     page.h *
     0.0254;
-
 
   const centre = lngLatToMeters(
     exportCenter.lng,
@@ -532,18 +518,12 @@ exportCenter.lat
 
 
 map.addLayer({
-
 id:"export-center",
-
 type:"circle",
-
 source:"export-center",
-
 paint:{
 "circle-radius":4,
 "circle-color":"#ff0000"
 }
-
 });
-
 }
