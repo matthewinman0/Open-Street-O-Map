@@ -64,3 +64,6 @@ Add styling for all layers (Patterns, ISOM Svgs):
     neighbourhood
     dam
     quarry
+
+
+    PLAYPARKS

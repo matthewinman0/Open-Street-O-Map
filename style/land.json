@@ -12,28 +12,6 @@
       }
     },
     {
-      "id": "landcover-grass",
-      "type": "fill",
-      "source": "osm",
-      "source-layer": "landcover",
-      "filter": ["in", "class", "grass", "meadow", "farmland", "orchard", "golf_course"],
-      "paint": {
-        "fill-color": "#febe50",
-        "fill-opacity": 1
-      }
-    },
-    {
-      "id": "rough-open",
-      "type":"fill",
-      "source": "osm",
-      "source-layer": "landcover",
-      "filter": ["in", "subclass", "heath"],
-      "paint": {
-        "fill-color": "#ffdfa4",
-        "fill-opacity": 1
-      }
-    },
-    {
       "id": "GFC",
       "type": "raster",
       "source": "GFC2020 Terrain",
@@ -87,6 +65,28 @@
       "filter": ["==", "class", "residential"],
       "paint": {
         "fill-color": "#aba537",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "rough-open",
+      "type":"fill",
+      "source": "osm",
+      "source-layer": "landcover",
+      "filter": ["in", "subclass", "heath"],
+      "paint": {
+        "fill-color": "#ffdfa4",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "landcover-grass",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landcover",
+      "filter": ["in", "class", "grass", "meadow", "farmland", "orchard", "golf_course"],
+      "paint": {
+        "fill-color": "#febe50",
         "fill-opacity": 1
       }
     },
