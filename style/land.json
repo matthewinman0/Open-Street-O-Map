@@ -128,7 +128,7 @@
       "type": "fill",
       "source": "osm",
       "source-layer": "landuse",
-      "filter": ["in", "class", "pitch"],
+      "filter": ["in", "class", "pitch", "playground"],
       "paint": {
         "fill-color": "#c07635",
         "fill-opacity": 1
