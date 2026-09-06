@@ -54,9 +54,30 @@
       "type": "line",
       "source": "osm",
       "source-layer": "waterway",
-      "filter": ["in", "class", "stream", "canal", "drain"],
+      "filter": ["in", "class", "stream", "canal"],
       "paint": {
         "line-color": "#009ddc",
+        "line-opacity": 1,
+        "line-width": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              10, 1.2,
+              14, 1,
+              18, 8,
+              19, 30
+              ]
+      }
+    },
+    {
+      "id": "drains",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "waterway",
+      "filter": ["in", "class", "drain"],
+      "paint": {
+        "line-color": "#009ddc",
+        "line-dasharray": [6, 2],
         "line-opacity": 1,
         "line-width": [
               "interpolate",

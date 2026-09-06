@@ -12,22 +12,6 @@
       }
     },
     {
-      "id": "GFC",
-      "type": "raster",
-      "source": "GFC2020 Terrain",
-      "paint": {
-        "raster-brightness-min": 1,
-        "raster-brightness-max": 1,
-        "raster-contrast": 0,
-        "raster-saturation": -1,
-        "raster-resampling": "linear"}
-    },
-    {
-      "id": "tree-cover",
-      "type": "raster",
-      "source": "tree-cover"
-    },
-    {
       "id": "paved-areas-outline",
       "type": "line",
       "source": "osm",
@@ -58,13 +42,13 @@
       }
     },
     {
-      "id": "residential-areas",
+      "id": "open areas",
       "type": "fill",
       "source": "osm",
-      "source-layer": "landuse",
-      "filter": ["==", "class", "residential"],
+      "source-layer": "landcover",
+      "filter": ["in", "class", "grass", "meadow", "farmland", "orchard", "golf_course"],
       "paint": {
-        "fill-color": "#aba537",
+        "fill-color": "#febe50",
         "fill-opacity": 1
       }
     },
@@ -80,11 +64,49 @@
       }
     },
     {
+      "id": "OSM forest",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landcover",
+      "filter": ["in", "class", "wood"],
+      "paint": {
+        "fill-color": "#febe50",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "GFC",
+      "type": "raster",
+      "source": "GFC2020 Terrain",
+      "paint": {
+        "raster-brightness-min": 1,
+        "raster-brightness-max": 1,
+        "raster-contrast": 0,
+        "raster-saturation": -1,
+        "raster-resampling": "linear"}
+    },
+    {
+      "id": "tree-cover",
+      "type": "raster",
+      "source": "tree-cover"
+    },
+    {
+      "id": "residential-areas",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landuse",
+      "filter": ["==", "class", "residential"],
+      "paint": {
+        "fill-color": "#aba537",
+        "fill-opacity": 1
+      }
+    },
+    {
       "id": "landcover-grass",
       "type": "fill",
       "source": "osm",
       "source-layer": "landcover",
-      "filter": ["in", "class", "grass", "meadow", "farmland", "orchard", "golf_course"],
+      "filter": ["in", "subclass", "grass"],
       "paint": {
         "fill-color": "#febe50",
         "fill-opacity": 1
