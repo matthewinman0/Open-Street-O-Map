@@ -189,7 +189,15 @@ function toggleBuildings() {
     terrainEnabled ? "visible" : "none"
   );
 }
-
+// Terrain exaggeration control
+document.getElementById("terrain-exaggeration").onchange = (e) => {
+  const value = parseFloat(e.target.value);
+  const terrain = map.getTerrain();
+  map.setTerrain({
+    source: "3d terrain",
+    exaggeration: value
+  });
+};
 
 
 // Map Initialization
