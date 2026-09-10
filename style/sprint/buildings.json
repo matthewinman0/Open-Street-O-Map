@@ -24,7 +24,14 @@
         },
         "paint": {
             "line-color": "#000000",
-            "line-width": 2
+            "line-width": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                12, 0.05,
+                14, 0.15,
+                18, 5
+                ]
         }
         
     },
