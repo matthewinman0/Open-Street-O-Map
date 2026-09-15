@@ -102,17 +102,6 @@
       }
     },
     {
-      "id": "landcover-grass",
-      "type": "fill",
-      "source": "osm",
-      "source-layer": "landcover",
-      "filter": ["in", "subclass", "grass"],
-      "paint": {
-        "fill-color": "#febe50",
-        "fill-opacity": 1
-      }
-    },
-    {
       "id": "farmland",
       "type": "fill",
       "source": "osm",
