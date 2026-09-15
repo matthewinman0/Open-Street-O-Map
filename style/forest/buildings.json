@@ -3,8 +3,9 @@
     {
         "id": "buildings-2d",
         "type": "fill",
-        "source": "osm",
-        "source-layer": "building",
+        "source": "osm_areas",
+        "source-layer": "osm_areas",
+        "filter": ["==", "class", "building"],
         "layout": {
             "visibility": "visible"
         },

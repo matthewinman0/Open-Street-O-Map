@@ -3,7 +3,7 @@
     {
       "id": "paved-aeroways",
       "type": "fill",
-      "source": "osm",
+      "source": "osm_areas",
       "source-layer": "aeroway",
       "filter": ["all"],
       "paint": {
@@ -14,7 +14,7 @@
     {
       "id": "paved-areas-outline",
       "type": "line",
-      "source": "osm",
+      "source": "osm_areas",
       "source-layer": "landuse",
       "filter": ["in", "class", "commercial", "retail", "runway", "taxiway"],
       "paint": {
@@ -33,7 +33,7 @@
     {
       "id": "paved-areas",
       "type": "fill",
-      "source": "osm",
+      "source": "osm_areas",
       "source-layer": "landuse",
       "filter": ["in", "class", "commercial", "retail"],
       "paint": {
@@ -44,7 +44,7 @@
     {
       "id": "open areas",
       "type": "fill",
-      "source": "osm",
+      "source": "osm_areas",
       "source-layer": "landcover",
       "filter": ["in", "class", "grass", "meadow", "farmland", "orchard", "golf_course"],
       "paint": {
@@ -55,7 +55,7 @@
     {
       "id": "rough-open",
       "type":"fill",
-      "source": "osm",
+      "source": "osm_areas",
       "source-layer": "landcover",
       "filter": ["in", "subclass", "heath"],
       "paint": {
@@ -66,12 +66,11 @@
     {
       "id": "OSM forest",
       "type": "fill",
-      "source": "osm",
-      "source-layer": "landcover",
-      "filter": ["in", "class", "wood"],
+      "source": "osm_areas",
+      "source-layer": "osm_areas",
+      "filter": ["==", "subclass", "forest"],
       "paint": {
-        "fill-color": "#febe50",
-        "fill-opacity": 1
+        "fill-color": "#ffffff"
       }
     },
     {
@@ -93,20 +92,30 @@
     {
       "id": "residential-areas",
       "type": "fill",
-      "source": "osm",
-      "source-layer": "landuse",
-      "filter": ["==", "class", "residential"],
+      "source": "osm_areas",
+      "source-layer": "osm_areas",
+      "filter": ["==", "subclass", "residential"],
       "paint": {
         "fill-color": "#aba537",
         "fill-opacity": 1
       }
     },
     {
+      "id": "osm-ways",
+      "type": "line",
+      "source": "osm_areas",
+      "source-layer": "osm_areas",
+      "paint": {
+        "line-color": "#ff0000",
+        "line-width": 2
+      }
+    },
+    {
       "id": "farmland",
       "type": "fill",
-      "source": "osm",
-      "source-layer": "landcover",
-      "filter": ["in", "class", "farmland"],
+      "source": "osm_areas",
+      "source-layer": "osm_areas",
+      "filter": ["in", "subclass", "farmland"],
       "paint": {
         "fill-color": "#febe50",
         "fill-opacity": 1
@@ -115,7 +124,7 @@
     {
       "id": "rocks",
       "type": "fill",
-      "source": "osm",
+      "source": "osm_areas",
       "source-layer": "landcover",
       "filter": ["in", "subclass", "rock"],
       "paint": {
@@ -126,9 +135,9 @@
     {
       "id": "Vegetation",
       "type": "fill",
-      "source": "osm",
-      "source-layer": "landcover",
-      "filter": ["in", "subclass", "scrub", "shrubbery"],
+      "source": "osm_areas",
+      "source-layer": "osm_areas",
+      "filter": ["in", "subclass", "scrub", "shrub"],
       "paint": {
         "fill-color": "#bef4b6",
         "fill-opacity": 1
@@ -137,8 +146,8 @@
     {
       "id": "pitches",
       "type": "fill",
-      "source": "osm",
-      "source-layer": "landuse",
+      "source": "osm_areas",
+      "source-layer": "osm_areas",
       "filter": ["in", "class", "pitch", "playground"],
       "paint": {
         "fill-color": "#c07635",
@@ -149,8 +158,8 @@
       "id": "ditches",
       "type": "line",
       "source": "osm",
-      "source-layer": "waterway",
-      "filter": ["==", "class", "ditch"],
+      "source-layer": "osm_ways",
+      "filter": ["==", "subclass", "ditch"],
       "layout": {"line-cap": "round"},
       "paint": {
         "line-color": "#D07500",

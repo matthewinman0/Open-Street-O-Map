@@ -6,7 +6,15 @@
     "osm": {
       "type": "vector",
       "tiles": [
-        "https://tiles.openfreemap.org/planet/20260506_001001_pt/{z}/{x}/{y}.pbf"
+        "http://192.168.1.170:3000/osm_ways/{z}/{x}/{y}"
+      ],
+      "minzoom": 0,
+      "maxzoom": 14
+    },
+    "osm_areas": {
+      "type": "vector",
+      "tiles": [
+        "http://192.168.1.170:3000/osm_areas/{z}/{x}/{y}"
       ],
       "minzoom": 0,
       "maxzoom": 14
