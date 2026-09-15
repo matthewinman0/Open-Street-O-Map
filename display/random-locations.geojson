@@ -1,0 +1,1505 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.035047001438016,
+          21.978863765245745
+        ]
+      },
+      "properties": {
+        "id": 1,
+        "country": "Sudan",
+        "iso2": "SD"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.112686844807712,
+          25.22457355288334
+        ]
+      },
+      "properties": {
+        "id": 2,
+        "country": "Libya",
+        "iso2": "LY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.05256792740556,
+          12.596804523284469
+        ]
+      },
+      "properties": {
+        "id": 3,
+        "country": "Myanmar",
+        "iso2": "MM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.28728325865899,
+          11.540388061755412
+        ]
+      },
+      "properties": {
+        "id": 4,
+        "country": "Vietnam",
+        "iso2": "VN"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.04678804998167,
+          21.020148997239637
+        ]
+      },
+      "properties": {
+        "id": 5,
+        "country": "India",
+        "iso2": "IN"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.790416127286818,
+          2.7643255974876824
+        ]
+      },
+      "properties": {
+        "id": 6,
+        "country": "Dem. Rep. Congo",
+        "iso2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.432855217882775,
+          53.60167883278646
+        ]
+      },
+      "properties": {
+        "id": 7,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.239497791943933,
+          16.660208146919448
+        ]
+      },
+      "properties": {
+        "id": 8,
+        "country": "Chad",
+        "iso2": "TD"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.62308347516972,
+          62.96933004025292
+        ]
+      },
+      "properties": {
+        "id": 9,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -50.797126592310406,
+          67.37279571661236
+        ]
+      },
+      "properties": {
+        "id": 10,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.87368805286877,
+          69.49781853777421
+        ]
+      },
+      "properties": {
+        "id": 11,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          56.21200614964991,
+          50.302866082862586
+        ]
+      },
+      "properties": {
+        "id": 12,
+        "country": "Kazakhstan",
+        "iso2": "KZ"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.28229164539556,
+          50.55240435220403
+        ]
+      },
+      "properties": {
+        "id": 13,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.16080020916014,
+          45.94075848645375
+        ]
+      },
+      "properties": {
+        "id": 14,
+        "country": "United States of America",
+        "iso2": "US"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          48.70559341168669,
+          15.931953285771822
+        ]
+      },
+      "properties": {
+        "id": 15,
+        "country": "Yemen",
+        "iso2": "YE"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.002897718569386,
+          39.89729687302997
+        ]
+      },
+      "properties": {
+        "id": 16,
+        "country": "Turkey",
+        "iso2": "TR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.37870392746595,
+          -2.299532511448547
+        ]
+      },
+      "properties": {
+        "id": 17,
+        "country": "Kenya",
+        "iso2": "KE"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.016643321629317143,
+          32.85354685451927
+        ]
+      },
+      "properties": {
+        "id": 18,
+        "country": "Algeria",
+        "iso2": "DZ"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          41.746188604864244,
+          51.976889451197536
+        ]
+      },
+      "properties": {
+        "id": 19,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.41839168063504,
+          29.702367088997217
+        ]
+      },
+      "properties": {
+        "id": 20,
+        "country": "Libya",
+        "iso2": "LY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -102.00962799268564,
+          53.74749698144266
+        ]
+      },
+      "properties": {
+        "id": 21,
+        "country": "Canada",
+        "iso2": "CA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.12662628077595,
+          49.020385914100444
+        ]
+      },
+      "properties": {
+        "id": 22,
+        "country": "Canada",
+        "iso2": "CA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.90834801303916,
+          -11.385980796463757
+        ]
+      },
+      "properties": {
+        "id": 23,
+        "country": "Peru",
+        "iso2": "PE"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.95733604693123,
+          25.513756914038314
+        ]
+      },
+      "properties": {
+        "id": 24,
+        "country": "China",
+        "iso2": "CN"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.97473552510246,
+          51.098011170215244
+        ]
+      },
+      "properties": {
+        "id": 25,
+        "country": "Mongolia",
+        "iso2": "MN"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.645637650149098,
+          25.136618230604434
+        ]
+      },
+      "properties": {
+        "id": 26,
+        "country": "Egypt",
+        "iso2": "EG"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          71.50250548844375,
+          40.191269550333466
+        ]
+      },
+      "properties": {
+        "id": 27,
+        "country": "Kyrgyzstan",
+        "iso2": "KG"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.94540755325332,
+          -8.608074545342657
+        ]
+      },
+      "properties": {
+        "id": 28,
+        "country": "Brazil",
+        "iso2": "BR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          67.17456503414255,
+          43.12585534331731
+        ]
+      },
+      "properties": {
+        "id": 29,
+        "country": "Kazakhstan",
+        "iso2": "KZ"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -138.8410608347658,
+          68.71695157217646
+        ]
+      },
+      "properties": {
+        "id": 30,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          142.2695098669392,
+          -16.053688110266123
+        ]
+      },
+      "properties": {
+        "id": 31,
+        "country": "Australia",
+        "iso2": "AU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.52041596286469,
+          -17.755614896988014
+        ]
+      },
+      "properties": {
+        "id": 32,
+        "country": "Madagascar",
+        "iso2": "MG"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.94168827389268,
+          58.76623227341919
+        ]
+      },
+      "properties": {
+        "id": 33,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -55.80399944233268,
+          72.75597827771534
+        ]
+      },
+      "properties": {
+        "id": 34,
+        "country": "Greenland",
+        "iso2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.549873860176945,
+          22.885628790535907
+        ]
+      },
+      "properties": {
+        "id": 35,
+        "country": "Saudi Arabia",
+        "iso2": "SA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -100.27126289444264,
+          25.411410872358875
+        ]
+      },
+      "properties": {
+        "id": 36,
+        "country": "Mexico",
+        "iso2": "MX"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.507201295271528,
+          8.691865089806369
+        ]
+      },
+      "properties": {
+        "id": 37,
+        "country": "Nigeria",
+        "iso2": "NG"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          68.85106553013165,
+          41.49669280380893
+        ]
+      },
+      "properties": {
+        "id": 38,
+        "country": "Kazakhstan",
+        "iso2": "KZ"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -55.61423596644673,
+          3.677760362388004
+        ]
+      },
+      "properties": {
+        "id": 39,
+        "country": "Suriname",
+        "iso2": "SR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.69681374130283,
+          44.637176149049665
+        ]
+      },
+      "properties": {
+        "id": 40,
+        "country": "Mongolia",
+        "iso2": "MN"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -41.855145365842986,
+          -4.413510791557992
+        ]
+      },
+      "properties": {
+        "id": 41,
+        "country": "Brazil",
+        "iso2": "BR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.3261130470105797,
+          5.496378054335644
+        ]
+      },
+      "properties": {
+        "id": 42,
+        "country": "Ghana",
+        "iso2": "GH"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.55104822149329,
+          18.19169616304349
+        ]
+      },
+      "properties": {
+        "id": 43,
+        "country": "Sudan",
+        "iso2": "SD"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.678636472373796,
+          22.285806792429632
+        ]
+      },
+      "properties": {
+        "id": 44,
+        "country": "Egypt",
+        "iso2": "EG"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          141.58985973753408,
+          -22.61448060375168
+        ]
+      },
+      "properties": {
+        "id": 45,
+        "country": "Australia",
+        "iso2": "AU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.426050522683568,
+          9.981886923332265
+        ]
+      },
+      "properties": {
+        "id": 46,
+        "country": "Chad",
+        "iso2": "TD"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.93090023543334,
+          -14.83203031621666
+        ]
+      },
+      "properties": {
+        "id": 47,
+        "country": "Australia",
+        "iso2": "AU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -68.80209226101944,
+          1.0440025228540442
+        ]
+      },
+      "properties": {
+        "id": 48,
+        "country": "Brazil",
+        "iso2": "BR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -69.23592865220947,
+          -27.897821132889753
+        ]
+      },
+      "properties": {
+        "id": 49,
+        "country": "Chile",
+        "iso2": "CL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.40055104897823,
+          63.60529125554727
+        ]
+      },
+      "properties": {
+        "id": 50,
+        "country": "Greenland",
+        "iso2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          41.868976781445866,
+          1.7786659044586615
+        ]
+      },
+      "properties": {
+        "id": 51,
+        "country": "Somalia",
+        "iso2": "SO"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -61.392935353396254,
+          -16.02216740278216
+        ]
+      },
+      "properties": {
+        "id": 52,
+        "country": "Bolivia",
+        "iso2": "BO"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.08582817499209,
+          64.42502111753878
+        ]
+      },
+      "properties": {
+        "id": 53,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -52.85256547767965,
+          -22.06769252552019
+        ]
+      },
+      "properties": {
+        "id": 54,
+        "country": "Brazil",
+        "iso2": "BR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          46.340467116075956,
+          -23.845536239050585
+        ]
+      },
+      "properties": {
+        "id": 55,
+        "country": "Madagascar",
+        "iso2": "MG"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -91.66882806929299,
+          36.55641657623444
+        ]
+      },
+      "properties": {
+        "id": 56,
+        "country": "United States of America",
+        "iso2": "US"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -105.2552833341327,
+          38.43148785700139
+        ]
+      },
+      "properties": {
+        "id": 57,
+        "country": "United States of America",
+        "iso2": "US"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.04510710265993,
+          37.50427253102266
+        ]
+      },
+      "properties": {
+        "id": 58,
+        "country": "China",
+        "iso2": "CN"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.9165335979477,
+          63.73615099345348
+        ]
+      },
+      "properties": {
+        "id": 59,
+        "country": "Canada",
+        "iso2": "CA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.44274875922002,
+          25.832125964555416
+        ]
+      },
+      "properties": {
+        "id": 60,
+        "country": "Myanmar",
+        "iso2": "MM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.01416913704965,
+          -22.26991078667165
+        ]
+      },
+      "properties": {
+        "id": 61,
+        "country": "Paraguay",
+        "iso2": "PY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.967605563172242,
+          18.956063091157404
+        ]
+      },
+      "properties": {
+        "id": 62,
+        "country": "Niger",
+        "iso2": "NE"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.64757897203641,
+          52.383549054126384
+        ]
+      },
+      "properties": {
+        "id": 63,
+        "country": "Canada",
+        "iso2": "CA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9959037726657414,
+          17.827361332723978
+        ]
+      },
+      "properties": {
+        "id": 64,
+        "country": "Mali",
+        "iso2": "ML"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.28100318529508,
+          42.89229918914457
+        ]
+      },
+      "properties": {
+        "id": 65,
+        "country": "United States of America",
+        "iso2": "US"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          109.23214464412479,
+          57.490433996611344
+        ]
+      },
+      "properties": {
+        "id": 66,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.583784863198787,
+          -8.035089383728904
+        ]
+      },
+      "properties": {
+        "id": 67,
+        "country": "Dem. Rep. Congo",
+        "iso2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          122.33659291373431,
+          -26.447134929692247
+        ]
+      },
+      "properties": {
+        "id": 68,
+        "country": "Australia",
+        "iso2": "AU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -44.71991464598494,
+          -9.665669563874244
+        ]
+      },
+      "properties": {
+        "id": 69,
+        "country": "Brazil",
+        "iso2": "BR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.03288742309746,
+          5.959608496461751
+        ]
+      },
+      "properties": {
+        "id": 70,
+        "country": "Ethiopia",
+        "iso2": "ET"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.56753828687306,
+          69.2703629390015
+        ]
+      },
+      "properties": {
+        "id": 71,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.830636684508761,
+          60.89700488707595
+        ]
+      },
+      "properties": {
+        "id": 72,
+        "country": "Sweden",
+        "iso2": "SE"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -101.87766844424563,
+          36.58668251155129
+        ]
+      },
+      "properties": {
+        "id": 73,
+        "country": "United States of America",
+        "iso2": "US"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.18452564401443,
+          19.298402632250834
+        ]
+      },
+      "properties": {
+        "id": 74,
+        "country": "Chad",
+        "iso2": "TD"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.4529483461387,
+          33.62792299098167
+        ]
+      },
+      "properties": {
+        "id": 75,
+        "country": "Iraq",
+        "iso2": "IQ"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.03734747358023,
+          67.88152679670677
+        ]
+      },
+      "properties": {
+        "id": 76,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.48623554640848,
+          51.07235426446874
+        ]
+      },
+      "properties": {
+        "id": 77,
+        "country": "Canada",
+        "iso2": "CA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -10.051537979158269,
+          27.585525013902906
+        ]
+      },
+      "properties": {
+        "id": 78,
+        "country": "Morocco",
+        "iso2": "MA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.87259103825474,
+          22.200062020540972
+        ]
+      },
+      "properties": {
+        "id": 79,
+        "country": "Egypt",
+        "iso2": "EG"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.86125103606122,
+          19.118210980811174
+        ]
+      },
+      "properties": {
+        "id": 80,
+        "country": "Sudan",
+        "iso2": "SD"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.520165162077774,
+          -18.404324233989353
+        ]
+      },
+      "properties": {
+        "id": 81,
+        "country": "Mozambique",
+        "iso2": "MZ"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.77968629313844,
+          47.94159947468559
+        ]
+      },
+      "properties": {
+        "id": 82,
+        "country": "Canada",
+        "iso2": "CA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -100.22225394559338,
+          22.984969779590358
+        ]
+      },
+      "properties": {
+        "id": 83,
+        "country": "Mexico",
+        "iso2": "MX"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.45754733671639,
+          -11.172876233811476
+        ]
+      },
+      "properties": {
+        "id": 84,
+        "country": "Brazil",
+        "iso2": "BR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.44580466444921,
+          49.475069109311775
+        ]
+      },
+      "properties": {
+        "id": 85,
+        "country": "Ukraine",
+        "iso2": "UA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.48001421562054,
+          -20.36532154666625
+        ]
+      },
+      "properties": {
+        "id": 86,
+        "country": "Australia",
+        "iso2": "AU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          124.32941644978081,
+          -9.847792364787509
+        ]
+      },
+      "properties": {
+        "id": 87,
+        "country": "Indonesia",
+        "iso2": "ID"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -68.80198674687261,
+          -27.84017310432992
+        ]
+      },
+      "properties": {
+        "id": 88,
+        "country": "Argentina",
+        "iso2": "AR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.985775585094586,
+          56.96765674311666
+        ]
+      },
+      "properties": {
+        "id": 89,
+        "country": "Russia",
+        "iso2": "RU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.78767429774361,
+          -12.24567761269881
+        ]
+      },
+      "properties": {
+        "id": 90,
+        "country": "Brazil",
+        "iso2": "BR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.89862723324129,
+          77.17993060729854
+        ]
+      },
+      "properties": {
+        "id": 91,
+        "country": "Greenland",
+        "iso2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.96151872321121,
+          8.126961799086091
+        ]
+      },
+      "properties": {
+        "id": 92,
+        "country": "Colombia",
+        "iso2": "CO"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.94252128806647,
+          0.9649783196004472
+        ]
+      },
+      "properties": {
+        "id": 93,
+        "country": "Indonesia",
+        "iso2": "ID"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          140.4857636257483,
+          -28.465138048765823
+        ]
+      },
+      "properties": {
+        "id": 94,
+        "country": "Australia",
+        "iso2": "AU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.238934474864067,
+          70.53652417934198
+        ]
+      },
+      "properties": {
+        "id": 95,
+        "country": "Norway",
+        "iso2": "NO"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -65.30091790716833,
+          1.6069810239327158
+        ]
+      },
+      "properties": {
+        "id": 96,
+        "country": "Venezuela",
+        "iso2": "VE"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          49.62397870840056,
+          49.62705762307617
+        ]
+      },
+      "properties": {
+        "id": 97,
+        "country": "Kazakhstan",
+        "iso2": "KZ"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -62.67110437985765,
+          -5.678913587256598
+        ]
+      },
+      "properties": {
+        "id": 98,
+        "country": "Brazil",
+        "iso2": "BR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.81899341896832,
+          41.261833561917854
+        ]
+      },
+      "properties": {
+        "id": 99,
+        "country": "China",
+        "iso2": "CN"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.7999742011451474,
+          43.85052128175166
+        ]
+      },
+      "properties": {
+        "id": 100,
+        "country": "France",
+        "iso2": "FR"
+      }
+    }
+  ]
+}

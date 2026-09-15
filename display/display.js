@@ -9,6 +9,28 @@ let savedState = {
   terrain: false
 };
 
+const colormap = {
+    "0": "#FF000000",
+    "1": "#FFFFFF",
+    "98": "#BEF4B6",
+    "99": "#BEF4B6",
+    "100": "#31AA47",
+};
+
+// Make values 1–97 white
+for (let i = 1; i <= 97; i++) {
+    colormap[i] = "#FFFFFF";
+}
+
+const tileUrl =
+    "https://home.matthewinman.uk/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?" +
+    new URLSearchParams({
+        url: "/data/UK_TCD.vrt",
+        bidx: "1",
+        colormap: JSON.stringify(colormap),
+        resampling: "bilinear",
+    }).toString();
+
 //contour definitions
 var demSource = new mlcontour.DemSource({
   url: "https://tiles.mapterhorn.com/{z}/{x}/{y}.webp",
@@ -30,6 +52,11 @@ async function loadStyle() {
     paths = await (await fetch("../style/forest/paths.json")).json();
     roads = await (await fetch("../style/forest/roads.json")).json();
     buildings = await (await fetch("../style/forest/buildings.json")).json();
+    base.sources["tree-cover"] = {
+    type: "raster",
+    tiles: [tileUrl],
+    tileSize: 256
+  };
 
   base.layers = [
     ...base.layers,
@@ -138,7 +165,7 @@ window.mapReady = loadStyle().then(style => {
             contourLayer: "contours",
             elevationKey: "ele",
             levelKey: "level",
-            extent: 4096,
+            extent: 16256,
             buffer: 1,
           }),
         ],
@@ -188,57 +215,71 @@ window.mapReady = loadStyle().then(style => {
 
     
     let tourTimer = null;
+    let locations = [];
 
-    async function goToRandomPlace() {
+    // Load the GeoJSON
+    async function loadLocations() {
+      try {
+        const response = await fetch("random-locations.geojson");
 
-    // Get random place in that country
-    const placesResponse = await fetch(
-    "https://api.randomcoords.com/v1/coordinates/?limit=1",
-    {
-        headers: {
-        "x-api-token": import.meta.env.RANDOMCOORDS_API_KEY
+        if (!response.ok) {
+          throw new Error(`Failed to load locations: ${response.status}`);
         }
+
+        const geojson = await response.json();
+
+        locations = geojson.features;
+
+        console.log(`Loaded ${locations.length} locations`);
+
+        // Start at the first random location
+        goToRandomPlace();
+
+        // Then every 10 seconds
+        tourTimer = setInterval(() => {
+          goToRandomPlace();
+        }, 20000);
+
+      } catch (error) {
+        console.error("Failed to load locations:", error);
+      }
     }
-    );
 
-    const places = await placesResponse.json();
 
-    if (!places.data || places.data.length === 0) {
+    // Fly to a random location
+    function goToRandomPlace() {
+      if (locations.length === 0) {
+        console.warn("No locations loaded");
         return;
-    }
+      }
 
-    const place = places.data[0];
+      // Pick a random point
+      const place = locations[
+        Math.floor(Math.random() * locations.length)
+      ];
 
-    const [lng, lat] = place.coordinates;
+      const [lng, lat] = place.geometry.coordinates;
 
-    console.log(
+      console.log(
         "Flying to:",
-        place.city,
-        country.name,
+        place.properties.country,
         lng,
         lat
-    );
+      );
 
-    // Fly there
-    map.flyTo({
+      map.flyTo({
         center: [lng, lat],
         zoom: 14,
-        duration: 4000,
+        duration: 6000,
         essential: true
-    });
+      });
     }
 
-    // First location
-    goToRandomPlace();
 
-    // Then every 10 seconds
-    tourTimer = setInterval(() => {
-    goToRandomPlace();
-    }, 10000);
-    
-    });
+    // Start loading the locations
+  loadLocations();
+  });
 });
-
 
 function updateContours() {
   let value = contourType.value;
