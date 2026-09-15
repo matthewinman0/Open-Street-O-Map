@@ -48,23 +48,25 @@
 
     <div id="map-settings">
       <h2 style="justify-content: center; display: flex;">Map Settings</h2>
-
+      <h3>Map Style</h3>
       <p>O-style: <select name="O-style" id="style-select">
         <option value="Forest">Forest</option>
         <option value="Sprint">Sprint</option>
       </select></p>
-
+      <p>Placenames:<input type="checkbox" id="placenames" checked></p>
+      <hr>
+      <h3>Contours</h3>
+      <p>Contour Interval: <input type="number" id="contour-int" name="contour-interval" step="2.5" value="2.5" max="5" min="2.5">  m</p>
       <p>Contour Type: <select name="Contour Type" id="contour-type">
         <option value="mapterhorn">Mapterhorn</option>
         <option value="amazon">AWS Terrarium</option>
         <option value="none">None</option>
       </select></p>
+      <hr>
+      <h3>3D</h3>
 
       <p>Terrain Exaggeration: <input name="Terrain Exaggeration" type="number" id="terrain-exaggeration" name="terrain-exaggeration" step="0.1" value="1" max="5" min="0"></p>
-
       <p>3d Buildings:<input name="3d Buildings toggle" type="checkbox" id="3d-buildings-toggle"></p>
-      <p>Contour Interval: <input type="number" id="contour-int" name="contour-interval" step="2.5" value="2.5" max="5" min="2.5">  m</p>
-      <p>Placenames:<input type="checkbox" id="placenames" checked></p>
       
     </div>
 
