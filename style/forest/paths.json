@@ -7,7 +7,7 @@
       "source-layer": "transportation",
       "filter": ["in", "subclass", "footway", "pedestrian", "cycleway", "bridleway"],
       "paint": {
-        "line-color": "#000000",
+        "line-color": "#1D1D1B",
         "line-width": [
             "interpolate",
             ["linear"],
@@ -25,7 +25,7 @@
       "source-layer": "transportation",
       "filter": ["in", "class", "track"],
       "paint": {
-        "line-color": "#000000",
+        "line-color": "#1D1D1B",
         "line-width": [
             "interpolate",
             ["linear"],
@@ -43,7 +43,7 @@
       "source-layer": "transportation",
       "filter": ["in", "subclass", "path", "steps"],
       "paint": {
-        "line-color": "#000000",
+        "line-color": "#1D1D1B",
         "line-width": [
             "interpolate",
             ["linear"],
