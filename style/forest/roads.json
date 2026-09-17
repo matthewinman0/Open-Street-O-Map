@@ -7,7 +7,7 @@
       "source-layer": "transportation",
       "filter": ["in", "class", "service"],
       "paint": {
-        "line-color": "#000000",
+        "line-color": "#1D1D1B",
         "line-width": [
             "interpolate",
             ["linear"],
@@ -25,7 +25,7 @@
       "source-layer": "aeroway",
       "filter": ["in", "class", "helipad", "runway", "taxiway", "apron", "gate"],
       "paint": {
-        "line-color": "#000000",
+        "line-color": "#1D1D1B",
         "line-width": [
             "interpolate",
             ["linear"],
@@ -43,7 +43,7 @@
         "source-layer": "transportation",
         "filter": ["in", "class", "motorway", "trunk"],
         "paint": {
-            "line-color": "#000000",
+            "line-color": "#1D1D1B",
             "line-width": [
               "interpolate",
               ["linear"],
@@ -62,7 +62,7 @@
       "source-layer": "transportation",
       "filter": ["in", "class", "primary", "secondary"],
       "paint": {
-        "line-color": "#000000",
+        "line-color": "#1D1D1B",
         "line-width": [
             "interpolate",
             ["linear"],
@@ -80,7 +80,7 @@
       "source-layer": "transportation",
       "filter": ["in", "class", "tertiary", "minor"],
       "paint": {
-        "line-color": "#000000",
+        "line-color": "#1D1D1B",
         "line-width": [
             "interpolate",
             ["linear"],
@@ -177,7 +177,7 @@
         "match",["get","brunnel"],["tunnel"],false,true],
         ["==", ["get", "class"], "rail"]],
       "paint": {
-        "line-color": "#000000",
+        "line-color": "#1D1D1B",
         "line-width": [
             "interpolate",
             ["linear"],
@@ -225,7 +225,7 @@
         ["==", "brunnel", "bridge"]
       ],
       "paint": {
-        "line-color": "#000000",
+        "line-color": "#1D1D1B",
         "line-width": [
             "interpolate",
             ["linear"],
@@ -247,7 +247,7 @@
         ["==", "brunnel", "bridge"]
       ],
       "paint": {
-          "line-color": "#000000",
+          "line-color": "#1D1D1B",
           "line-width": [
             "interpolate",
             ["linear"],
@@ -269,7 +269,7 @@
         ["in", "class", "primary", "secondary"],
         ["==", "brunnel", "bridge"]],
       "paint": {
-        "line-color": "#000000",
+        "line-color": "#1D1D1B",
         "line-width": [
             "interpolate",
             ["linear"],
