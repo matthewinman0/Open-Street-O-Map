@@ -34,7 +34,7 @@ console.log(tileUrl);
 var demSource = new mlcontour.DemSource({
   url: "https://tiles.mapterhorn.com/{z}/{x}/{y}.webp",
   encoding: "terrarium", // "mapbox" or "terrarium" default="terrarium"
-  maxzoom: 13,
+  maxzoom: 12,
   worker: true, // offload isoline computation to a web worker to reduce jank
   cacheSize: 100, // number of most-recent tiles to cache
   timeoutMs: 10_000, // timeout on fetch requests
@@ -483,7 +483,7 @@ function updateContours() {
   const demSource = new mlcontour.DemSource({
     url: demUrl,
     encoding: encoding||"terrarium",
-    maxzoom: 13,
+    maxzoom: 12,
     worker: true,
     cacheSize: 100,
     timeoutMs: 10000
