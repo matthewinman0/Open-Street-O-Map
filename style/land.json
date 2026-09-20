@@ -46,7 +46,7 @@
       "type": "fill",
       "source": "osm",
       "source-layer": "landcover",
-      "filter": ["in", "class", "grass", "meadow", "farmland", "orchard", "golf_course"],
+      "filter": ["in", "class", "meadow", "farmland", "orchard", "golf_course"],
       "paint": {
         "fill-color": "#febe50",
         "fill-opacity": 1
@@ -70,7 +70,7 @@
       "source-layer": "landcover",
       "filter": ["in", "class", "wood"],
       "paint": {
-        "fill-color": "#febe50",
+        "fill-color": "#ffffff",
         "fill-opacity": 1
       }
     },
