@@ -57,12 +57,6 @@ async function loadStyle() {
     roads = await (await fetch("./style/sprint/roads.json")).json();
     buildings = await (await fetch("./style/sprint/buildings.json")).json();
   }
-  //add sources for layers that are in json with no sources defined
-  base.sources["tree-cover"] = {
-    type: "raster",
-    tiles: [tileUrl],
-    tileSize: 256
-  };
   base.layers = [
     ...base.layers,
     ...land.layers,

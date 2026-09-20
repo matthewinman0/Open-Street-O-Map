@@ -86,11 +86,6 @@
         "raster-resampling": "linear"}
     },
     {
-      "id": "tree-cover",
-      "type": "raster",
-      "source": "tree-cover"
-    },
-    {
       "id": "residential-areas",
       "type": "fill",
       "source": "osm",
