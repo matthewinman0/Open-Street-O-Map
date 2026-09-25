@@ -98,8 +98,17 @@ window.mapReady = loadStyle().then(style => {
   map = new maplibregl.Map({
     container: "map",
     style,
+<<<<<<< Updated upstream
     center: [-2.5420, 54.0022],
     zoom: 5
+=======
+    center: savedState.center,
+    zoom: savedState.zoom,
+    bearing: savedState.bearing,
+    pitch: savedState.pitch,
+    terrain: savedState.terrain ? { source: "3d terrain" } : null,
+    preserveDrawingBuffer: true
+>>>>>>> Stashed changes
   });
 
   window.map = map;
