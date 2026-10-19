@@ -97,6 +97,17 @@
       }
     },
     {
+      "id": "Parks",
+      "type": "fill",
+      "source": "osm",
+      "source-layer": "landcover",
+      "filter": ["in", "subclass", "park"],
+      "paint": {
+        "fill-color": "#ffffff",
+        "fill-opacity": 1
+      }
+    },
+    {
       "id": "farmland",
       "type": "fill",
       "source": "osm",
