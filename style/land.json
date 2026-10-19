@@ -64,17 +64,6 @@
       }
     },
     {
-      "id": "OSM forest",
-      "type": "fill",
-      "source": "osm",
-      "source-layer": "landcover",
-      "filter": ["in", "class", "wood"],
-      "paint": {
-        "fill-color": "#ffffff",
-        "fill-opacity": 1
-      }
-    },
-    {
       "id": "GFC",
       "type": "raster",
       "source": "GFC2020 Terrain",
@@ -97,11 +86,11 @@
       }
     },
     {
-      "id": "Parks",
+      "id": "OSM forest",
       "type": "fill",
       "source": "osm",
       "source-layer": "landcover",
-      "filter": ["in", "subclass", "park"],
+      "filter": ["in", "class", "wood"],
       "paint": {
         "fill-color": "#ffffff",
         "fill-opacity": 1
