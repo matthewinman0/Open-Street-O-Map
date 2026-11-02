@@ -35,7 +35,7 @@
       "type": "fill",
       "source": "osm",
       "source-layer": "landuse",
-      "filter": ["in", "class", "commercial", "retail"],
+      "filter": ["in", "class", "commercial", "retail", "parking"],
       "paint": {
         "fill-color": "#e4af7b",
         "fill-opacity": 1

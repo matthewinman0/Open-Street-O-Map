@@ -2,6 +2,8 @@ window.exportMap = null;
 let exportCenter = null;
 let exportBounds = null;
 let Nlat = null, Slat = null, Wlng = null, Elng = null;
+let scale = null;
+let DPI = null;
 
 function getMap() {
   return window.map;
@@ -9,10 +11,10 @@ function getMap() {
 
 //lat/lng to meters and meters to lat/lng
 function latToMeters(input) {
-  return 6378137 * Math.log(Math.tan((Math.PI / 4) + (input.lat * (Math.PI / 360))));
+  return 6378137 * Math.log(Math.tan((Math.PI / 4) + (input * (Math.PI / 360))));
 }
 function lngToMeters(input) {
-  return 6378137 * input.lng * Math.PI / 180;
+  return 6378137 * input * Math.PI / 180;
 }
 function metersToLat(meters) {
   return (360 / Math.PI) * Math.atan(Math.exp(meters / 6378137)) - 90;
@@ -36,8 +38,8 @@ function calculateExportBounds(center, width, height) {
   const halfWidth = width / 2;
   const halfHeight = height / 2;
   //convert center lat/lng to meters
-  const centerNorthing = latToMeters(center);
-  const centerEasting = lngToMeters(center);
+  const centerNorthing = latToMeters(center.lat);
+  const centerEasting = lngToMeters(center.lng);
   console.log({ northingM: centerNorthing, eastingM: centerEasting });
 
   const mercatorScale = 1 / Math.cos(center.lat * Math.PI / 180);
@@ -72,17 +74,47 @@ function boundsToGeoJson(Nlat, Slat, Wlng, Elng){
   return geojson;
 }
 
-function drawBBox(geojson) {
+function drawBBox() {
   const map = getMap();
-  if (map.getSource("export-bbox")) {
+  if (document.getElementById("landscape").checked) {
+    exportBounds = calculateExportBounds(exportCenter, document.getElementById("scale-select").value * paperLengthToMilimeters(document.getElementById("page-size").value)/ 1000, document.getElementById("scale-select").value * paperWidthToMilimeters(document.getElementById("page-size").value)/ 1000);
+  } else {
+    exportBounds = calculateExportBounds(exportCenter, document.getElementById("scale-select").value * paperWidthToMilimeters(document.getElementById("page-size").value)/ 1000, document.getElementById("scale-select").value * paperLengthToMilimeters(document.getElementById("page-size").value)/ 1000);
+  }
+  if (map.getSource("export-bbox") || map.getSource("export-center")) {
     map.removeLayer("export-bbox");
     map.removeSource("export-bbox");
+    map.removeLayer("export-center");
+    map.removeSource("export-center");
   }
+  if (!exportBounds) {
+    console.error("Export bounds not set.");
+    return;
+  }
+  map.addSource("export-center", {
+    type: "geojson",
+    data: {
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [exportCenter.lng, exportCenter.lat]
+      }
+    }
+  });
   map.addSource("export-bbox", {
     type: "geojson",
-    data: geojson
+    data: boundsToGeoJson(exportBounds[0], exportBounds[1], exportBounds[2], exportBounds[3])
   });
 
+  map.addLayer({
+    id: "export-center",
+    type: "circle",
+    source: "export-center",
+    paint: {
+      "circle-radius": 3,
+      "circle-color": "#ff0000"
+    }
+  });
   map.addLayer({
     id: "export-bbox",
     type: "line",
@@ -94,10 +126,15 @@ function drawBBox(geojson) {
   });
 }
 
+// Event listeners for scale and page size changes
+document.getElementById("scale-select").onchange = drawBBox;
+document.getElementById("page-size").onchange = drawBBox;
+document.getElementById("landscape").onchange = drawBBox;
+document.getElementById("portrait").onchange = drawBBox;
+
 // Select Area for Export
 document.getElementById("export-select-btn").onclick = () => {
   const map = getMap();
-  const scale = document.getElementById("scale-select").value;
   map.getCanvas().style.cursor = "crosshair";
   //cancel map select
   document.getElementById("export-select-btn").addEventListener("keydown", function (event) {
@@ -109,39 +146,55 @@ document.getElementById("export-select-btn").onclick = () => {
   //select map center
   map.once("click", (e) => {
     exportCenter = e.lngLat;
-    map.getCanvas().style.cursor = "";
-    console.log("Export center selected:", exportCenter);
-
-    exportBounds = calculateExportBounds(exportCenter, scale * paperWidthToMilimeters(document.getElementById("page-size").value)/ 1000, scale * paperLengthToMilimeters(document.getElementById("page-size").value)/ 1000);
-    console.log("Export bounds:", exportBounds);
-
-    drawBBox(boundsToGeoJson(exportBounds[0], exportBounds[1], exportBounds[2], exportBounds[3]));
+    map.getCanvas().style.cursor = ""; //Set cursor back to default 
+    drawBBox();
   });
 };
 
-
+// Export Button click event
 document.getElementById("export-btn").onclick = async () => {
-  const map = getMap();
   console.log("export recieved", exportBounds);
-
   await exportBbox(exportBounds);
 }
 
 
 
 
-function calculatePGW (mapWidth, mapHeight) {
-  pixelX = (Elng - Wlng) / mapWidth
-  console.log(pixelX);
+function calculatePGW (mapWidthPx, mapHeightPx) {
+  // 1. Convert bounding box edges from degrees to Web Mercator meters
+  const minX = lngToMeters(exportBounds[2]);
+  const maxX = lngToMeters(exportBounds[3]);
+  const minY = latToMeters(exportBounds[1]);
+  const maxY = latToMeters(exportBounds[0]);
 
-  let l1 
+  // 2. Calculate pixel size strictly in meters
+  let l1 = (maxX - minX) / mapWidthPx;  // Width of a pixel in meters
   let l2 = 0;
   let l3 = 0;
-  let l4
-  let l5 
-  let l6
+  let l4 = (minY - maxY) / mapHeightPx;  // Height of a pixel in meters (negative value)
+  
+  // 3. Set the origin coordinates (center of the top-left pixel)
+  // To be mathematically precise, offset by half a pixel size to hit the pixel center
+  let l5 = minX + (l1 / 2);
+  let l6 = maxY + (l4 / 2);
+
+  const pgwContent = `${l1}\n${l2}\n${l3}\n${l4}\n${l5}\n${l6}`;
+  console.log("PGW content:", pgwContent);
+  return pgwContent;
 }
 
+
+
+function downloadPGW(pgwContent) {
+  const blob = new Blob([pgwContent], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const downloadLink = document.createElement("a");
+  downloadLink.href = url;
+  downloadLink.download = "export.pgw";
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+}
 
 
 
@@ -177,13 +230,7 @@ async function createExportMap(bounds, outputWidth, outputHeight) {
 
   const [Nlat, Slat, Wlng, Elng] = bounds;
 
-  // ----------------------------------------------------------
   // Calculate the CSS viewport size at zoom 14.
-  //
-  // This controls the geographic area shown.
-  // DPI is NOT used here.
-  // ----------------------------------------------------------
-
   const worldSize = 512 * Math.pow(2, EXPORT_ZOOM);
 
   function lngToPixel(lng) {
@@ -225,23 +272,10 @@ async function createExportMap(bounds, outputWidth, outputHeight) {
     zoom: EXPORT_ZOOM
   });
 
-  // ----------------------------------------------------------
-  // Create the CSS-sized container.
-  //
-  // This determines the geographic extent.
-  // ----------------------------------------------------------
-
   const container = createExportContainer(
     Math.ceil(cssWidth),
     Math.ceil(cssHeight)
   );
-
-  // ----------------------------------------------------------
-  // Calculate the pixel ratio required to make the
-  // MapLibre WebGL canvas itself the requested resolution.
-  //
-  // We use both dimensions and take the larger ratio.
-  // ----------------------------------------------------------
 
   const pixelRatio = Math.max(
     outputWidth / cssWidth,
@@ -250,14 +284,7 @@ async function createExportMap(bounds, outputWidth, outputHeight) {
 
   console.log("Export pixel ratio:", pixelRatio);
 
-  // ----------------------------------------------------------
   // Create MapLibre export map.
-  //
-  // IMPORTANT:
-  // MapLibre itself renders at the high resolution.
-  // There is NO later upscaling.
-  // ----------------------------------------------------------
-
   window.exportMap = new maplibregl.Map({
     container: container,
     style: mainMap.getStyle(),
@@ -273,10 +300,7 @@ async function createExportMap(bounds, outputWidth, outputHeight) {
 
   const exportMap = window.exportMap;
 
-  // ----------------------------------------------------------
-  // Wait for style
-  // ----------------------------------------------------------
-
+  // Wait for style to load first
   await new Promise((resolve) => {
     if (exportMap.isStyleLoaded()) {
       resolve();
@@ -285,21 +309,25 @@ async function createExportMap(bounds, outputWidth, outputHeight) {
     }
   });
 
-  // ----------------------------------------------------------
-  // Force MapLibre to recognise the container size.
-  // ----------------------------------------------------------
+  //hide red bounds
+  exportMap.setLayoutProperty("export-center", "visibility", "none");
+  exportMap.setLayoutProperty("export-bbox", "visibility", "none");
 
+  // Load custom pattern images
+  const patternImg = await exportMap.loadImage("./patterns/dot.png");
+  const marshImg = await exportMap.loadImage("./patterns/marsh.png");
+  const greenDotImg = await exportMap.loadImage("./patterns/greenDot.png");
+
+  exportMap.addImage("dot", patternImg.data);
+  exportMap.addImage("marsh", marshImg.data);
+  exportMap.addImage("greenDot", greenDotImg.data);
+
+  // Force MapLibre to recognise the container size.
   exportMap.resize();
 
-  // ----------------------------------------------------------
   // Wait until everything has rendered.
-  // ----------------------------------------------------------
-
   await new Promise((resolve) => {
-    if (
-      exportMap.loaded() &&
-      exportMap.areTilesLoaded()
-    ) {
+    if (exportMap.loaded() && exportMap.areTilesLoaded()) {     
       requestAnimationFrame(() => {
         requestAnimationFrame(resolve);
       });
@@ -322,44 +350,16 @@ async function createExportMap(bounds, outputWidth, outputHeight) {
 
 
 async function exportBbox(bounds) {
-  // ----------------------------------------------------------
-  // DPI
-  // ----------------------------------------------------------
-
-  const DPI = parseFloat(
-    document.getElementById("dpi").value
-  );
-
+  const DPI = parseFloat(document.getElementById("dpi").value);
   if (!Number.isFinite(DPI) || DPI <= 0) {
     console.error("Invalid DPI:", DPI);
     return;
   }
+  const paperWidthMM = paperWidthToMilimeters(document.getElementById("page-size").value);
+  const paperHeightMM = paperLengthToMilimeters(document.getElementById("page-size").value);
 
-  // ----------------------------------------------------------
-  // Paper size
-  //
-  // Currently A4.
-  // ----------------------------------------------------------
-
-  const paperWidthMM =
-    paperWidthToMilimeters(4);
-
-  const paperHeightMM =
-    paperLengthToMilimeters(4);
-
-  // ----------------------------------------------------------
-  // Convert physical paper size to actual pixels.
-  //
-  // This is the resolution MapLibre must render at.
-  // ----------------------------------------------------------
-
-  const outputWidth = Math.round(
-    (paperWidthMM / 25.4) * DPI
-  );
-
-  const outputHeight = Math.round(
-    (paperHeightMM / 25.4) * DPI
-  );
+  const outputWidth = Math.round((paperWidthMM / 25.4) * DPI);
+  const outputHeight = Math.round((paperHeightMM / 25.4) * DPI);
 
   console.log("Export settings:", {
     DPI,
@@ -369,75 +369,46 @@ async function exportBbox(bounds) {
     outputHeight
   });
 
-  // ----------------------------------------------------------
   // Create MapLibre map at the required resolution.
-  //
-  // No second canvas.
-  // No upscaling.
-  // ----------------------------------------------------------
-
   const exportMap = await createExportMap(
     bounds,
     outputWidth,
     outputHeight
   );
 
-  // ----------------------------------------------------------
   // Get the actual MapLibre WebGL canvas.
-  // ----------------------------------------------------------
-
   const canvas = exportMap.getCanvas();
 
   console.log("Final rendered canvas:", {
     width: canvas.width,
     height: canvas.height,
-
     expectedWidth: outputWidth,
     expectedHeight: outputHeight
   });
 
-  calculatePGW(canvas.width, canvas.height)
+  downloadPGW(calculatePGW(canvas.width, canvas.height));
 
-  // ----------------------------------------------------------
   // Export directly from MapLibre's high-resolution canvas.
-  // ----------------------------------------------------------
-
   const imgUrl = canvas.toDataURL("image/png");
-
-  // ----------------------------------------------------------
-  // Download
-  // ----------------------------------------------------------
-
-  const downloadLink =
-    document.createElement("a");
+  const downloadLink = document.createElement("a");
 
   downloadLink.href = imgUrl;
-
-  downloadLink.download =
-    `map-export-${DPI}dpi.png`;
-
+  downloadLink.download =`map-export-${DPI}dpi.png`;
   document.body.appendChild(downloadLink);
-
   downloadLink.click();
-
   document.body.removeChild(downloadLink);
 
-  // ----------------------------------------------------------
-  // Clean up
-  // ----------------------------------------------------------
-
+  //clean up
   exportMap.remove();
-
   window.exportMap = null;
-
   const container =
     document.getElementById(
       "map-export-container"
     );
-
   if (container) {
     container.remove();
   }
 
+  //add back bbox and center
   console.log("Export complete.");
 }
